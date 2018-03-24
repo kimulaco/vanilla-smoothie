@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+/* ===========================
+ * .figure-code
+ * ======================== */
+.figure-code {
+  text-align: left;
+  margin: 0 0 32px;
+  width: 100%;
+  overflow-x: auto;
+
+  code {
+    display: block;
+    padding: 16px;
+    color: #666;
+    word-break: break-all;
+  }
+
+  figcaption {
+    display: inline-block;
+    color: #39c;
+    padding: 8px 4px 2px;
+    margin: 0 12px 4px;
+    border-bottom: 1px solid #39c;
+  }
+
+  .figure-code-inner {
+    min-width: 640px;
+    margin: 0;
+    border: 1px solid #39c;
+    border-radius: 2px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .2);
+    background: #fefefe;
+  }
+}

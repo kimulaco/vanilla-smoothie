@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+/* ===========================
+ * .site-main
+ * ======================== */
+.site-main {
+  .main-section {
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+  }
+
+  .main-inner {
+    max-width: 680px;
+    min-width: 320px;
+    margin: 0 auto;
+    padding: 60px 16px;
+
+    @include media() {
+      padding: 100px 16px;
+    }
+  }
+}

@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+/* ===========================
+ * .heading-lv2
+ * ======================== */
+.heading-lv2 {
+  font-size: 26px;
+  text-align: center;
+  margin: 0 0 48px;
+
+  @include media() {
+    font-size: 32px;
+  }
+
+  > span {
+    display: inline-block;
+    padding: 0 16px 4px;
+    border-bottom: 2px solid #ccc;
+  }
+}
+
+
+
+/* ===========================
+ * .heading-lv3
+ * ======================== */
+.heading-lv3 {
+  font-size: 18px;
+  text-align: center;
+  margin: 48px 0 32px;
+
+  @include media() {
+    font-size: 24px;
+    margin: 96px 0 32px;
+  }
+}

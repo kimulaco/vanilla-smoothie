@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>SmoothScroll.js</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body id="root">
+    <header class="site-header">
+        <div class="header-inner">
+            <h1 class="header-title">SmoothScroll.js</h1>
+
+            <ul class="header-menu">
+                <li><a href="#section-overview">Overview</a></li>
+                <li><a href="#section-use">Use</a></li>
+                <li><a href="#section-methods">Methods</a></li>
+            </ul><!-- /.header-menu -->
+        </div><!-- /.header-inner -->
+    </header><!-- /.site-header -->
+
+    <main class="site-main">
+        <section id="section-overview" class="main-section">
+            <div class="main-inner">
+                <h2 class="heading-lv2"><span>Overview</span></h2>
+                <p>Vanila JSでスムーススクロールを簡単に実装するプラグイン。</p>
+            </div><!-- /.main-inner -->
+        </section><!-- /.main-section -->
+
+        <section id="section-use" class="main-section">
+            <div class="main-inner">
+                <h2 class="heading-lv2"><span>Use</span></h2>
+
+                <div class="figure-code">
+                    <figure class="figure-code-inner">
+                        <pre><code>&lt;script src="smoothScroll.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener('click', function () {
+        smoothScroll.scrollTo(this.getAttribute('href'), 500);
+    });
+});
+&lt;/script&gt;</code></pre>
+                    </figure><!-- /.figure-code-inner -->
+                </div><!-- /.figure-code -->
+            </div><!-- /.main-inner -->
+        </section><!-- /.main-section -->
+
+        <section id="section-methods" class="main-section">
+            <div class="main-inner">
+                <h2 class="heading-lv2"><span>Methods</span></h2>
+
+                <h3 class="heading-lv3">scrollTo(target[, duration, root])</h3>
+
+                <div class="figure-code">
+                    <figure class="figure-code-inner">
+                        <pre><code>// Selector
+smoothScroll.scrollTo('#id-name');
+
+// Offset top
+smoothScroll.scrollTo(300);</code></pre>
+                    </figure><!-- /.figure-code-inner -->
+                </div><!-- /.figure-code -->
+
+                <div class="table-detail">
+                    <table>
+                        <colgroup>
+                            <col class="table-detail-name">
+                            <col class="table-detail-type">
+                            <col class="table-detail-description">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th class="table-detail-name">Parameter</th>
+                                <th class="table-detail-type">Type</th>
+                                <th class="table-detail-description">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th class="table-detail-name"><code>target</code></th>
+                                <td class="table-detail-type">string, number</td>
+                                <td class="table-detail-description">Selector or offset top.</td>
+                            </tr>
+                            <tr>
+                                <th class="table-detail-name"><code>duration</code></th>
+                                <td class="table-detail-type">number</td>
+                                <td class="table-detail-description">Number of milliseconds to scroll.</td>
+                            </tr>
+                            <tr>
+                                <th class="table-detail-name"><code>root</code></th>
+                                <td class="table-detail-type">object</td>
+                                <td class="table-detail-description">Element to Scroll.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><!-- /.table-detail -->
+
+                <h3 class="heading-lv3">scrollTop([duration, root])</h3>
+
+                <div class="button">
+                    <button type="button" class="js-button-page">Scroll Top</button>
+                </div><!-- /.button -->
+
+                <div class="figure-code">
+                    <figure class="figure-code-inner">
+                        <pre><code>smoothScroll.scrollTop(target);</code></pre>
+                    </figure><!-- /.figure-code-inner -->
+                </div><!-- /.figure-code -->
+
+                <div class="table-detail">
+                    <table>
+                        <colgroup>
+                            <col class="table-detail-name">
+                            <col class="table-detail-type">
+                            <col class="table-detail-description">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th class="table-detail-name">Parameter</th>
+                                <th class="table-detail-type">Type</th>
+                                <th class="table-detail-description">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th class="table-detail-name"><code>duration</code></th>
+                                <td class="table-detail-type">number</td>
+                                <td class="table-detail-description">Number of milliseconds to scroll.</td>
+                            </tr>
+                            <tr>
+                                <th class="table-detail-name"><code>root</code></th>
+                                <td class="table-detail-type">object</td>
+                                <td class="table-detail-description">Element to Scroll.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><!-- /.table-detail -->
+
+                <h3 class="heading-lv3">scrollBottom([duration, root])</h3>
+
+                <div class="button">
+                    <button type="button" class="js-button-bottom">Scroll Bottom</button>
+                </div><!-- /.button -->
+
+                <div class="figure-code">
+                    <figure class="figure-code-inner">
+                        <pre><code>smoothScroll.scrollBottom();</code></pre>
+                    </figure><!-- /.figure-code-inner -->
+                </div><!-- /.figure-code -->
+
+                <div class="table-detail">
+                    <table>
+                        <colgroup>
+                            <col class="table-detail-name">
+                            <col class="table-detail-type">
+                            <col class="table-detail-description">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th class="table-detail-name">Parameter</th>
+                                <th class="table-detail-type">Type</th>
+                                <th class="table-detail-description">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th class="table-detail-name"><code>duration</code></th>
+                                <td class="table-detail-type">number</td>
+                                <td class="table-detail-description">Number of milliseconds to scroll.</td>
+                            </tr>
+                            <tr>
+                                <th class="table-detail-name"><code>root</code></th>
+                                <td class="table-detail-type">object</td>
+                                <td class="table-detail-description">Element to Scroll.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><!-- /.table-detail -->
+
+                <p><a href="#root">Page Top</a></p>
+            </div><!-- /.main-inner -->
+        </section><!-- /.main-section -->
+    </main><!-- /.site-main -->
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <p class="footer-copyright">&copy; 2018 kmrk.</p>
+        </div><!-- /.footer-inner -->
+    </footer><!-- /.site-footer -->
+
+    <script src="/js/smoothScroll.min.js"></script>
+    <script>
+    smoothScroll.scrollTo(0, 500);
+    </script>
+    <script src="/js/script.js"></script>
+</body>
+</html>
