@@ -16,6 +16,7 @@
     var context = window;
     var start = context.scrollTop || window.pageYOffset;
     var end = 0;
+    var callbackFunc = null;
 
     /**
      * easeInOutCubic
@@ -78,9 +79,10 @@
 
     /**
      * scrollFrame
+     * @param {function} callback
      * @return {number}
      */
-    var scrollFrame = function() {
+    var scrollFrame = function(callback) {
         var elapsed = Date.now() - clock;
 
         if (context === window) {
@@ -91,6 +93,10 @@
 
         if (elapsed <= time) {
             requestAnimationFrame(scrollFrame);
+        } else {
+            if (typeof callbackFunc === 'function') {
+                callbackFunc();
+            }
         }
     };
 
@@ -102,13 +108,16 @@
          * @param {string|number} target
          * @param {number} duration
          * @param {object} root
+         * @param {function} callback
+         * @return {void}
          */
-        scrollTo: function(target, duration, root) {
+        scrollTo: function(target, duration, root, callback) {
             clock = Date.now();
             time = duration || 500;
             context = root || window;
             start = context.scrollTop || window.pageYOffset;
             end = getTargetTop(target);
+            callbackFunc = callback;
 
             scrollFrame();
         },
@@ -117,18 +126,22 @@
          * scrollTop
          * @param {number} duration
          * @param {object} root
+         * @param {function} callback
+         * @return {void}
          */
-        scrollTop: function (duration, root) {
-            this.scrollTo(0, duration, root);
+        scrollTop: function (duration, root, callback) {
+            this.scrollTo(0, duration, root, callback);
         },
 
         /**
          * scrollBottom
          * @param {number} duration
          * @param {object} root
+         * @param {function} callback
+         * @return {void}
          */
-        scrollBottom: function (duration, root) {
-            this.scrollTo(getScrollPageBottom(), duration, root);
+        scrollBottom: function (duration, root, callback) {
+            this.scrollTo(getScrollPageBottom(), duration, root, callback);
         }
     };
 

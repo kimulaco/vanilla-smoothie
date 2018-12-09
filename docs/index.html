@@ -37,7 +37,9 @@
 &lt;script&gt;
 document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function () {
-        smoothScroll.scrollTo(this.getAttribute('href'), 500);
+        smoothScroll.scrollTo(this.getAttribute('href'), 500, function () {
+            console.log('Callback')
+        });
     });
 });
 &lt;/script&gt;</code></pre>
@@ -190,9 +192,6 @@ smoothScroll.scrollTo(300);</code></pre>
     </footer><!-- /.site-footer -->
 
     <script src="./js/smoothScroll.min.js"></script>
-    <script>
-    smoothScroll.scrollTo(0, 500);
-    </script>
     <script src="./js/script.js"></script>
 </body>
 </html>

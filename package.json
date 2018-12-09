@@ -1,6 +1,6 @@
 {
   "name": "smooth-scroll",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Package that implements smooth scrolling with Vanilla JS.",
   "author": "kmrk",
   "license": "MIT",

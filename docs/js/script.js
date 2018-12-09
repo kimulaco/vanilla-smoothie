@@ -17,18 +17,24 @@
     setClickEvent('a[href^="#"]', function (event) {
         event.preventDefault();
 
-        smoothScroll.scrollTo(event.target.getAttribute('href'), 500);
+        smoothScroll.scrollTo(event.target.getAttribute('href'), 500, null, function () {
+            console.log('Callback')
+        });
     });
 
     setClickEvent('.js-button-page', function (event) {
         event.preventDefault();
 
-        smoothScroll.scrollTop(500);
+        smoothScroll.scrollTop(500, null, function () {
+            console.log('Callback')
+        });
     });
 
     setClickEvent('.js-button-bottom', function (event) {
         event.preventDefault();
 
-        smoothScroll.scrollBottom(500);
+        smoothScroll.scrollBottom(500, null, function () {
+            console.log('Callback')
+        });
     });
 }());
