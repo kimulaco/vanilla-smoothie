@@ -6,7 +6,14 @@ const config = {
                 src: './src/js/**/*.js',
                 watch: './src/js/**/*.js',
                 dest: './',
-                option: {}
+                option: {
+                    rollup: {
+                        input: './src/js/smoothScroll.js',
+                        output: {
+                            format: 'umd'
+                        }
+                    }
+                }
             }
         },
         dev: {
@@ -43,7 +50,14 @@ const config = {
                 src: './src/js/**/*.js',
                 watch: './src/js/**/*.js',
                 dest: './docs/js/',
-                option: {}
+                option: {
+                    rollup: {
+                        input: './src/js/smoothScroll.js',
+                        output: {
+                            format: 'umd'
+                        }
+                    }
+                }
             }
         }
     }

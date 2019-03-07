@@ -1,6 +1,10 @@
-(function (window) {
-    'use strict';
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory() :
+	typeof define === 'function' && define.amd ? define(factory) :
+	(factory());
+}(this, (function () { 'use strict';
 
+(function (window) {
     var document = window.document;
     var body = document.body;
     var rootElement = document.documentElement;
@@ -147,3 +151,5 @@
 
     window.smoothScroll = new SmoothScroll();
 }(window));
+
+})));

@@ -4,6 +4,8 @@
 
 Package that implements smooth scrolling with Vanilla JS.
 
+[https://kimulaco.github.io/smooth-scroll/](https://kimulaco.github.io/smooth-scroll/)
+
 ### Support Browser
 
 - Google Chrome
