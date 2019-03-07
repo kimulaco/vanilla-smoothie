@@ -67,4 +67,4 @@ smoothScroll.scrollBottom();
 
 ## License
 
-[MIT License](https://github.com/kmrk/smooth-scroll/blob/master/LICENSE).
+[MIT License](https://github.com/kimulaco/smooth-scroll/blob/master/LICENSE).
