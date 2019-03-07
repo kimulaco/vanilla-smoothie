@@ -2,6 +2,7 @@ module.exports = function (taskName, option) {
     'use strict';
 
     const gulp = require('gulp');
+    const rollup = require('gulp-rollup');
     const uglify = require('gulp-uglify');
     const rename = require('gulp-rename');
     const plumber = require('gulp-plumber');
@@ -13,6 +14,7 @@ module.exports = function (taskName, option) {
     gulp.task(`${taskName}.minify`, () => {
         gulp.src(option.src)
             .pipe(plumber())
+            .pipe(rollup(option.option.rollup))
             .pipe(gulp.dest(option.dest))
             .pipe(uglify())
             .pipe(rename({
