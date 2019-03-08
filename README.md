@@ -65,6 +65,16 @@ smoothScroll.scrollTop(target);
 smoothScroll.scrollBottom();
 ```
 
+## Development
+
+```shell
+npm install
+
+npm run dev
+
+npm run  build
+```
+
 ## License
 
 [MIT License](https://github.com/kimulaco/smooth-scroll/blob/master/LICENSE).
