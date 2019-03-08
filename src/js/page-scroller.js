@@ -1,31 +1,42 @@
-(function (window) {
-    'use strict';
-
-    var document = window.document;
-    var body = document.body;
-    var rootElement = document.documentElement;
-    var requestAnimationFrame =
-        window.requestAnimationFrame ||
-        window.mozRequestAnimationFrame ||
-        window.webkitRequestAnimationFrame ||
+((win) => {
+    const doc = win.document;
+    const body = doc.body;
+    const rootElement = doc.documentElement;
+    const requestAnimationFrame =
+        win.requestAnimationFrame ||
+        win.mozRequestAnimationFrame ||
+        win.webkitRequestAnimationFrame ||
         function (func) {
-            window.setTimeout(func, 15);
+            win.setTimeout(func, 15);
         };
-    var clock = '';
-    var time = 500;
-    var context = window;
-    var start = context.scrollTop || window.pageYOffset;
-    var end = 0;
-    var callbackFunc = null;
+    let clock = Date.now();
+    let time = 500;
+    let context = win;
+    let start = context.scrollTop || win.pageYOffset;
+    let end = 0;
+    let callbackFunc = null;
 
     /**
      * easeInOutCubic
      * @param {number} t
      * @return {number}
      */
-    var easeInOutCubic = function(t) {
+    const easeInOutCubic = (t) => {
         return t < 0.5 ? 4 * t * t * t :
             (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+    };
+
+    /**
+     * getScrollPageBottom
+     * @return {number}
+     */
+    const getScrollPageBottom = () => {
+        return Math.max.apply(null, [
+            body.clientHeight,
+            body.scrollHeight,
+            rootElement.scrollHeight,
+            rootElement.clientHeight
+        ]) - win.innerHeight;
     };
 
     /**
@@ -33,19 +44,19 @@
      * @param {number|string} target
      * @return {number|boolean}
      */
-    var getTargetTop = function(target) {
-        var targetElement = {};
+    const getTargetTop = (target) => {
+        let targetElement = {};
 
         if (typeof target === 'number') {
             return target;
         } else if (typeof target === 'string') {
-            targetElement = document.querySelector(target);
+            targetElement = doc.querySelector(target);
 
             if (!targetElement) {
                 return false;
             }
 
-            return targetElement.getBoundingClientRect().top + window.pageYOffset;
+            return targetElement.getBoundingClientRect().top + win.pageYOffset;
         }
 
         return false;
@@ -59,34 +70,24 @@
      * @param {number} duration
      * @return {number}
      */
-    var getScrollTop = function(startV, endV, elapsed, duration) {
+    const getScrollTop = (startV, endV, elapsed, duration) => {
         if (elapsed > duration) {
             return endV;
         }
 
-        return startV + (end - startV) * easeInOutCubic(elapsed / duration);
-    };
-
-    /**
-     * getScrollPageBottom
-     * @return {number}
-     */
-    var getScrollPageBottom = function() {
-        var contentHeight = Math.max.apply(null, [body.clientHeight, body.scrollHeight, rootElement.scrollHeight, rootElement.clientHeight]);
-
-        return contentHeight - window.innerHeight;
+        return startV + (end - startV) *
+            easeInOutCubic(elapsed /duration);
     };
 
     /**
      * scrollFrame
-     * @param {function} callback
      * @return {number}
      */
-    var scrollFrame = function(callback) {
-        var elapsed = Date.now() - clock;
+    const scrollFrame = () =>  {
+        const elapsed = Date.now() - clock;
 
-        if (context === window) {
-            window.scroll(0, getScrollTop(start, end, elapsed, time));
+        if (context === win) {
+            win.scroll(0, getScrollTop(start, end, elapsed, time));
         } else {
             context.scrollTop = getScrollTop(start, end, elapsed, time);
         }
@@ -100,9 +101,11 @@
         }
     };
 
-    var SmoothScroll = function SmoothScroll() {};
-
-    SmoothScroll.prototype = {
+    /**
+     * PageScroller
+     * @constructor
+     */
+    class PageScroller {
         /**
          * scrollTo
          * @param {string|number} target
@@ -111,16 +114,16 @@
          * @param {function} callback
          * @return {void}
          */
-        scrollTo: function(target, duration, root, callback) {
+        scrollTo(target, duration, root, callback) {
             clock = Date.now();
             time = duration || 500;
-            context = root || window;
+            context = root || win;
             start = context.scrollTop || window.pageYOffset;
             end = getTargetTop(target);
             callbackFunc = callback;
 
             scrollFrame();
-        },
+        }
 
         /**
          * scrollTop
@@ -129,9 +132,9 @@
          * @param {function} callback
          * @return {void}
          */
-        scrollTop: function (duration, root, callback) {
+        scrollTop(duration, root, callback) {
             this.scrollTo(0, duration, root, callback);
-        },
+        }
 
         /**
          * scrollBottom
@@ -140,10 +143,17 @@
          * @param {function} callback
          * @return {void}
          */
-        scrollBottom: function (duration, root, callback) {
+        scrollBottom(duration, root, callback) {
             this.scrollTo(getScrollPageBottom(), duration, root, callback);
         }
-    };
+    }
 
-    window.smoothScroll = new SmoothScroll();
-}(window));
+    if (
+        typeof exports === 'object' &&
+        typeof module !== 'undefined'
+    ) {
+        module.export =  new PageScroller();
+    } else if (typeof win !== 'undefined') {
+        win.pageScroller = new PageScroller();
+    }
+})(window);

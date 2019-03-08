@@ -1,3 +1,5 @@
+const babel = require('rollup-plugin-babel');
+
 const config = {
     task: {
         build: {
@@ -8,10 +10,17 @@ const config = {
                 dest: './',
                 option: {
                     rollup: {
-                        input: './src/js/smoothScroll.js',
+                        input: './src/js/page-scroller.js',
                         output: {
                             format: 'umd'
-                        }
+                        },
+                        plugins: [
+                            babel({
+                                presets: [
+                                    '@babel/preset-env'
+                                ]
+                            })
+                        ]
                     }
                 }
             }
@@ -52,10 +61,17 @@ const config = {
                 dest: './docs/js/',
                 option: {
                     rollup: {
-                        input: './src/js/smoothScroll.js',
+                        input: './src/js/page-scroller.js',
                         output: {
                             format: 'umd'
-                        }
+                        },
+                        plugins: [
+                            babel({
+                                presets: [
+                                    '@babel/preset-env'
+                                ]
+                            })
+                        ]
                     }
                 }
             }

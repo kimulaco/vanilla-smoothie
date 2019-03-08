@@ -1,10 +1,10 @@
-# SmoothScroll.js
+# PageScroller.js
 
 ## Overview
 
 Package that implements smooth scrolling with Vanilla JS.
 
-[https://kimulaco.github.io/smooth-scroll/](https://kimulaco.github.io/smooth-scroll/)
+[https://kimulaco.github.io/page-scroller/](https://kimulaco.github.io/page-scroller/)
 
 ### Support Browser
 
@@ -15,11 +15,11 @@ Package that implements smooth scrolling with Vanilla JS.
 ## Use
 
 ```html
-<script src="smoothScroll.min.js"></script>
+<script src="page-scroller.min.js"></script>
 <script>
 document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function () {
-        smoothScroll.scrollTo(this.getAttribute('href'), 500);
+        pageScroller.scrollTo(this.getAttribute('href'), 500);
     });
 });
 </script>
@@ -37,10 +37,10 @@ document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
 
 ```js
 // Selector
-smoothScroll.scrollTo('#id-name');
+pageScroller.scrollTo('#id-name');
 
 // Offset top
-smoothScroll.scrollTo(300);
+pageScroller.scrollTo(300);
 ```
 
 ### scrollTop([duration, root])
@@ -51,7 +51,7 @@ smoothScroll.scrollTo(300);
 | root | object | Element to Scroll. |
 
 ```js
-smoothScroll.scrollTop(target);
+pageScroller.scrollTop(target);
 ```
 
 ### scrollBottom([duration, root])
@@ -62,9 +62,19 @@ smoothScroll.scrollTop(target);
 | root | object | Element to Scroll. |
 
 ```js
-smoothScroll.scrollBottom();
+pageScroller.scrollBottom();
+```
+
+## Development
+
+```shell
+npm install
+
+npm run dev
+
+npm run  build
 ```
 
 ## License
 
-[MIT License](https://github.com/kimulaco/smooth-scroll/blob/master/LICENSE).
+[MIT License](https://github.com/kimulaco/page-scroller/blob/master/LICENSE).
