@@ -1,16 +1,16 @@
 {
-  "name": "smooth-scroll",
+  "name": "page-scroller",
   "version": "1.0.0-alpha",
   "description": "Package that implements smooth scrolling with Vanilla JS.",
   "author": "kimulaco",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kimulaco/smooth-scroll.git"
+    "url": "https://github.com/kimulaco/page-scroller.git"
   },
-  "bug": "https://github.com/kimulaco/smooth-scroll/issues",
-  "homepage": "https://kimulaco.github.io/smooth-scroll/",
-  "main": "smoothScroll.js",
+  "bug": "https://github.com/kimulaco/page-scroller/issues",
+  "homepage": "https://kimulaco.github.io/page-scroller/",
+  "main": "page-scroller.js",
   "scripts": {
     "build": "gulp build",
     "dev": "gulp dev"

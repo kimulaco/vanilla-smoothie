@@ -104,9 +104,9 @@
         }
     };
 
-    var SmoothScroll = function SmoothScroll() {};
+    var PageScroller = function PageScroller() {};
 
-    SmoothScroll.prototype = {
+    PageScroller.prototype = {
         /**
          * scrollTo
          * @param {string|number} target
@@ -149,7 +149,7 @@
         }
     };
 
-    window.smoothScroll = new SmoothScroll();
+    window.pageScroller = new PageScroller();
 }(window));
 
 })));

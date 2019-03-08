@@ -8,7 +8,7 @@ const config = {
                 dest: './',
                 option: {
                     rollup: {
-                        input: './src/js/smoothScroll.js',
+                        input: './src/js/page-scroller.js',
                         output: {
                             format: 'umd'
                         }
@@ -52,7 +52,7 @@ const config = {
                 dest: './docs/js/',
                 option: {
                     rollup: {
-                        input: './src/js/smoothScroll.js',
+                        input: './src/js/page-scroller.js',
                         output: {
                             format: 'umd'
                         }

@@ -3,13 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>SmoothScroll.js</title>
+    <title>PageScroller.js</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body id="root">
     <header class="site-header">
         <div class="header-inner">
-            <h1 class="header-title">SmoothScroll.js</h1>
+            <h1 class="header-title">PageScroller.js</h1>
 
             <ul class="header-menu">
                 <li><a href="#section-overview">Overview</a></li>
@@ -23,7 +23,7 @@
         <section id="section-overview" class="main-section">
             <div class="main-inner">
                 <h2 class="heading-lv2"><span>Overview</span></h2>
-                <p>Vanila JSでスムーススクロールを簡単に実装するプラグイン。</p>
+                <p>Package that implements smooth scrolling with Vanilla JS.</p>
             </div><!-- /.main-inner -->
         </section><!-- /.main-section -->
 
@@ -33,11 +33,11 @@
 
                 <div class="figure-code">
                     <figure class="figure-code-inner">
-                        <pre><code>&lt;script src="smoothScroll.min.js"&gt;&lt;/script&gt;
+                        <pre><code>&lt;script src="page-scroller.min.js"&gt;&lt;/script&gt;
 &lt;script&gt;
 document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function () {
-        smoothScroll.scrollTo(this.getAttribute('href'), 500, function () {
+        pageScroller.scrollTo(this.getAttribute('href'), 500, function () {
             console.log('Callback')
         });
     });
@@ -57,10 +57,10 @@ document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
                 <div class="figure-code">
                     <figure class="figure-code-inner">
                         <pre><code>// Selector
-smoothScroll.scrollTo('#id-name');
+pageScroller.scrollTo('#id-name');
 
 // Offset top
-smoothScroll.scrollTo(300);</code></pre>
+pageScroller.scrollTo(300);</code></pre>
                     </figure><!-- /.figure-code-inner -->
                 </div><!-- /.figure-code -->
 
@@ -106,7 +106,7 @@ smoothScroll.scrollTo(300);</code></pre>
 
                 <div class="figure-code">
                     <figure class="figure-code-inner">
-                        <pre><code>smoothScroll.scrollTop(target);</code></pre>
+                        <pre><code>pageScroller.scrollTop(target);</code></pre>
                     </figure><!-- /.figure-code-inner -->
                 </div><!-- /.figure-code -->
 
@@ -147,7 +147,7 @@ smoothScroll.scrollTo(300);</code></pre>
 
                 <div class="figure-code">
                     <figure class="figure-code-inner">
-                        <pre><code>smoothScroll.scrollBottom();</code></pre>
+                        <pre><code>pageScroller.scrollBottom();</code></pre>
                     </figure><!-- /.figure-code-inner -->
                 </div><!-- /.figure-code -->
 
@@ -191,7 +191,7 @@ smoothScroll.scrollTo(300);</code></pre>
         </div><!-- /.footer-inner -->
     </footer><!-- /.site-footer -->
 
-    <script src="./js/smoothScroll.min.js"></script>
+    <script src="./js/page-scroller.min.js"></script>
     <script src="./js/script.js"></script>
 </body>
 </html>

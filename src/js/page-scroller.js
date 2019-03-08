@@ -1,10 +1,6 @@
-(function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory() :
-	typeof define === 'function' && define.amd ? define(factory) :
-	(factory());
-}(this, (function () { 'use strict';
-
 (function (window) {
+    'use strict';
+
     var document = window.document;
     var body = document.body;
     var rootElement = document.documentElement;
@@ -104,9 +100,9 @@
         }
     };
 
-    var SmoothScroll = function SmoothScroll() {};
+    var PageScroller = function PageScroller() {};
 
-    SmoothScroll.prototype = {
+    PageScroller.prototype = {
         /**
          * scrollTo
          * @param {string|number} target
@@ -149,7 +145,5 @@
         }
     };
 
-    window.smoothScroll = new SmoothScroll();
+    window.pageScroller = new PageScroller();
 }(window));
-
-})));
