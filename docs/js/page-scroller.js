@@ -4,152 +4,208 @@
 	(factory());
 }(this, (function () { 'use strict';
 
-(function (window) {
-    var document = window.document;
-    var body = document.body;
-    var rootElement = document.documentElement;
-    var requestAnimationFrame =
-        window.requestAnimationFrame ||
-        window.mozRequestAnimationFrame ||
-        window.webkitRequestAnimationFrame ||
-        function (func) {
-            window.setTimeout(func, 15);
-        };
-    var clock = '';
-    var time = 500;
-    var context = window;
-    var start = context.scrollTop || window.pageYOffset;
-    var end = 0;
-    var callbackFunc = null;
-
-    /**
-     * easeInOutCubic
-     * @param {number} t
-     * @return {number}
-     */
-    var easeInOutCubic = function(t) {
-        return t < 0.5 ? 4 * t * t * t :
-            (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+function _typeof(obj) {
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function (obj) {
+      return typeof obj;
     };
+  } else {
+    _typeof = function (obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
 
-    /**
-     * getTargetTop
-     * @param {number|string} target
-     * @return {number|boolean}
-     */
-    var getTargetTop = function(target) {
-        var targetElement = {};
+  return _typeof(obj);
+}
 
-        if (typeof target === 'number') {
-            return target;
-        } else if (typeof target === 'string') {
-            targetElement = document.querySelector(target);
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-            if (!targetElement) {
-                return false;
-            }
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
 
-            return targetElement.getBoundingClientRect().top + window.pageYOffset;
-        }
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
 
+(function (win) {
+  var doc = win.document;
+  var body = doc.body;
+  var rootElement = doc.documentElement;
+
+  var requestAnimationFrame = win.requestAnimationFrame || win.mozRequestAnimationFrame || win.webkitRequestAnimationFrame || function (func) {
+    win.setTimeout(func, 15);
+  };
+
+  var clock = Date.now();
+  var time = 500;
+  var context = win;
+  var start = context.scrollTop || win.pageYOffset;
+  var end = 0;
+  var callbackFunc = null;
+  /**
+   * easeInOutCubic
+   * @param {number} t
+   * @return {number}
+   */
+
+  var easeInOutCubic = function easeInOutCubic(t) {
+    return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+  };
+  /**
+   * getScrollPageBottom
+   * @return {number}
+   */
+
+
+  var getScrollPageBottom = function getScrollPageBottom() {
+    return Math.max.apply(null, [body.clientHeight, body.scrollHeight, rootElement.scrollHeight, rootElement.clientHeight]) - win.innerHeight;
+  };
+  /**
+   * getTargetTop
+   * @param {number|string} target
+   * @return {number|boolean}
+   */
+
+
+  var getTargetTop = function getTargetTop(target) {
+    var targetElement = {};
+
+    if (typeof target === 'number') {
+      return target;
+    } else if (typeof target === 'string') {
+      targetElement = doc.querySelector(target);
+
+      if (!targetElement) {
         return false;
-    };
+      }
 
-    /**
-     * getScrollTop
-     * @param {number} startV
-     * @param {number} endV
-     * @param {number} elapsed
-     * @param {number} duration
-     * @return {number}
-     */
-    var getScrollTop = function(startV, endV, elapsed, duration) {
-        if (elapsed > duration) {
-            return endV;
-        }
+      return targetElement.getBoundingClientRect().top + win.pageYOffset;
+    }
 
-        return startV + (end - startV) * easeInOutCubic(elapsed / duration);
-    };
+    return false;
+  };
+  /**
+   * getScrollTop
+   * @param {number} startV
+   * @param {number} endV
+   * @param {number} elapsed
+   * @param {number} duration
+   * @return {number}
+   */
 
-    /**
-     * getScrollPageBottom
-     * @return {number}
-     */
-    var getScrollPageBottom = function() {
-        var contentHeight = Math.max.apply(null, [body.clientHeight, body.scrollHeight, rootElement.scrollHeight, rootElement.clientHeight]);
 
-        return contentHeight - window.innerHeight;
-    };
+  var getScrollTop = function getScrollTop(startV, endV, elapsed, duration) {
+    if (elapsed > duration) {
+      return endV;
+    }
 
-    /**
-     * scrollFrame
-     * @param {function} callback
-     * @return {number}
-     */
-    var scrollFrame = function(callback) {
-        var elapsed = Date.now() - clock;
+    return startV + (end - startV) * easeInOutCubic(elapsed / duration);
+  };
+  /**
+   * scrollFrame
+   * @return {number}
+   */
 
-        if (context === window) {
-            window.scroll(0, getScrollTop(start, end, elapsed, time));
-        } else {
-            context.scrollTop = getScrollTop(start, end, elapsed, time);
-        }
 
-        if (elapsed <= time) {
-            requestAnimationFrame(scrollFrame);
-        } else {
-            if (typeof callbackFunc === 'function') {
-                callbackFunc();
-            }
-        }
-    };
+  var scrollFrame = function scrollFrame() {
+    var elapsed = Date.now() - clock;
 
-    var PageScroller = function PageScroller() {};
+    if (context === win) {
+      win.scroll(0, getScrollTop(start, end, elapsed, time));
+    } else {
+      context.scrollTop = getScrollTop(start, end, elapsed, time);
+    }
 
-    PageScroller.prototype = {
-        /**
-         * scrollTo
-         * @param {string|number} target
-         * @param {number} duration
-         * @param {object} root
-         * @param {function} callback
-         * @return {void}
-         */
-        scrollTo: function(target, duration, root, callback) {
-            clock = Date.now();
-            time = duration || 500;
-            context = root || window;
-            start = context.scrollTop || window.pageYOffset;
-            end = getTargetTop(target);
-            callbackFunc = callback;
+    if (elapsed <= time) {
+      requestAnimationFrame(scrollFrame);
+    } else {
+      if (typeof callbackFunc === 'function') {
+        callbackFunc();
+      }
+    }
+  };
+  /**
+   * PageScroller
+   * @constructor
+   */
 
-            scrollFrame();
-        },
 
-        /**
-         * scrollTop
-         * @param {number} duration
-         * @param {object} root
-         * @param {function} callback
-         * @return {void}
-         */
-        scrollTop: function (duration, root, callback) {
-            this.scrollTo(0, duration, root, callback);
-        },
+  var PageScroller =
+  /*#__PURE__*/
+  function () {
+    function PageScroller() {
+      _classCallCheck(this, PageScroller);
+    }
 
-        /**
-         * scrollBottom
-         * @param {number} duration
-         * @param {object} root
-         * @param {function} callback
-         * @return {void}
-         */
-        scrollBottom: function (duration, root, callback) {
-            this.scrollTo(getScrollPageBottom(), duration, root, callback);
-        }
-    };
+    _createClass(PageScroller, [{
+      key: "scrollTo",
 
-    window.pageScroller = new PageScroller();
-}(window));
+      /**
+       * scrollTo
+       * @param {string|number} target
+       * @param {number} duration
+       * @param {object} root
+       * @param {function} callback
+       * @return {void}
+       */
+      value: function scrollTo(target, duration, root, callback) {
+        clock = Date.now();
+        time = duration || 500;
+        context = root || win;
+        start = context.scrollTop || window.pageYOffset;
+        end = getTargetTop(target);
+        callbackFunc = callback;
+        scrollFrame();
+      }
+      /**
+       * scrollTop
+       * @param {number} duration
+       * @param {object} root
+       * @param {function} callback
+       * @return {void}
+       */
+
+    }, {
+      key: "scrollTop",
+      value: function scrollTop(duration, root, callback) {
+        this.scrollTo(0, duration, root, callback);
+      }
+      /**
+       * scrollBottom
+       * @param {number} duration
+       * @param {object} root
+       * @param {function} callback
+       * @return {void}
+       */
+
+    }, {
+      key: "scrollBottom",
+      value: function scrollBottom(duration, root, callback) {
+        this.scrollTo(getScrollPageBottom(), duration, root, callback);
+      }
+    }]);
+
+    return PageScroller;
+  }();
+
+  if ((typeof exports === "undefined" ? "undefined" : _typeof(exports)) === 'object' && typeof module !== 'undefined') {
+    module.export = new PageScroller();
+  } else if (typeof win !== 'undefined') {
+    win.pageScroller = new PageScroller();
+  }
+})(window);
 
 })));
