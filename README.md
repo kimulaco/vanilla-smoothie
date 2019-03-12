@@ -12,7 +12,7 @@ Package that implements smooth scrolling with Vanilla JS.
 
 ```shell
 # install package
-npm install --sace vanilla-smoothie
+npm install --save vanilla-smoothie
 ```
 
 ```js

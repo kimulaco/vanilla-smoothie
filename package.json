@@ -1,6 +1,6 @@
 {
   "name": "vanilla-smoothie",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Package that implements smooth scrolling with Vanilla JS.",
   "author": "kimulaco",
   "license": "MIT",
