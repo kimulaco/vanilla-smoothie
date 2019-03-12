@@ -10,7 +10,8 @@
   },
   "bug": "https://github.com/kimulaco/page-scroller/issues",
   "homepage": "https://kimulaco.github.io/page-scroller/",
-  "main": "page-scroller.js",
+  "main": "dist/page-scroller.js",
+  "umd:main": "dist/page-scroller.min.js",
   "scripts": {
     "build": "gulp build",
     "dev": "gulp dev"

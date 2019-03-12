@@ -7,12 +7,13 @@ const config = {
                 module: './gulp/task-js.js',
                 src: './src/js/**/*.js',
                 watch: './src/js/**/*.js',
-                dest: './',
+                dest: './dist/',
                 option: {
                     rollup: {
                         input: './src/js/page-scroller.js',
                         output: {
-                            format: 'umd'
+                            format: 'umd',
+                            name: 'page-scroller'
                         },
                         plugins: [
                             babel({
@@ -63,7 +64,8 @@ const config = {
                     rollup: {
                         input: './src/js/page-scroller.js',
                         output: {
-                            format: 'umd'
+                            format: 'umd',
+                            name: 'page-scroller'
                         },
                         plugins: [
                             babel({
