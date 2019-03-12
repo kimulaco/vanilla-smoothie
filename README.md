@@ -6,13 +6,26 @@ Package that implements smooth scrolling with Vanilla JS.
 
 [https://kimulaco.github.io/page-scroller/](https://kimulaco.github.io/page-scroller/)
 
-### Support Browser
-
-- Google Chrome
-- Firefox
-- Safari
-
 ## Use
+
+### API
+
+```shell
+# install package
+npm install --sacve page-scroller
+```
+
+```js
+import pageScroller from 'page-scroller';
+// or const pageScroller =  require('page-scroller');
+
+pageScroller.scrollTo('#anchor-01');
+pageScroller.scrollTo(1000);
+pageScroller.scrollTop();
+pageScroller.scrollBottom();
+```
+
+### Browser
 
 ```html
 <script src="page-scroller.min.js"></script>
@@ -65,15 +78,13 @@ pageScroller.scrollTop(target);
 pageScroller.scrollBottom();
 ```
 
-## Development
+### Support Browser
 
-```shell
-npm install
+Latest version of browser below.
 
-npm run dev
-
-npm run  build
-```
+- Google Chrome
+- Firefox
+- Safari
 
 ## License
 

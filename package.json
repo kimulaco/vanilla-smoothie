@@ -1,6 +1,6 @@
 {
   "name": "page-scroller",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0",
   "description": "Package that implements smooth scrolling with Vanilla JS.",
   "author": "kimulaco",
   "license": "MIT",
