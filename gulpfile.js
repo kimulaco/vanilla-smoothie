@@ -11,10 +11,10 @@ const config = {
                 option: {
                     license: './src/js/license.js',
                     rollup: {
-                        input: './src/js/page-scroller.js',
+                        input: './src/js/vanilla-smoothie.js',
                         output: {
                             format: 'umd',
-                            name: 'page-scroller'
+                            name: 'vanilla-smoothie'
                         },
                         plugins: [
                             babel({
@@ -64,10 +64,10 @@ const config = {
                 option: {
                     license: './src/js/license.js',
                     rollup: {
-                        input: './src/js/page-scroller.js',
+                        input: './src/js/vanilla-smoothie.js',
                         output: {
                             format: 'umd',
-                            name: 'page-scroller'
+                            name: 'vanilla-smoothie'
                         },
                         plugins: [
                             babel({

@@ -3,13 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>PageScroller.js</title>
+    <title>VanillaSmoothie.js</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body id="root">
     <header class="site-header">
         <div class="header-inner">
-            <h1 class="header-title">PageScroller.js</h1>
+            <h1 class="header-title">VanillaSmoothie.js</h1>
 
             <ul class="header-menu">
                 <li><a href="#section-overview">Overview</a></li>
@@ -33,11 +33,11 @@
 
                 <div class="figure-code">
                     <figure class="figure-code-inner">
-                        <pre><code>&lt;script src="page-scroller.min.js"&gt;&lt;/script&gt;
+                        <pre><code>&lt;script src="vanilla-smoothie.min.js"&gt;&lt;/script&gt;
 &lt;script&gt;
 document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function () {
-        pageScroller.scrollTo(this.getAttribute('href'), 500, function () {
+        vanillaSmoothie.scrollTo(this.getAttribute('href'), 500, function () {
             console.log('Callback')
         });
     });
@@ -57,10 +57,10 @@ document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
                 <div class="figure-code">
                     <figure class="figure-code-inner">
                         <pre><code>// Selector
-pageScroller.scrollTo('#id-name');
+vanillaSmoothie.scrollTo('#id-name');
 
 // Offset top
-pageScroller.scrollTo(300);</code></pre>
+vanillaSmoothie.scrollTo(300);</code></pre>
                     </figure><!-- /.figure-code-inner -->
                 </div><!-- /.figure-code -->
 
@@ -106,7 +106,7 @@ pageScroller.scrollTo(300);</code></pre>
 
                 <div class="figure-code">
                     <figure class="figure-code-inner">
-                        <pre><code>pageScroller.scrollTop(target);</code></pre>
+                        <pre><code>vanillaSmoothie.scrollTop(target);</code></pre>
                     </figure><!-- /.figure-code-inner -->
                 </div><!-- /.figure-code -->
 
@@ -147,7 +147,7 @@ pageScroller.scrollTo(300);</code></pre>
 
                 <div class="figure-code">
                     <figure class="figure-code-inner">
-                        <pre><code>pageScroller.scrollBottom();</code></pre>
+                        <pre><code>vanillaSmoothie.scrollBottom();</code></pre>
                     </figure><!-- /.figure-code-inner -->
                 </div><!-- /.figure-code -->
 
@@ -187,11 +187,11 @@ pageScroller.scrollTo(300);</code></pre>
 
     <footer class="site-footer">
         <div class="footer-inner">
-            <p class="footer-copyright">&copy; 2019 smooth-scroll.</p>
+            <p class="footer-copyright">&copy; 2019 VanillaSmoothie.js.</p>
         </div><!-- /.footer-inner -->
     </footer><!-- /.site-footer -->
 
-    <script src="./js/page-scroller.min.js"></script>
+    <script src="./js/vanilla-smoothie.min.js"></script>
     <script src="./js/script.js"></script>
 </body>
 </html>

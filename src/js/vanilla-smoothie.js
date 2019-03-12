@@ -102,10 +102,10 @@ const scrollFrame = () =>  {
 };
 
 /**
- * PageScroller
+ * VanillaSmoothie
  * @constructor
  */
-class PageScroller {
+class VanillaSmoothie {
     /**
      * scrollTo
      * @param {string|number} target
@@ -148,12 +148,12 @@ class PageScroller {
     }
 }
 
-export default new PageScroller();
+export default new VanillaSmoothie();
 
 if (
     typeof exports !== 'object' &&
     typeof module === 'undefined' &&
     typeof window !== 'undefined'
 ) {
-    window.pageScroller = new PageScroller();
+    window.vanillaSmoothie = new VanillaSmoothie();
 }

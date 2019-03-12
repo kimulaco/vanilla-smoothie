@@ -1,17 +1,17 @@
 {
-  "name": "page-scroller",
+  "name": "vanilla-smoothie",
   "version": "1.0.0",
   "description": "Package that implements smooth scrolling with Vanilla JS.",
   "author": "kimulaco",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kimulaco/page-scroller.git"
+    "url": "https://github.com/kimulaco/vanilla-smoothie.git"
   },
-  "bug": "https://github.com/kimulaco/page-scroller/issues",
-  "homepage": "https://kimulaco.github.io/page-scroller/",
-  "main": "dist/page-scroller.js",
-  "umd:main": "dist/page-scroller.min.js",
+  "bug": "https://github.com/kimulaco/vanilla-smoothie/issues",
+  "homepage": "https://kimulaco.github.io/vanilla-smoothie/",
+  "main": "dist/vanilla-smoothie.js",
+  "umd:main": "dist/vanilla-smoothie.min.js",
   "scripts": {
     "build": "gulp build",
     "dev": "gulp dev"
