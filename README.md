@@ -12,7 +12,7 @@ Package that implements smooth scrolling with Vanilla JS.
 
 ```shell
 # install package
-npm install --sacve vanilla-smoothie
+npm install --sace vanilla-smoothie
 ```
 
 ```js
@@ -47,6 +47,7 @@ document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
 | target | string, number | Selector or offset top. |
 | duration | number | Number of milliseconds to scroll. |
 | root | object | Element to Scroll. |
+| callback | function | Callback function. |
 
 ```js
 // Selector
@@ -54,6 +55,10 @@ vanillaSmoothie.scrollTo('#id-name');
 
 // Offset top
 vanillaSmoothie.scrollTo(300);
+
+vanillaSmoothie.scrollTo('#id-name', 1000, document.body, () => {
+    console.log('Callback!!');
+});
 ```
 
 ### scrollTop([duration, root])
@@ -62,6 +67,7 @@ vanillaSmoothie.scrollTo(300);
 ----|----|----
 | duration | number | Number of milliseconds to scroll. |
 | root | object | Element to Scroll. |
+| callback | function | Callback function. |
 
 ```js
 vanillaSmoothie.scrollTop(target);
@@ -73,6 +79,7 @@ vanillaSmoothie.scrollTop(target);
 ----|----|----
 | duration | number | Number of milliseconds to scroll. |
 | root | object | Element to Scroll. |
+| callback | function | Callback function. |
 
 ```js
 vanillaSmoothie.scrollBottom();
