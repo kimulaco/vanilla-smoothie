@@ -1,3 +1,5 @@
+const babel = require('rollup-plugin-babel');
+
 const config = {
     task: {
         build: {
@@ -5,13 +7,22 @@ const config = {
                 module: './gulp/task-js.js',
                 src: './src/js/**/*.js',
                 watch: './src/js/**/*.js',
-                dest: './',
+                dest: './dist/',
                 option: {
+                    license: './src/js/license.js',
                     rollup: {
-                        input: './src/js/smoothScroll.js',
+                        input: './src/js/page-scroller.js',
                         output: {
-                            format: 'umd'
-                        }
+                            format: 'umd',
+                            name: 'page-scroller'
+                        },
+                        plugins: [
+                            babel({
+                                presets: [
+                                    '@babel/preset-env'
+                                ]
+                            })
+                        ]
                     }
                 }
             }
@@ -51,11 +62,20 @@ const config = {
                 watch: './src/js/**/*.js',
                 dest: './docs/js/',
                 option: {
+                    license: './src/js/license.js',
                     rollup: {
-                        input: './src/js/smoothScroll.js',
+                        input: './src/js/page-scroller.js',
                         output: {
-                            format: 'umd'
-                        }
+                            format: 'umd',
+                            name: 'page-scroller'
+                        },
+                        plugins: [
+                            babel({
+                                presets: [
+                                    '@babel/preset-env'
+                                ]
+                            })
+                        ]
                     }
                 }
             }
