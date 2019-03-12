@@ -9,6 +9,7 @@ const config = {
                 watch: './src/js/**/*.js',
                 dest: './dist/',
                 option: {
+                    license: './src/js/license.js',
                     rollup: {
                         input: './src/js/page-scroller.js',
                         output: {
@@ -61,6 +62,7 @@ const config = {
                 watch: './src/js/**/*.js',
                 dest: './docs/js/',
                 option: {
+                    license: './src/js/license.js',
                     rollup: {
                         input: './src/js/page-scroller.js',
                         output: {
