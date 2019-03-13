@@ -122,7 +122,7 @@ var getScrollTop = function getScrollTop(startV, endV, elapsed, duration) {
 };
 /**
  * scrollFrame
- * @return {number}
+ * @return {void}
  */
 
 
