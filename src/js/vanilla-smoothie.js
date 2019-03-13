@@ -81,7 +81,7 @@ const getScrollTop = (startV, endV, elapsed, duration) => {
 
 /**
  * scrollFrame
- * @return {number}
+ * @return {void}
  */
 const scrollFrame = () =>  {
     const elapsed = Date.now() - clock;
