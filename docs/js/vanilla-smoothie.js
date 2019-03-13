@@ -1,13 +1,13 @@
 /**
-PageScroller.js
+VanillaSmoothie.js
 Copyright (c) 2019 kimulaco
 This software is released under the MIT License.
-https://github.com/kimulaco/page-scroller/blob/develop/LICENSE
+https://github.com/kimulaco/vanilla-smoothie/blob/develop/LICENSE
 */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
-	(global['page-scroller'] = factory());
+	(global['vanilla-smoothie'] = factory());
 }(this, (function () { 'use strict';
 
 function _typeof(obj) {
@@ -144,19 +144,19 @@ var scrollFrame = function scrollFrame() {
   }
 };
 /**
- * PageScroller
+ * VanillaSmoothie
  * @constructor
  */
 
 
-var PageScroller =
+var VanillaSmoothie =
 /*#__PURE__*/
 function () {
-  function PageScroller() {
-    _classCallCheck(this, PageScroller);
+  function VanillaSmoothie() {
+    _classCallCheck(this, VanillaSmoothie);
   }
 
-  _createClass(PageScroller, [{
+  _createClass(VanillaSmoothie, [{
     key: "scrollTo",
 
     /**
@@ -204,15 +204,15 @@ function () {
     }
   }]);
 
-  return PageScroller;
+  return VanillaSmoothie;
 }();
 
-var pageScroller = new PageScroller();
+var vanillaSmoothie = new VanillaSmoothie();
 
 if ((typeof exports === "undefined" ? "undefined" : _typeof(exports)) !== 'object' && typeof module === 'undefined' && typeof window !== 'undefined') {
-  window.pageScroller = new PageScroller();
+  window.vanillaSmoothie = new VanillaSmoothie();
 }
 
-return pageScroller;
+return vanillaSmoothie;
 
 })));

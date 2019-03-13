@@ -1,10 +1,10 @@
-# PageScroller.js
+# VanillaSmoothie.js
 
 ## Overview
 
 Package that implements smooth scrolling with Vanilla JS.
 
-[https://kimulaco.github.io/page-scroller/](https://kimulaco.github.io/page-scroller/)
+[https://kimulaco.github.io/vanilla-smoothie/](https://kimulaco.github.io/vanilla-smoothie/)
 
 ## Use
 
@@ -12,27 +12,27 @@ Package that implements smooth scrolling with Vanilla JS.
 
 ```shell
 # install package
-npm install --sacve page-scroller
+npm install --sace vanilla-smoothie
 ```
 
 ```js
-import pageScroller from 'page-scroller';
-// or const pageScroller =  require('page-scroller');
+import vanillaSmoothie from 'vanilla-smoothie';
+// or const vanillaSmoothie =  require('vanilla-smoothie');
 
-pageScroller.scrollTo('#anchor-01');
-pageScroller.scrollTo(1000);
-pageScroller.scrollTop();
-pageScroller.scrollBottom();
+vanillaSmoothie.scrollTo('#anchor-01');
+vanillaSmoothie.scrollTo(1000);
+vanillaSmoothie.scrollTop();
+vanillaSmoothie.scrollBottom();
 ```
 
 ### Browser
 
 ```html
-<script src="page-scroller.min.js"></script>
+<script src="vanilla-smoothie.min.js"></script>
 <script>
 document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function () {
-        pageScroller.scrollTo(this.getAttribute('href'), 500);
+        vanillaSmoothie.scrollTo(this.getAttribute('href'), 500);
     });
 });
 </script>
@@ -47,13 +47,18 @@ document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
 | target | string, number | Selector or offset top. |
 | duration | number | Number of milliseconds to scroll. |
 | root | object | Element to Scroll. |
+| callback | function | Callback function. |
 
 ```js
 // Selector
-pageScroller.scrollTo('#id-name');
+vanillaSmoothie.scrollTo('#id-name');
 
 // Offset top
-pageScroller.scrollTo(300);
+vanillaSmoothie.scrollTo(300);
+
+vanillaSmoothie.scrollTo('#id-name', 1000, document.body, () => {
+    console.log('Callback!!');
+});
 ```
 
 ### scrollTop([duration, root])
@@ -62,9 +67,10 @@ pageScroller.scrollTo(300);
 ----|----|----
 | duration | number | Number of milliseconds to scroll. |
 | root | object | Element to Scroll. |
+| callback | function | Callback function. |
 
 ```js
-pageScroller.scrollTop(target);
+vanillaSmoothie.scrollTop(target);
 ```
 
 ### scrollBottom([duration, root])
@@ -73,9 +79,10 @@ pageScroller.scrollTop(target);
 ----|----|----
 | duration | number | Number of milliseconds to scroll. |
 | root | object | Element to Scroll. |
+| callback | function | Callback function. |
 
 ```js
-pageScroller.scrollBottom();
+vanillaSmoothie.scrollBottom();
 ```
 
 ### Support Browser
@@ -88,4 +95,4 @@ Latest version of browser below.
 
 ## License
 
-[MIT License](https://github.com/kimulaco/page-scroller/blob/master/LICENSE).
+[MIT License](https://github.com/kimulaco/vanilla-smoothie/blob/master/LICENSE).
