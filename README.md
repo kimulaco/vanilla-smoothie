@@ -8,21 +8,20 @@ Package that implements smooth scrolling with Vanilla JS.
 
 ## Use
 
-### API
+### Module
 
 ```shell
 # install package
-npm install --sace vanilla-smoothie
+npm install --save vanilla-smoothie
 ```
 
 ```js
 import vanillaSmoothie from 'vanilla-smoothie';
 // or const vanillaSmoothie =  require('vanilla-smoothie');
 
-vanillaSmoothie.scrollTo('#anchor-01');
-vanillaSmoothie.scrollTo(1000);
-vanillaSmoothie.scrollTop();
-vanillaSmoothie.scrollBottom();
+vanillaSmoothie.scrollTo('#anchor-01', 800);
+vanillaSmoothie.scrollTo(1000, 500);
+vanillaSmoothie.scrollTop(500);
 ```
 
 ### Browser
@@ -30,17 +29,21 @@ vanillaSmoothie.scrollBottom();
 ```html
 <script src="vanilla-smoothie.min.js"></script>
 <script>
-document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
-    anchor.addEventListener('click', function () {
-        vanillaSmoothie.scrollTo(this.getAttribute('href'), 500);
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', (event) => {
+        vanillaSmoothie.scrollTo(event.target.getAttribute('href'), 500);
     });
+});
+
+document.getElementById('to-top').addEventListener('click', () => {
+    vanillaSmoothie.scrollTop(500);
 });
 </script>
 ```
 
 ## Methods
 
-### scrollTo(target[, duration, root])
+### scrollTo(target[, duration, root, callback])
 
 | Parameter | Type | Description |
 ----|----|----
@@ -61,7 +64,7 @@ vanillaSmoothie.scrollTo('#id-name', 1000, document.body, () => {
 });
 ```
 
-### scrollTop([duration, root])
+### scrollTop([duration, root, callback])
 
 | Parameter | Type | Description |
 ----|----|----
@@ -73,7 +76,7 @@ vanillaSmoothie.scrollTo('#id-name', 1000, document.body, () => {
 vanillaSmoothie.scrollTop(target);
 ```
 
-### scrollBottom([duration, root])
+### scrollBottom([duration, root, callback])
 
 | Parameter | Type | Description |
 ----|----|----
