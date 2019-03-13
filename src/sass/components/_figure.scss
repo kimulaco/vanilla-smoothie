@@ -9,6 +9,12 @@
   width: 100%;
   overflow-x: auto;
 
+  pre {
+    &.language-javascript {
+      padding: 0;
+    }
+  }
+
   code {
     display: block;
     padding: 16px;
@@ -29,7 +35,10 @@
     margin: 0;
     border: 1px solid #39c;
     border-radius: 2px;
-    box-shadow: 0 0 8px rgba(0, 0, 0, .2);
+    background: #fefefe;
+  }
+
+  .language-javascript {
     background: #fefefe;
   }
 }

@@ -32,13 +32,31 @@
             <div class="main-inner">
                 <h2 class="heading-lv2"><span>Use</span></h2>
 
+                <h3 class="heading-lv3"><span>Module</span></h3>
+
                 <div class="figure-code">
                     <figure class="figure-code-inner">
-                        <pre><code>&lt;script src="vanilla-smoothie.min.js"&gt;&lt;/script&gt;
+                        <pre><code class="language-javascript">import vanillaSmoothie from 'vanilla-smoothie';
+// or const vanillaSmoothie =  require('vanilla-smoothie');
+
+vanillaSmoothie.scrollTo('#anchor-01', 800);
+vanillaSmoothie.scrollTo(1000, 500);
+vanillaSmoothie.scrollTop(500);
+</code></pre>
+                    </figure><!-- /.figure-code-inner -->
+                </div><!-- /.figure-code -->
+
+                <h3 class="heading-lv3"><span>Browser</span></h3>
+
+                <div class="figure-code">
+                    <figure class="figure-code-inner">
+                        <pre><code class="language-javascript">&lt;script src="vanilla-smoothie.min.js"&gt;&lt;/script&gt;
 &lt;script&gt;
-document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
-    anchor.addEventListener('click', function () {
-        vanillaSmoothie.scrollTo(this.getAttribute('href'), 500, function () {
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', (event) => {
+        const href = event.target.getAttribute('href');
+
+        vanillaSmoothie.scrollTo(href, 500, () => {
             console.log('Callback')
         });
     });
@@ -57,7 +75,7 @@ document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
 
                 <div class="figure-code">
                     <figure class="figure-code-inner">
-                        <pre><code>// Selector
+                        <pre><code class="language-javascript">// Selector
 vanillaSmoothie.scrollTo('#id-name');
 
 // Offset top
@@ -95,6 +113,11 @@ vanillaSmoothie.scrollTo(300);</code></pre>
                                 <td class="table-detail-type">object</td>
                                 <td class="table-detail-description">Element to Scroll.</td>
                             </tr>
+                            <tr>
+                                <th class="table-detail-name"><code>callback</code></th>
+                                <td class="table-detail-type">function</td>
+                                <td class="table-detail-description">Callback function.</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div><!-- /.table-detail -->
@@ -107,7 +130,7 @@ vanillaSmoothie.scrollTo(300);</code></pre>
 
                 <div class="figure-code">
                     <figure class="figure-code-inner">
-                        <pre><code>vanillaSmoothie.scrollTop(target);</code></pre>
+                        <pre><code class="language-javascript">vanillaSmoothie.scrollTop(target);</code></pre>
                     </figure><!-- /.figure-code-inner -->
                 </div><!-- /.figure-code -->
 
@@ -135,6 +158,11 @@ vanillaSmoothie.scrollTo(300);</code></pre>
                                 <th class="table-detail-name"><code>root</code></th>
                                 <td class="table-detail-type">object</td>
                                 <td class="table-detail-description">Element to Scroll.</td>
+                            </tr>
+                            <tr>
+                                <th class="table-detail-name"><code>callback</code></th>
+                                <td class="table-detail-type">function</td>
+                                <td class="table-detail-description">Callback function.</td>
                             </tr>
                         </tbody>
                     </table>
@@ -148,7 +176,7 @@ vanillaSmoothie.scrollTo(300);</code></pre>
 
                 <div class="figure-code">
                     <figure class="figure-code-inner">
-                        <pre><code>vanillaSmoothie.scrollBottom();</code></pre>
+                        <pre><code class="language-javascript">vanillaSmoothie.scrollBottom();</code></pre>
                     </figure><!-- /.figure-code-inner -->
                 </div><!-- /.figure-code -->
 
@@ -177,11 +205,14 @@ vanillaSmoothie.scrollTo(300);</code></pre>
                                 <td class="table-detail-type">object</td>
                                 <td class="table-detail-description">Element to Scroll.</td>
                             </tr>
+                            <tr>
+                                <th class="table-detail-name"><code>callback</code></th>
+                                <td class="table-detail-type">function</td>
+                                <td class="table-detail-description">Callback function.</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div><!-- /.table-detail -->
-
-                <p><a href="#root">Page Top</a></p>
             </div><!-- /.main-inner -->
         </section><!-- /.main-section -->
     </main><!-- /.site-main -->
@@ -192,6 +223,7 @@ vanillaSmoothie.scrollTo(300);</code></pre>
         </div><!-- /.footer-inner -->
     </footer><!-- /.site-footer -->
 
+    <script src="./js/prism.js"></script>
     <script src="./js/vanilla-smoothie.min.js"></script>
     <script src="./js/script.js"></script>
 </body>
