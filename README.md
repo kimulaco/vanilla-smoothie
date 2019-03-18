@@ -1,5 +1,7 @@
 # VanillaSmoothie.js
 
+[![npm version](https://badge.fury.io/js/vanilla-smoothie.svg)](https://badge.fury.io/js/vanilla-smoothie)
+
 ## Overview
 
 Package that implements smooth scrolling with Vanilla JS.
