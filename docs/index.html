@@ -1,231 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>VanillaSmoothie.js</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <meta name="description" content="Package that implements smooth scrolling with Vanilla JS.">
-    <link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.css'>
-    <link rel="stylesheet" href="./css/prism.css">
+<meta charset="utf-8">
+<title>VanillaSmoothie.js</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="A minimal smooth scroll library based on vanilla JavaScript.">
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.css'>
+<link rel="stylesheet" href="./css/prism.css">
 </head>
-<body id="root">
-    <header class="site-header">
-        <div class="header-inner">
-            <h1 class="header-title">VanillaSmoothie.js</h1>
+<body>
+<main>
+<h1 id="vanillasmoothiejs">VanillaSmoothie.js</h1>
+<p><a href="https://badge.fury.io/js/vanilla-smoothie"><img src="https://badge.fury.io/js/vanilla-smoothie.svg" alt="npm version"></a></p>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#use">Use</a></li>
+<li><a href="#support">Support</a></li>
+<li><a href="#development">Development</a></li>
+<li><a href="#license">License</a></li>
+</ul>
 
-            <ul class="header-menu">
-                <li><a href="#section-overview">Overview</a></li>
-                <li><a href="#section-use">Use</a></li>
-                <li><a href="#section-methods">Methods</a></li>
-            </ul><!-- /.header-menu -->
-        </div><!-- /.header-inner -->
-    </header><!-- /.site-header -->
 
-    <main class="site-main">
-        <section id="section-overview" class="main-section">
-            <div class="main-inner">
-                <h2 class="heading-lv2"><span>Overview</span></h2>
-                <p>Package that implements smooth scrolling with Vanilla JS.</p>
-            </div><!-- /.main-inner -->
-        </section><!-- /.main-section -->
+<h2 id="overview">Overview</h2>
+<p>A minimal smooth scroll library based on vanilla JavaScript.</p>
+<p>This library has no dependencies on other libraries. So you can easily use it without being influenced by the presence of the framework.</p>
+<p><a href="https://github.com/kimulaco/vanilla-smoothie">GitHub</a></p>
+<h2 id="use">Use</h2>
+<h3 id="api">API</h3>
+<pre><code class="language-shell"># install package
+npm install --save vanilla-smoothie
+# or yarn install vanilla-smoothie</code></pre>
+<pre><code class="language-js">import vanillaSmoothie from &#39;vanilla-smoothie&#39;
+// or const vanillaSmoothie =  require(&#39;vanilla-smoothie&#39;)
 
-        <section id="section-use" class="main-section">
-            <div class="main-inner">
-                <h2 class="heading-lv2"><span>Use</span></h2>
-
-                <h3 class="heading-lv3"><span>Module</span></h3>
-
-                <div class="figure-code">
-                    <figure class="figure-code-inner">
-                        <pre><code class="language-javascript">import vanillaSmoothie from 'vanilla-smoothie';
-// or const vanillaSmoothie =  require('vanilla-smoothie');
-
-vanillaSmoothie.scrollTo('#anchor-01', 800);
-vanillaSmoothie.scrollTo(1000, 500);
-vanillaSmoothie.scrollTop(500);
-</code></pre>
-                    </figure><!-- /.figure-code-inner -->
-                </div><!-- /.figure-code -->
-
-                <h3 class="heading-lv3"><span>Browser</span></h3>
-
-                <div class="figure-code">
-                    <figure class="figure-code-inner">
-                        <pre><code class="language-javascript">&lt;script src="vanilla-smoothie.min.js"&gt;&lt;/script&gt;
+vanillaSmoothie.scrollTo(&#39;#anchor-01&#39;, 800)
+vanillaSmoothie.scrollTo(1000, 500)
+vanillaSmoothie.scrollTop(500)</code></pre>
+<h3 id="browser">Browser</h3>
+<pre><code class="language-html">&lt;script src=&quot;vanilla-smoothie.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener('click', (event) => {
-        const href = event.target.getAttribute('href');
+document.querySelectorAll(&#39;a[href^=&quot;#&quot;]&#39;).forEach((anchor) =&gt; {
+  anchor.addEventListener(&#39;click&#39;, (event) =&gt; {
+    vanillaSmoothie.scrollTo(event.target.getAttribute(&#39;href&#39;), 500)
+  })
+})
 
-        vanillaSmoothie.scrollTo(href, 500, () => {
-            console.log('Callback')
-        });
-    });
-});
+document.getElementById(&#39;to-top&#39;).addEventListener(&#39;click&#39;, () =&gt; {
+  vanillaSmoothie.scrollTop(500)
+})
 &lt;/script&gt;</code></pre>
-                    </figure><!-- /.figure-code-inner -->
-                </div><!-- /.figure-code -->
-            </div><!-- /.main-inner -->
-        </section><!-- /.main-section -->
-
-        <section id="section-methods" class="main-section">
-            <div class="main-inner">
-                <h2 class="heading-lv2"><span>Methods</span></h2>
-
-                <h3 class="heading-lv3">scrollTo(target[, duration, root])</h3>
-
-                <div class="figure-code">
-                    <figure class="figure-code-inner">
-                        <pre><code class="language-javascript">// Selector
-vanillaSmoothie.scrollTo('#id-name');
+<h2 id="methods">Methods</h2>
+<h3 id="scrolltotarget-duration-root-callback">scrollTo(target[, duration, root, callback])</h3>
+<pre><code class="language-js">// Selector
+vanillaSmoothie.scrollTo(&#39;#id-name&#39;)
 
 // Offset top
-vanillaSmoothie.scrollTo(300);</code></pre>
-                    </figure><!-- /.figure-code-inner -->
-                </div><!-- /.figure-code -->
+vanillaSmoothie.scrollTo(300)
 
-                <div class="table-detail">
-                    <table>
-                        <colgroup>
-                            <col class="table-detail-name">
-                            <col class="table-detail-type">
-                            <col class="table-detail-description">
-                        </colgroup>
-                        <thead>
-                            <tr>
-                                <th class="table-detail-name">Parameter</th>
-                                <th class="table-detail-type">Type</th>
-                                <th class="table-detail-description">Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th class="table-detail-name"><code>target</code></th>
-                                <td class="table-detail-type">string, number</td>
-                                <td class="table-detail-description">Selector or offset top.</td>
-                            </tr>
-                            <tr>
-                                <th class="table-detail-name"><code>duration</code></th>
-                                <td class="table-detail-type">number</td>
-                                <td class="table-detail-description">Number of milliseconds to scroll.</td>
-                            </tr>
-                            <tr>
-                                <th class="table-detail-name"><code>root</code></th>
-                                <td class="table-detail-type">object</td>
-                                <td class="table-detail-description">Element to Scroll.</td>
-                            </tr>
-                            <tr>
-                                <th class="table-detail-name"><code>callback</code></th>
-                                <td class="table-detail-type">function</td>
-                                <td class="table-detail-description">Callback function.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div><!-- /.table-detail -->
+vanillaSmoothie.scrollTo(&#39;#id-name&#39;, 1000, document.body, () =&gt; {
+  console.log(&#39;Callback!!&#39;)
+})</code></pre>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>target</td>
+<td>string, number</td>
+<td>Selector or offset top.</td>
+</tr>
+<tr>
+<td>duration</td>
+<td>number</td>
+<td>Number of milliseconds to scroll.</td>
+</tr>
+<tr>
+<td>root</td>
+<td>object</td>
+<td>Element to Scroll.</td>
+</tr>
+<tr>
+<td>callback</td>
+<td>function</td>
+<td>Callback function.</td>
+</tr>
+</tbody></table>
+<h3 id="scrolltopduration-root-callback">scrollTop([duration, root, callback])</h3>
+<pre><code class="language-js">vanillaSmoothie.scrollTop(target)</code></pre>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>duration</td>
+<td>number</td>
+<td>Number of milliseconds to scroll.</td>
+</tr>
+<tr>
+<td>root</td>
+<td>object</td>
+<td>Element to Scroll.</td>
+</tr>
+<tr>
+<td>callback</td>
+<td>function</td>
+<td>Callback function.</td>
+</tr>
+</tbody></table>
+<p><button type="button" class="js-button-top">Page Top</button></p>
+<h3 id="scrollbottomduration-root-callback">scrollBottom([duration, root, callback])</h3>
+<pre><code class="language-js">vanillaSmoothie.scrollBottom()</code></pre>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>duration</td>
+<td>number</td>
+<td>Number of milliseconds to scroll.</td>
+</tr>
+<tr>
+<td>root</td>
+<td>object</td>
+<td>Element to Scroll.</td>
+</tr>
+<tr>
+<td>callback</td>
+<td>function</td>
+<td>Callback function.</td>
+</tr>
+</tbody></table>
+<p><button type="button" class="js-button-bottom">Page Bottom</button></p>
+<h2 id="support">Support</h2>
+<p>Latest version of browser below.</p>
+<ul>
+<li>Google Chrome</li>
+<li>Firefox</li>
+<li>Safari</li>
+</ul>
+<h2 id="development">Development</h2>
+<pre><code class="language-shell"># Install package
+npm install
 
-                <h3 class="heading-lv3">scrollTop([duration, root])</h3>
+# JavaScript compile and launch local server to http://localhost:3000
+npm run dev</code></pre>
+<h2 id="license">License</h2>
+<p><a href="https://github.com/kimulaco/vanilla-smoothie/blob/master/LICENSE">MIT License</a>.</p>
 
-                <div class="button">
-                    <button type="button" class="js-button-page">Scroll Top</button>
-                </div><!-- /.button -->
+</main>
 
-                <div class="figure-code">
-                    <figure class="figure-code-inner">
-                        <pre><code class="language-javascript">vanillaSmoothie.scrollTop(target);</code></pre>
-                    </figure><!-- /.figure-code-inner -->
-                </div><!-- /.figure-code -->
+<footer>
+<p><small>&copy; 2019 VanillaSmoothie.js.</small></p>
+</footer>
 
-                <div class="table-detail">
-                    <table>
-                        <colgroup>
-                            <col class="table-detail-name">
-                            <col class="table-detail-type">
-                            <col class="table-detail-description">
-                        </colgroup>
-                        <thead>
-                            <tr>
-                                <th class="table-detail-name">Parameter</th>
-                                <th class="table-detail-type">Type</th>
-                                <th class="table-detail-description">Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th class="table-detail-name"><code>duration</code></th>
-                                <td class="table-detail-type">number</td>
-                                <td class="table-detail-description">Number of milliseconds to scroll.</td>
-                            </tr>
-                            <tr>
-                                <th class="table-detail-name"><code>root</code></th>
-                                <td class="table-detail-type">object</td>
-                                <td class="table-detail-description">Element to Scroll.</td>
-                            </tr>
-                            <tr>
-                                <th class="table-detail-name"><code>callback</code></th>
-                                <td class="table-detail-type">function</td>
-                                <td class="table-detail-description">Callback function.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div><!-- /.table-detail -->
-
-                <h3 class="heading-lv3">scrollBottom([duration, root])</h3>
-
-                <div class="button">
-                    <button type="button" class="js-button-bottom">Scroll Bottom</button>
-                </div><!-- /.button -->
-
-                <div class="figure-code">
-                    <figure class="figure-code-inner">
-                        <pre><code class="language-javascript">vanillaSmoothie.scrollBottom();</code></pre>
-                    </figure><!-- /.figure-code-inner -->
-                </div><!-- /.figure-code -->
-
-                <div class="table-detail">
-                    <table>
-                        <colgroup>
-                            <col class="table-detail-name">
-                            <col class="table-detail-type">
-                            <col class="table-detail-description">
-                        </colgroup>
-                        <thead>
-                            <tr>
-                                <th class="table-detail-name">Parameter</th>
-                                <th class="table-detail-type">Type</th>
-                                <th class="table-detail-description">Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th class="table-detail-name"><code>duration</code></th>
-                                <td class="table-detail-type">number</td>
-                                <td class="table-detail-description">Number of milliseconds to scroll.</td>
-                            </tr>
-                            <tr>
-                                <th class="table-detail-name"><code>root</code></th>
-                                <td class="table-detail-type">object</td>
-                                <td class="table-detail-description">Element to Scroll.</td>
-                            </tr>
-                            <tr>
-                                <th class="table-detail-name"><code>callback</code></th>
-                                <td class="table-detail-type">function</td>
-                                <td class="table-detail-description">Callback function.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div><!-- /.table-detail -->
-            </div><!-- /.main-inner -->
-        </section><!-- /.main-section -->
-    </main><!-- /.site-main -->
-
-    <footer class="site-footer">
-        <div class="footer-inner">
-            <p class="footer-copyright">&copy; 2019 VanillaSmoothie.js.</p>
-        </div><!-- /.footer-inner -->
-    </footer><!-- /.site-footer -->
-
-    <script src="./js/prism.js"></script>
-    <script src="./js/vanilla-smoothie.js"></script>
-    <script src="./js/script.js"></script>
+<script src="./js/prism.js"></script>
+<script src="./js/vanilla-smoothie.js"></script>
+<script src="./js/script.js"></script>
 </body>
 </html>

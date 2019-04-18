@@ -22,7 +22,7 @@
     })
   })
 
-  setClickEvent('.js-button-page', function (event) {
+  setClickEvent('.js-button-top', function (event) {
     event.preventDefault()
     vanillaSmoothie.scrollTop(500, null, function () {
       console.log('scrollTop callback')
