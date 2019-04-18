@@ -4,13 +4,15 @@
 
 ## Overview
 
-Package that implements smooth scrolling with Vanilla JS.
+A minimal smooth scroll library based on vanilla JavaScript.
 
-[https://kimulaco.github.io/vanilla-smoothie/](https://kimulaco.github.io/vanilla-smoothie/)
+This library has no dependencies on other libraries. So you can easily use it without being influenced by the presence of the framework.
+
+[Document](https://kimulaco.github.io/vanilla-smoothie/)
 
 ## Use
 
-### Module
+### API
 
 ```shell
 # install package
@@ -50,10 +52,10 @@ document.getElementById('to-top').addEventListener('click', () => {
 
 | Parameter | Type | Description |
 ----|----|----
-| target | string, number | Selector or offset top. |
-| duration | number | Number of milliseconds to scroll. |
-| root | object | Element to Scroll. |
-| callback | function | Callback function. |
+| `target` | string, number | Selector or offset top. |
+| `duration` | number | Number of milliseconds to scroll. |
+| `root` | object | Element to Scroll. |
+| `callback` | function | Callback function. |
 
 ```js
 // Selector
@@ -71,9 +73,9 @@ vanillaSmoothie.scrollTo('#id-name', 1000, document.body, () => {
 
 | Parameter | Type | Description |
 ----|----|----
-| duration | number | Number of milliseconds to scroll. |
-| root | object | Element to Scroll. |
-| callback | function | Callback function. |
+| `duration` | number | Number of milliseconds to scroll. |
+| `root` | object | Element to Scroll. |
+| `callback` | function | Callback function. |
 
 ```js
 vanillaSmoothie.scrollTop(target);
@@ -83,9 +85,9 @@ vanillaSmoothie.scrollTop(target);
 
 | Parameter | Type | Description |
 ----|----|----
-| duration | number | Number of milliseconds to scroll. |
-| root | object | Element to Scroll. |
-| callback | function | Callback function. |
+| `duration` | number | Number of milliseconds to scroll. |
+| `root` | object | Element to Scroll. |
+| `callback` | function | Callback function. |
 
 ```js
 vanillaSmoothie.scrollBottom();
@@ -105,7 +107,7 @@ Latest version of browser below.
 # Install package
 npm install
 
-# JavaScript compile and launch local server
+# JavaScript compile and launch local server to http://localhost:3000
 npm run dev
 ```
 
