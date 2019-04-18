@@ -1,8 +1,12 @@
-/** 
- * VanillaSmoothie.js
- * Copyright (c) 2019 kimulaco
+/**
+ * VanillaSmoothie.js v1.1.0
+ * https://kimulaco.github.io/vanilla-smoothie/
+ *
+ * Copyright (c) kimulaco
  * This software is released under the MIT License.
  * https://github.com/kimulaco/vanilla-smoothie/blob/develop/LICENSE
+ *
+ * Date: Thu, 18 Apr 2019 10:11:19 GMT
  */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :

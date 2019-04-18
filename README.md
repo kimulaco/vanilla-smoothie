@@ -46,7 +46,7 @@ vanillaSmoothie.scrollTop(500)
 ### Browser
 
 ```html
-<script src="vanilla-smoothie.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanilla-smoothie@1.1.0/dist/vanilla-smoothie.min.js"></script>
 <script>
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener('click', (event) => {

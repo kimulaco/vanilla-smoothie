@@ -1,8 +1,12 @@
-/** 
- * VanillaSmoothie.js
- * Copyright (c) 2019 kimulaco
+/**
+ * VanillaSmoothie.js v1.1.0
+ * https://kimulaco.github.io/vanilla-smoothie/
+ *
+ * Copyright (c) kimulaco
  * This software is released under the MIT License.
  * https://github.com/kimulaco/vanilla-smoothie/blob/develop/LICENSE
+ *
+ * Date: Thu, 18 Apr 2019 10:25:40 GMT
  */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -48,6 +52,7 @@
 
   var win = window;
   var doc = win.document;
+  var history = win.history && win.history.pushState ? win.history : null;
   var body = doc.body;
   var rootElement = doc.documentElement;
 
@@ -60,6 +65,7 @@
   var context = win;
   var start = context.scrollTop || win.pageYOffset;
   var end = 0;
+  var hash = '';
   var callbackFunc = null;
 
   var easeInOutCubic = function easeInOutCubic(t) {
@@ -76,6 +82,10 @@
     if (typeof target === 'number') {
       return target;
     } else if (typeof target === 'string') {
+      if (target[0] === '#') {
+        hash = target;
+      }
+
       targetElement = doc.querySelector(target);
 
       if (!targetElement) {
@@ -108,6 +118,12 @@
     if (elapsed <= time) {
       requestAnimationFrame(scrollFrame);
     } else {
+      if (hash) {
+        history.pushState(null, null, hash);
+      }
+
+      hash = '';
+
       if (typeof callbackFunc === 'function') {
         callbackFunc();
       }
