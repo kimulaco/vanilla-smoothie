@@ -3,6 +3,10 @@
 [![npm version](https://badge.fury.io/js/vanilla-smoothie.svg)](https://badge.fury.io/js/vanilla-smoothie)
 
 <!-- [GH_PAGES]
+[GitHub](https://github.com/kimulaco/vanilla-smoothie)
+[GH_PAGES] -->
+
+<!-- [GH_PAGES]
 <ul>
 <li><a href="#overview">Overview</a></li>
 <li><a href="#use">Use</a></li>
@@ -19,10 +23,6 @@ A minimal smooth scroll library based on vanilla JavaScript.
 This library has no dependencies on other libraries. So you can easily use it without being influenced by the presence of the framework.
 
 [Document](https://kimulaco.github.io/vanilla-smoothie/)
-
-<!-- [GH_PAGES]
-[GitHub](https://github.com/kimulaco/vanilla-smoothie)
-[GH_PAGES] -->
 
 ## Use
 
@@ -131,7 +131,12 @@ npm install
 
 # JavaScript compile and launch local server to http://localhost:3000
 npm run dev
+
+# Build JavaScript and Document
+npm run build
 ```
+
+Other commands look to `package.json`.
 
 ## License
 

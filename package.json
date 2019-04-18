@@ -13,11 +13,13 @@
   "main": "dist/vanilla-smoothie.js",
   "umd:main": "dist/vanilla-smoothie.min.js",
   "scripts": {
-    "build": "npm run build:main && npm run build:minify",
+    "build": "npm-run-all -s lint build:*",
     "build:main": "NODE_ENV=production rollup -c",
     "build:minify": "NODE_ENV=production MODE=minify rollup -c",
+    "build:docs": "node script/docs.js",
     "dev": "npm-run-all -p dev:*",
     "dev:build": "rollup -c -w",
+    "dev:docs": "node script/docs.js -w",
     "dev:server": "serve docs -p 3000",
     "lint": "eslint src/js/*js"
   },

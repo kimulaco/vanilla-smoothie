@@ -1,6 +1,8 @@
+/* eslint no-console: 0 */
 const fs = require('fs')
 const path = require('path')
 const marked = require('marked')
+const isWatch = ['-w', '--watch'].includes(process.argv[2])
 
 class Docs {
   constructor(config) {
@@ -26,7 +28,16 @@ class Docs {
       marked(md)
     )
 
-    return fs.writeFileSync(this.config.output, source)
+    fs.writeFileSync(this.config.output, source)
+    console.log('Generated pages.')
+  }
+
+  watch(func) {
+    console.log('Start watch.')
+    fs.watch(this.config.md, (eventType, filename) => {
+      console.log('Changed file.')
+      func(eventType, filename)
+    })
   }
 }
 
@@ -46,4 +57,10 @@ const doc = new Docs({
   ]
 })
 
-doc.generate()
+if (isWatch) {
+  doc.watch(() => {
+    doc.generate()
+  })
+} else {
+  doc.generate()
+}
