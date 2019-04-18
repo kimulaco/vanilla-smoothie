@@ -1,20 +1,20 @@
-const win = window;
-const doc = win.document;
-const body = doc.body;
-const rootElement = doc.documentElement;
+const win = window
+const doc = win.document
+const body = doc.body
+const rootElement = doc.documentElement
 const requestAnimationFrame =
-    win.requestAnimationFrame ||
-    win.mozRequestAnimationFrame ||
-    win.webkitRequestAnimationFrame ||
-    function (func) {
-        win.setTimeout(func, 15);
-    };
-let clock = Date.now();
-let time = 500;
-let context = win;
-let start = context.scrollTop || win.pageYOffset;
-let end = 0;
-let callbackFunc = null;
+  win.requestAnimationFrame ||
+  win.mozRequestAnimationFrame ||
+  win.webkitRequestAnimationFrame ||
+  function (func) {
+    win.setTimeout(func, 15)
+  }
+let clock = Date.now()
+let time = 500
+let context = win
+let start = context.scrollTop || win.pageYOffset
+let end = 0
+let callbackFunc = null
 
 /**
  * easeInOutCubic
@@ -22,22 +22,22 @@ let callbackFunc = null;
  * @return {number}
  */
 const easeInOutCubic = (t) => {
-    return t < 0.5 ? 4 * t * t * t :
-        (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
-};
+  return t < 0.5 ? 4 * t * t * t :
+    (t - 1) * (2 * t - 2) * (2 * t - 2) + 1
+}
 
 /**
  * getScrollPageBottom
  * @return {number}
  */
 const getScrollPageBottom = () => {
-    return Math.max.apply(null, [
-        body.clientHeight,
-        body.scrollHeight,
-        rootElement.scrollHeight,
-        rootElement.clientHeight
-    ]) - win.innerHeight;
-};
+  return Math.max.apply(null, [
+    body.clientHeight,
+    body.scrollHeight,
+    rootElement.scrollHeight,
+    rootElement.clientHeight
+  ]) - win.innerHeight
+}
 
 /**
  * getTargetTop
@@ -45,22 +45,22 @@ const getScrollPageBottom = () => {
  * @return {number|boolean}
  */
 const getTargetTop = (target) => {
-    let targetElement = {};
+  let targetElement = {}
 
-    if (typeof target === 'number') {
-        return target;
-    } else if (typeof target === 'string') {
-        targetElement = doc.querySelector(target);
+  if (typeof target === 'number') {
+    return target
+  } else if (typeof target === 'string') {
+    targetElement = doc.querySelector(target)
 
-        if (!targetElement) {
-            return false;
-        }
-
-        return targetElement.getBoundingClientRect().top + win.pageYOffset;
+    if (!targetElement) {
+      return false
     }
 
-    return false;
-};
+    return targetElement.getBoundingClientRect().top + win.pageYOffset
+  }
+
+  return false
+}
 
 /**
  * getScrollTop
@@ -71,89 +71,89 @@ const getTargetTop = (target) => {
  * @return {number}
  */
 const getScrollTop = (startV, endV, elapsed, duration) => {
-    if (elapsed > duration) {
-        return endV;
-    }
+  if (elapsed > duration) {
+    return endV
+  }
 
-    return startV + (end - startV) *
-        easeInOutCubic(elapsed /duration);
-};
+  return startV + (end - startV) *
+    easeInOutCubic(elapsed / duration)
+}
 
 /**
  * scrollFrame
  * @return {void}
  */
-const scrollFrame = () =>  {
-    const elapsed = Date.now() - clock;
+const scrollFrame = () => {
+  const elapsed = Date.now() - clock
 
-    if (context === win) {
-        win.scroll(0, getScrollTop(start, end, elapsed, time));
-    } else {
-        context.scrollTop = getScrollTop(start, end, elapsed, time);
-    }
+  if (context === win) {
+    win.scroll(0, getScrollTop(start, end, elapsed, time))
+  } else {
+    context.scrollTop = getScrollTop(start, end, elapsed, time)
+  }
 
-    if (elapsed <= time) {
-        requestAnimationFrame(scrollFrame);
-    } else {
-        if (typeof callbackFunc === 'function') {
-            callbackFunc();
-        }
+  if (elapsed <= time) {
+    requestAnimationFrame(scrollFrame)
+  } else {
+    if (typeof callbackFunc === 'function') {
+      callbackFunc()
     }
-};
+  }
+}
 
 /**
  * VanillaSmoothie
  * @constructor
  */
 class VanillaSmoothie {
-    /**
-     * scrollTo
-     * @param {string|number} target
-     * @param {number} duration
-     * @param {object} root
-     * @param {function} callback
-     * @return {void}
-     */
-    scrollTo(target, duration, root, callback) {
-        clock = Date.now();
-        time = duration || 500;
-        context = root || win;
-        start = context.scrollTop || window.pageYOffset;
-        end = getTargetTop(target);
-        callbackFunc = callback;
+  /**
+   * scrollTo
+   * @param {string|number} target
+   * @param {number} duration
+   * @param {object} root
+   * @param {function} callback
+   * @return {void}
+   */
+  scrollTo(target, duration, root, callback) {
+    clock = Date.now()
+    time = duration || 500
+    context = root || win
+    start = context.scrollTop || window.pageYOffset
+    end = getTargetTop(target)
+    callbackFunc = callback
 
-        scrollFrame();
-    }
+    scrollFrame()
+  }
 
-    /**
-     * scrollTop
-     * @param {number} duration
-     * @param {object} root
-     * @param {function} callback
-     * @return {void}
-     */
-    scrollTop(duration, root, callback) {
-        this.scrollTo(0, duration, root, callback);
-    }
+  /**
+   * scrollTop
+   * @param {number} duration
+   * @param {object} root
+   * @param {function} callback
+   * @return {void}
+   */
+  scrollTop(duration, root, callback) {
+    this.scrollTo(0, duration, root, callback)
+  }
 
-    /**
-     * scrollBottom
-     * @param {number} duration
-     * @param {object} root
-     * @param {function} callback
-     * @return {void}
-     */
-    scrollBottom(duration, root, callback) {
-        this.scrollTo(getScrollPageBottom(), duration, root, callback);
-    }
+  /**
+   * scrollBottom
+   * @param {number} duration
+   * @param {object} root
+   * @param {function} callback
+   * @return {void}
+   */
+  scrollBottom(duration, root, callback) {
+    this.scrollTo(getScrollPageBottom(), duration, root, callback)
+  }
 }
 
-export default new VanillaSmoothie();
+export default new VanillaSmoothie()
 
 if (
-    typeof exports !== 'object' &&
-    typeof module === 'undefined' &&
-    typeof window !== 'undefined'
+  typeof exports !== 'object' &&
+  typeof module === 'undefined' &&
+  typeof window !== 'undefined'
 ) {
-    window.vanillaSmoothie = new VanillaSmoothie();
+  window.vanillaSmoothie = new VanillaSmoothie()
 }

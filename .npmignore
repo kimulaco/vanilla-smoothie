@@ -2,8 +2,3 @@ node_modules
 test
 docs
 src
-gulp
-gulpfile.js
-.npmrc
-.csscomb.json
-.stylelintrc

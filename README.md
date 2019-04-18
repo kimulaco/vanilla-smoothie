@@ -15,6 +15,7 @@ Package that implements smooth scrolling with Vanilla JS.
 ```shell
 # install package
 npm install --save vanilla-smoothie
+# or yarn install vanilla-smoothie
 ```
 
 ```js
@@ -97,6 +98,16 @@ Latest version of browser below.
 - Google Chrome
 - Firefox
 - Safari
+
+## development
+
+```shell
+# Install package
+npm install
+
+# JavaScript compile and launch local server
+npm run dev
+```
 
 ## License
 
