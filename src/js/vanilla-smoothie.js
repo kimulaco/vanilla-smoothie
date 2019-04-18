@@ -1,5 +1,6 @@
 const win = window
 const doc = win.document
+const history = win.history && win.history.pushState ? win.history : null
 const body = doc.body
 const rootElement = doc.documentElement
 const requestAnimationFrame =
@@ -14,6 +15,7 @@ let time = 500
 let context = win
 let start = context.scrollTop || win.pageYOffset
 let end = 0
+let hash = ''
 let callbackFunc = null
 
 /**
@@ -50,6 +52,10 @@ const getTargetTop = (target) => {
   if (typeof target === 'number') {
     return target
   } else if (typeof target === 'string') {
+    if (target[0] === '#') {
+      hash = target
+    }
+
     targetElement = doc.querySelector(target)
 
     if (!targetElement) {
@@ -95,6 +101,12 @@ const scrollFrame = () => {
   if (elapsed <= time) {
     requestAnimationFrame(scrollFrame)
   } else {
+    if (hash) {
+      history.pushState(null, null, hash)
+    }
+
+    hash = ''
+
     if (typeof callbackFunc === 'function') {
       callbackFunc()
     }
