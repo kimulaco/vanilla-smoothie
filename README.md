@@ -18,98 +18,123 @@
 
 ## Overview
 
-A minimal smooth scroll library based on vanilla JavaScript.
+A minimal smooth scroll library based on vanilla JavaScript. Compressed file size is about 2KB.
 
 This library has no dependencies on other libraries. So you can easily use it without being influenced by the presence of the framework.
 
 [Document](https://kimulaco.github.io/vanilla-smoothie/)
 
-## Use
+## Install
 
-### API
+### npm
 
 ```shell
-# install package
 npm install --save vanilla-smoothie
 # or yarn install vanilla-smoothie
 ```
 
-```js
-import vanillaSmoothie from 'vanilla-smoothie'
-// or const vanillaSmoothie =  require('vanilla-smoothie')
-
-vanillaSmoothie.scrollTo('#anchor-01', 800)
-vanillaSmoothie.scrollTo(1000, 500)
-vanillaSmoothie.scrollTop(500)
-```
-
-### Browser
+### CDN
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/vanilla-smoothie@1.1.0/dist/vanilla-smoothie.min.js"></script>
-<script>
+<script src="https://cdn.jsdelivr.net/npm/vanilla-smoothie@1.2.0/dist/vanilla-smoothie.min.js"></script>
+```
+
+## Use
+
+```js
+const VanillaSmoothie = require('vanilla-smoothie')
+// or import VanillaSmoothie from 'vanilla-smoothie'
+const vanillaSmoothie = VanillaSmoothie()
+
+vanillaSmoothie.scrollTo('#anchor-01', 800, () => {
+  console.log('Callback!!')
+})
+```
+
+### example
+
+Anchor link
+
+```js
+const vanillaSmoothie = VanillaSmoothie()
+
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener('click', (event) => {
-    vanillaSmoothie.scrollTo(event.target.getAttribute('href'), 500)
+    vanillaSmoothie.scrollTo(event.target.getAttribute('href'))
   })
 })
-
-document.getElementById('to-top').addEventListener('click', () => {
-  vanillaSmoothie.scrollTop(500)
-})
-</script>
 ```
+
+## Options
+
+```js
+const vanillaSmoothie = VanillaSmoothie({
+  element: window,
+  history: true,
+  hash: true,
+  duration: 500
+})
+```
+
+| Parameter | Type | Description | required, default |
+----|----|----|----
+| element | object | Target scroll element. | default: `window` |
+| history | boolean | Enabled pushstate and popstate. | default: `true` |
+| hash | boolean | Enabled url hash scroll. | default: `true` |
+| duration | number | Default number of milliseconds to scroll. | default: `500` |
 
 ## Methods
 
-### scrollTo(target[, duration, root, callback])
+### scrollTo(target[, duration, callback])
 
 ```js
 // Selector
 vanillaSmoothie.scrollTo('#id-name')
 
-// Offset top
+// Offset Top
 vanillaSmoothie.scrollTo(300)
 
-vanillaSmoothie.scrollTo('#id-name', 1000, document.body, () => {
+// Callback
+vanillaSmoothie.scrollTo('#id-name', 1000, () => {
   console.log('Callback!!')
 })
 ```
 
-| Parameter | Type | Description |
-----|----|----
-| target | string, number | Selector or offset top. |
-| duration | number | Number of milliseconds to scroll. |
-| root | object | Element to Scroll. |
-| callback | function | Callback function. |
+| Parameter | Type | Description | required, default |
+----|----|----|----
+| target | string, number | Selector or offset top. | **required** |
+| duration | number | Number of milliseconds to scroll. | default: `500` |
+| callback | function | Callback function. | default: `null` |
 
-### scrollTop([duration, root, callback])
+### scrollTop([duration, callback])
 
 ```js
-vanillaSmoothie.scrollTop(target)
+vanillaSmoothie.scrollTop(1000, () => {
+  console.log('Callback!!')
+})
 ```
 
-| Parameter | Type | Description |
-----|----|----
-| duration | number | Number of milliseconds to scroll. |
-| root | object | Element to Scroll. |
-| callback | function | Callback function. |
+| Parameter | Type | Description | required, default |
+----|----|----|----
+| duration | number | Number of milliseconds to scroll. | default: `500` |
+| callback | function | Callback function. | default: `null` |
 
 <!-- [GH_PAGES]
 <button type="button" class="js-button-top">Page Top</button>
 [GH_PAGES] -->
 
-### scrollBottom([duration, root, callback])
+### scrollBottom([duration, callback])
 
 ```js
-vanillaSmoothie.scrollBottom()
+vanillaSmoothie.scrollBottom(1000, () => {
+  console.log('Callback!!')
+})
 ```
 
-| Parameter | Type | Description |
-----|----|----
-| duration | number | Number of milliseconds to scroll. |
-| root | object | Element to Scroll. |
-| callback | function | Callback function. |
+| Parameter | Type | Description | required, default |
+----|----|----|----
+| duration | number | Number of milliseconds to scroll. | default: `500` |
+| callback | function | Callback function. | default: `null` |
 
 <!-- [GH_PAGES]
 <button type="button" class="js-button-bottom">Page Bottom</button>

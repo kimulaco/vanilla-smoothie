@@ -23,41 +23,82 @@
 
 
 <h2 id="overview">Overview</h2>
-<p>A minimal smooth scroll library based on vanilla JavaScript.</p>
+<p>A minimal smooth scroll library based on vanilla JavaScript. Compressed file size is about 2KB.</p>
 <p>This library has no dependencies on other libraries. So you can easily use it without being influenced by the presence of the framework.</p>
-<h2 id="use">Use</h2>
-<h3 id="api">API</h3>
-<pre><code class="language-shell"># install package
-npm install --save vanilla-smoothie
+<h2 id="install">Install</h2>
+<h3 id="npm">npm</h3>
+<pre><code class="language-shell">npm install --save vanilla-smoothie
 # or yarn install vanilla-smoothie</code></pre>
-<pre><code class="language-js">import vanillaSmoothie from &#39;vanilla-smoothie&#39;
-// or const vanillaSmoothie =  require(&#39;vanilla-smoothie&#39;)
+<h3 id="cdn">CDN</h3>
+<pre><code class="language-html">&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vanilla-smoothie@1.2.0/dist/vanilla-smoothie.min.js&quot;&gt;&lt;/script&gt;</code></pre>
+<h2 id="use">Use</h2>
+<pre><code class="language-js">const VanillaSmoothie = require(&#39;vanilla-smoothie&#39;)
+// or import VanillaSmoothie from &#39;vanilla-smoothie&#39;
+const vanillaSmoothie = VanillaSmoothie()
 
-vanillaSmoothie.scrollTo(&#39;#anchor-01&#39;, 800)
-vanillaSmoothie.scrollTo(1000, 500)
-vanillaSmoothie.scrollTop(500)</code></pre>
-<h3 id="browser">Browser</h3>
-<pre><code class="language-html">&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vanilla-smoothie@1.1.0/dist/vanilla-smoothie.min.js&quot;&gt;&lt;/script&gt;
-&lt;script&gt;
+vanillaSmoothie.scrollTo(&#39;#anchor-01&#39;, 800, () =&gt; {
+  console.log(&#39;Callback!!&#39;)
+})</code></pre>
+<h3 id="example">example</h3>
+<p>Anchor link</p>
+<pre><code class="language-js">const vanillaSmoothie = VanillaSmoothie()
+
 document.querySelectorAll(&#39;a[href^=&quot;#&quot;]&#39;).forEach((anchor) =&gt; {
   anchor.addEventListener(&#39;click&#39;, (event) =&gt; {
-    vanillaSmoothie.scrollTo(event.target.getAttribute(&#39;href&#39;), 500)
+    vanillaSmoothie.scrollTo(event.target.getAttribute(&#39;href&#39;))
   })
-})
-
-document.getElementById(&#39;to-top&#39;).addEventListener(&#39;click&#39;, () =&gt; {
-  vanillaSmoothie.scrollTop(500)
-})
-&lt;/script&gt;</code></pre>
+})</code></pre>
+<h2 id="options">Options</h2>
+<pre><code class="language-js">const vanillaSmoothie = VanillaSmoothie({
+  element: window,
+  history: true,
+  hash: true,
+  duration: 500
+})</code></pre>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+<th>required, default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>element</td>
+<td>object</td>
+<td>Target scroll element.</td>
+<td>default: <code>window</code></td>
+</tr>
+<tr>
+<td>history</td>
+<td>boolean</td>
+<td>Enabled pushstate and popstate.</td>
+<td>default: <code>true</code></td>
+</tr>
+<tr>
+<td>hash</td>
+<td>boolean</td>
+<td>Enabled url hash scroll.</td>
+<td>default: <code>true</code></td>
+</tr>
+<tr>
+<td>duration</td>
+<td>number</td>
+<td>Default number of milliseconds to scroll.</td>
+<td>default: <code>500</code></td>
+</tr>
+</tbody></table>
 <h2 id="methods">Methods</h2>
-<h3 id="scrolltotarget-duration-root-callback">scrollTo(target[, duration, root, callback])</h3>
+<h3 id="scrolltotarget-duration-callback">scrollTo(target[, duration, callback])</h3>
 <pre><code class="language-js">// Selector
 vanillaSmoothie.scrollTo(&#39;#id-name&#39;)
 
-// Offset top
+// Offset Top
 vanillaSmoothie.scrollTo(300)
 
-vanillaSmoothie.scrollTo(&#39;#id-name&#39;, 1000, document.body, () =&gt; {
+// Callback
+vanillaSmoothie.scrollTo(&#39;#id-name&#39;, 1000, () =&gt; {
   console.log(&#39;Callback!!&#39;)
 })</code></pre>
 <table>
@@ -66,80 +107,79 @@ vanillaSmoothie.scrollTo(&#39;#id-name&#39;, 1000, document.body, () =&gt; {
 <th>Parameter</th>
 <th>Type</th>
 <th>Description</th>
+<th>required, default</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>target</td>
 <td>string, number</td>
 <td>Selector or offset top.</td>
+<td><strong>required</strong></td>
 </tr>
 <tr>
 <td>duration</td>
 <td>number</td>
 <td>Number of milliseconds to scroll.</td>
-</tr>
-<tr>
-<td>root</td>
-<td>object</td>
-<td>Element to Scroll.</td>
+<td>default: <code>500</code></td>
 </tr>
 <tr>
 <td>callback</td>
 <td>function</td>
 <td>Callback function.</td>
+<td>default: <code>null</code></td>
 </tr>
 </tbody></table>
-<h3 id="scrolltopduration-root-callback">scrollTop([duration, root, callback])</h3>
-<pre><code class="language-js">vanillaSmoothie.scrollTop(target)</code></pre>
+<h3 id="scrolltopduration-callback">scrollTop([duration, callback])</h3>
+<pre><code class="language-js">vanillaSmoothie.scrollTop(1000, () =&gt; {
+  console.log(&#39;Callback!!&#39;)
+})</code></pre>
 <table>
 <thead>
 <tr>
 <th>Parameter</th>
 <th>Type</th>
 <th>Description</th>
+<th>required, default</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>duration</td>
 <td>number</td>
 <td>Number of milliseconds to scroll.</td>
-</tr>
-<tr>
-<td>root</td>
-<td>object</td>
-<td>Element to Scroll.</td>
+<td>default: <code>500</code></td>
 </tr>
 <tr>
 <td>callback</td>
 <td>function</td>
 <td>Callback function.</td>
+<td>default: <code>null</code></td>
 </tr>
 </tbody></table>
 <p><button type="button" class="js-button-top">Page Top</button></p>
-<h3 id="scrollbottomduration-root-callback">scrollBottom([duration, root, callback])</h3>
-<pre><code class="language-js">vanillaSmoothie.scrollBottom()</code></pre>
+<h3 id="scrollbottomduration-callback">scrollBottom([duration, callback])</h3>
+<pre><code class="language-js">vanillaSmoothie.scrollBottom(1000, () =&gt; {
+  console.log(&#39;Callback!!&#39;)
+})</code></pre>
 <table>
 <thead>
 <tr>
 <th>Parameter</th>
 <th>Type</th>
 <th>Description</th>
+<th>required, default</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>duration</td>
 <td>number</td>
 <td>Number of milliseconds to scroll.</td>
-</tr>
-<tr>
-<td>root</td>
-<td>object</td>
-<td>Element to Scroll.</td>
+<td>default: <code>500</code></td>
 </tr>
 <tr>
 <td>callback</td>
 <td>function</td>
 <td>Callback function.</td>
+<td>default: <code>null</code></td>
 </tr>
 </tbody></table>
 <p><button type="button" class="js-button-bottom">Page Bottom</button></p>

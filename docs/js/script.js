@@ -1,11 +1,13 @@
-/* global vanillaSmoothie */
+/* global VanillaSmoothie */
 /* eslint no-console: 0 */
 (function () {
   'use strict'
 
-  if (typeof vanillaSmoothie === 'undefined') {
+  if (typeof VanillaSmoothie === 'undefined') {
     return
   }
+
+  const vanillaSmoothie = new VanillaSmoothie()
 
   const setClickEvent = function (selector, func) {
     document.querySelectorAll(selector).forEach(function (elenemt) {
