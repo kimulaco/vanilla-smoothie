@@ -1,5 +1,5 @@
 /** 
- * VanillaSmoothie.js v1.1.0
+ * VanillaSmoothie.js v1.2.0
  * https://kimulaco.github.io/vanilla-smoothie/
  * Copyright (c) 2019 kimulaco
  * This software is released under the MIT License.
@@ -48,11 +48,10 @@
    */
   const getTargetTop = (target) => {
     let targetElement = {};
-    const targetType = typeof target;
 
-    if (targetType === 'number') {
+    if (typeof target === 'number') {
       return target
-    } else if (targetType === 'string') {
+    } else if (typeof target === 'string') {
       if (target[0] === '#') hash = target;
 
       targetElement = doc.querySelector(target);
@@ -92,7 +91,7 @@
       this.option = Object.assign({
         element: win,
         history: true,
-        hash: false,
+        hash: true,
         duration: 500
       }, option);
       this.start = this.option.element.scrollTop || win.pageYOffset;
@@ -140,8 +139,8 @@
      * @param {function} callback
      * @return {void}
      */
-    scrollTop(duration, root, callback) {
-      this.scrollTo(0, duration, root, callback);
+    scrollTop(duration, callback) {
+      this.scrollTo(0, duration, callback);
     }
 
     /**
@@ -151,8 +150,8 @@
      * @param {function} callback
      * @return {void}
      */
-    scrollBottom(duration, root, callback) {
-      this.scrollTo(getScrollPageBottom(), duration, root, callback);
+    scrollBottom(duration, callback) {
+      this.scrollTo(getScrollPageBottom(), duration, callback);
     }
 
     _privateScrollTo(target) {
