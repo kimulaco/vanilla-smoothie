@@ -1,6 +1,5 @@
-import babel from 'rollup-plugin-babel'
-import {uglify} from 'rollup-plugin-uglify'
 import banner from 'rollup-plugin-banner'
+import {terser} from 'rollup-plugin-terser'
 import license from './src/js/license'
 
 const packageName = 'vanilla-smoothie'
@@ -25,12 +24,7 @@ export default {
   input: `./src/js/${packageName}.js`,
   output: isProd ? prodOutput : devOutput,
   plugins: [
-    babel({
-      presets: [
-        '@babel/preset-env'
-      ]
-    }),
-    isProd && isMinify && uglify(),
+    isProd && isMinify && terser(),
     banner(license)
   ]
 }

@@ -1,22 +1,9 @@
 const win = window
 const doc = win.document
-const history = win.history && win.history.pushState ? win.history : null
 const body = doc.body
-const rootElement = doc.documentElement
-const requestAnimationFrame =
-  win.requestAnimationFrame ||
-  win.mozRequestAnimationFrame ||
-  win.webkitRequestAnimationFrame ||
-  function (func) {
-    win.setTimeout(func, 15)
-  }
-let clock = Date.now()
-let time = 500
-let context = win
-let start = context.scrollTop || win.pageYOffset
-let end = 0
+const docElement = doc.documentElement
+const history = win.history && win.history.pushState ? win.history : null
 let hash = ''
-let callbackFunc = null
 
 /**
  * easeInOutCubic
@@ -24,7 +11,8 @@ let callbackFunc = null
  * @return {number}
  */
 const easeInOutCubic = (t) => {
-  return t < 0.5 ? 4 * t * t * t :
+  return t < 0.5 ?
+    4 * t * t * t :
     (t - 1) * (2 * t - 2) * (2 * t - 2) + 1
 }
 
@@ -36,8 +24,8 @@ const getScrollPageBottom = () => {
   return Math.max.apply(null, [
     body.clientHeight,
     body.scrollHeight,
-    rootElement.scrollHeight,
-    rootElement.clientHeight
+    docElement.scrollHeight,
+    docElement.clientHeight
   ]) - win.innerHeight
 }
 
@@ -52,15 +40,11 @@ const getTargetTop = (target) => {
   if (typeof target === 'number') {
     return target
   } else if (typeof target === 'string') {
-    if (target[0] === '#') {
-      hash = target
-    }
+    if (target[0] === '#') hash = target
 
     targetElement = doc.querySelector(target)
 
-    if (!targetElement) {
-      return false
-    }
+    if (!targetElement) return false
 
     return targetElement.getBoundingClientRect().top + win.pageYOffset
   }
@@ -81,60 +65,59 @@ const getScrollTop = (startV, endV, elapsed, duration) => {
     return endV
   }
 
-  return startV + (end - startV) *
+  return startV + (endV - startV) *
     easeInOutCubic(elapsed / duration)
-}
-
-/**
- * scrollFrame
- * @return {void}
- */
-const scrollFrame = () => {
-  const elapsed = Date.now() - clock
-
-  if (context === win) {
-    win.scroll(0, getScrollTop(start, end, elapsed, time))
-  } else {
-    context.scrollTop = getScrollTop(start, end, elapsed, time)
-  }
-
-  if (elapsed <= time) {
-    requestAnimationFrame(scrollFrame)
-  } else {
-    if (hash) {
-      history.pushState(null, null, hash)
-    }
-
-    hash = ''
-
-    if (typeof callbackFunc === 'function') {
-      callbackFunc()
-    }
-  }
 }
 
 /**
  * VanillaSmoothie
  * @constructor
+ * @param {object}
  */
 class VanillaSmoothie {
+  constructor(option = {}) {
+    this.option = Object.assign({
+      element: win,
+      history: true,
+      hash: true,
+      duration: 500
+    }, option)
+    this.start = this.option.element.scrollTop || win.pageYOffset
+    this.duration = this.option.duration
+    this.end = 0
+    this.clock = null
+    this.callback = null
+    this.popstateFlag = false
+    this._scrollFrame = this._frame.bind(this)
+
+    if (this.option.history) {
+      win.addEventListener('popstate', () => {
+        if (location.hash) {
+          this._privateScrollTo(location.hash)
+        } else {
+          this._privateScrollTo(0)
+        }
+      })
+    }
+
+    if (this.option.hash) this._privateScrollTo(location.hash)
+  }
+
   /**
    * scrollTo
    * @param {string|number} target
    * @param {number} duration
-   * @param {object} root
    * @param {function} callback
    * @return {void}
    */
-  scrollTo(target, duration, root, callback) {
-    clock = Date.now()
-    time = duration || 500
-    context = root || win
-    start = context.scrollTop || window.pageYOffset
-    end = getTargetTop(target)
-    callbackFunc = callback
+  scrollTo(target, duration, callback) {
+    this.clock = Date.now()
+    this.start = this.option.element.scrollTop || window.pageYOffset
+    this.end = getTargetTop(target)
+    this.callback = callback
+    this.duration = duration || this.option.duration
 
-    scrollFrame()
+    this._scrollFrame()
   }
 
   /**
@@ -144,8 +127,8 @@ class VanillaSmoothie {
    * @param {function} callback
    * @return {void}
    */
-  scrollTop(duration, root, callback) {
-    this.scrollTo(0, duration, root, callback)
+  scrollTop(duration, callback) {
+    this.scrollTo(0, duration, callback)
   }
 
   /**
@@ -155,17 +138,42 @@ class VanillaSmoothie {
    * @param {function} callback
    * @return {void}
    */
-  scrollBottom(duration, root, callback) {
-    this.scrollTo(getScrollPageBottom(), duration, root, callback)
+  scrollBottom(duration, callback) {
+    this.scrollTo(getScrollPageBottom(), duration, callback)
+  }
+
+  _privateScrollTo(target) {
+    this.popstateFlag = true
+    this.scrollTo(target, this.option.duration, () => {
+      this.popstateFlag = false
+    })
+  }
+
+  /**
+   * _frame
+   * @return {void}
+   */
+  _frame() {
+    const elapsed = Date.now() - this.clock
+
+    if (this.option.element === win) {
+      win.scroll(0, getScrollTop(this.start, this.end, elapsed, this.duration))
+    } else {
+      this.option.element.scrollTop = getScrollTop(this.start, this.end, elapsed, this.duration)
+    }
+
+    if (elapsed <= this.duration) {
+      requestAnimationFrame(this._scrollFrame)
+    } else {
+      if (hash && !this.popstateFlag) history.pushState(null, null, hash)
+
+      hash = ''
+
+      if (typeof this.callback === 'function') this.callback()
+    }
   }
 }
 
-export default new VanillaSmoothie()
+if (typeof window !== 'undefined') win.VanillaSmoothie = VanillaSmoothie
 
-if (
-  typeof exports !== 'object' &&
-  typeof module === 'undefined' &&
-  typeof window !== 'undefined'
-) {
-  window.vanillaSmoothie = new VanillaSmoothie()
-}
+export default VanillaSmoothie
