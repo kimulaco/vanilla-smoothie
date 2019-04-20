@@ -115,7 +115,7 @@
         history: true,
         hash: true,
         duration: 500,
-        easing: 'easeInOutCubic'
+        easing: 'linear'
       }, option);
       this.start = this.option.element.scrollTop || win.pageYOffset;
       this.duration = this.option.duration;
