@@ -18,7 +18,7 @@
 
 ## Overview
 
-A minimal smooth scroll library based on vanilla JavaScript. Compressed file size is about 2KB.
+A minimal smooth scroll library based on vanilla JavaScript. Compressed file size is less than 3KB.
 
 This library has no dependencies on other libraries. So you can easily use it without being influenced by the presence of the framework.
 
@@ -72,7 +72,8 @@ const vanillaSmoothie = VanillaSmoothie({
   element: window,
   history: true,
   hash: true,
-  duration: 500
+  duration: 500,
+  easing: 'linear'
 })
 ```
 
@@ -82,6 +83,23 @@ const vanillaSmoothie = VanillaSmoothie({
 | history | boolean | Enabled pushstate and popstate. | default: `true` |
 | hash | boolean | Enabled url hash scroll. | default: `true` |
 | duration | number | Default number of milliseconds to scroll. | default: `500` |
+| easing | string | Easing name | default: `linear` |
+
+### Easing
+
+- linear
+- easeInQuad
+- easeOutQuad
+- easeInOutQuad
+- easeInCubic
+- easeOutCubic
+- easeInOutCubic
+- easeInQuart
+- easeOutQuart
+- easeInOutQuart
+- easeInQuint
+- easeOutQuint
+- easeInOutQuint
 
 ## Methods
 
