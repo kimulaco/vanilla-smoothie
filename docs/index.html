@@ -23,14 +23,14 @@
 
 
 <h2 id="overview">Overview</h2>
-<p>A minimal smooth scroll library based on vanilla JavaScript. Compressed file size is about 2KB.</p>
+<p>A minimal smooth scroll library based on vanilla JavaScript. Compressed file size is less than 3KB.</p>
 <p>This library has no dependencies on other libraries. So you can easily use it without being influenced by the presence of the framework.</p>
 <h2 id="install">Install</h2>
 <h3 id="npm">npm</h3>
 <pre><code class="language-shell">npm install --save vanilla-smoothie
 # or yarn install vanilla-smoothie</code></pre>
 <h3 id="cdn">CDN</h3>
-<pre><code class="language-html">&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vanilla-smoothie@1.2.0/dist/vanilla-smoothie.min.js&quot;&gt;&lt;/script&gt;</code></pre>
+<pre><code class="language-html">&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vanilla-smoothie@1.2.1/dist/vanilla-smoothie.min.js&quot;&gt;&lt;/script&gt;</code></pre>
 <h2 id="use">Use</h2>
 <pre><code class="language-js">const VanillaSmoothie = require(&#39;vanilla-smoothie&#39;)
 // or import VanillaSmoothie from &#39;vanilla-smoothie&#39;
@@ -53,7 +53,8 @@ document.querySelectorAll(&#39;a[href^=&quot;#&quot;]&#39;).forEach((anchor) =&g
   element: window,
   history: true,
   hash: true,
-  duration: 500
+  duration: 500,
+  easing: &#39;linear&#39;
 })</code></pre>
 <table>
 <thead>
@@ -88,7 +89,29 @@ document.querySelectorAll(&#39;a[href^=&quot;#&quot;]&#39;).forEach((anchor) =&g
 <td>Default number of milliseconds to scroll.</td>
 <td>default: <code>500</code></td>
 </tr>
+<tr>
+<td>easing</td>
+<td>string</td>
+<td>Easing name</td>
+<td>default: <code>linear</code></td>
+</tr>
 </tbody></table>
+<h3 id="easing">Easing</h3>
+<ul>
+<li>linear</li>
+<li>easeInQuad</li>
+<li>easeOutQuad</li>
+<li>easeInOutQuad</li>
+<li>easeInCubic</li>
+<li>easeOutCubic</li>
+<li>easeInOutCubic</li>
+<li>easeInQuart</li>
+<li>easeOutQuart</li>
+<li>easeInOutQuart</li>
+<li>easeInQuint</li>
+<li>easeOutQuint</li>
+<li>easeInOutQuint</li>
+</ul>
 <h2 id="methods">Methods</h2>
 <h3 id="scrolltotarget-duration-callback">scrollTo(target[, duration, callback])</h3>
 <pre><code class="language-js">// Selector
