@@ -36,7 +36,7 @@ npm install --save vanilla-smoothie
 ### CDN
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/vanilla-smoothie@1.2.1/dist/vanilla-smoothie.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanilla-smoothie@1.2.3/dist/vanilla-smoothie.min.js"></script>
 ```
 
 ## Use
