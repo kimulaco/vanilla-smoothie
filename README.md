@@ -36,7 +36,7 @@ npm install --save vanilla-smoothie
 ### CDN
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/vanilla-smoothie@1.2.3/dist/vanilla-smoothie.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanilla-smoothie@1.2.4/dist/vanilla-smoothie.min.js"></script>
 ```
 
 ## Use
@@ -183,4 +183,4 @@ Other commands look to `package.json`.
 
 ## License
 
-[MIT License](https://github.com/kimulaco/vanilla-smoothie/blob/master/LICENSE).
+[MIT License](LICENSE).
