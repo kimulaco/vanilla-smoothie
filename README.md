@@ -9,7 +9,7 @@
 - [Overview](#overview)
 - [Use](#use)
 - [Support browsers](#support-browsers)
-- [Development](#development)
+- [Contributing](#contributing)
 - [License](#license)
 
 ## Overview
