@@ -6,15 +6,11 @@
 [GitHub](https://github.com/kimulaco/vanilla-smoothie)
 [GH_PAGES] -->
 
-<!-- [GH_PAGES]
-<ul>
-<li><a href="#overview">Overview</a></li>
-<li><a href="#use">Use</a></li>
-<li><a href="#support">Support</a></li>
-<li><a href="#development">Development</a></li>
-<li><a href="#license">License</a></li>
-</ul>
-[GH_PAGES] -->
+- [Overview](#overview)
+- [Use](#use)
+- [Support](#support)
+- [Development](#development)
+- [License](#license)
 
 ## Overview
 
