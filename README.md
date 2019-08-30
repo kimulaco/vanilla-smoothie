@@ -164,7 +164,7 @@ Latest version of browser below.
 
 ## Contributing
 
-Please create an Issue or Pull requests if you have any improvements!
+Please create an [Issue](https://github.com/kimulaco/vanilla-smoothie/issues) or [Pull requests](https://github.com/kimulaco/vanilla-smoothie/pulls) if you have any improvements!
 
 ### Development
 
