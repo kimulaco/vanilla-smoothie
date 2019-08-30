@@ -8,7 +8,7 @@
 
 - [Overview](#overview)
 - [Use](#use)
-- [Support](#support)
+- [Support browsers](#support-browsers)
 - [Development](#development)
 - [License](#license)
 
@@ -154,7 +154,7 @@ vanillaSmoothie.scrollBottom(1000, () => {
 <button type="button" class="js-button-bottom">Page Bottom</button>
 [GH_PAGES] -->
 
-## Support
+## Support browsers
 
 Latest version of browser below.
 
@@ -162,17 +162,23 @@ Latest version of browser below.
 - Firefox
 - Safari
 
-## Development
+## Contributing
+
+Please create an Issue or Pull requests if you have any improvements!
+
+### Development
+
+You can use yarn or npm.
 
 ```shell
 # Install package
-npm install
+yarn install
 
 # JavaScript compile and launch local server to http://localhost:3000
-npm run dev
+yarn dev
 
 # Build JavaScript and Document
-npm run build
+yarn build
 ```
 
 Other commands look to `package.json`.
