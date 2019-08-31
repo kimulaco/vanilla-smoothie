@@ -46,7 +46,7 @@ class VanillaSmoothie {
 
   private cache: VanillaSmoothieCache = {
     hash: '',
-    easing: 'easeInQuad',
+    easing: 'linear',
     duration: 500,
     startTime: 0,
     startOffset: 0,
@@ -71,7 +71,7 @@ class VanillaSmoothie {
     option = Object.assign(defaultOption, option)
     this.cache = {
       hash: typeof target === 'string' && target[0] === '#' ? target : '',
-      easing: option.easing || 'easeInQuad',
+      easing: option.easing || 'linear',
       duration: option.duration || 500,
       startTime: Date.now(),
       startOffset: option.element.scrollTop || window.pageYOffset,
