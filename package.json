@@ -21,10 +21,10 @@
     "dev:build": "MINIFY=true rollup -c -w",
     "dev:docs": "node script/docs.js -w",
     "dev:server": "serve docs -p 3000",
-    "eslint": "eslint src/ts/*ts"
+    "lint": "eslint src/ts/*ts"
   },
   "lint-staged": {
-    "*.{ts,js}": "eslint"
+    "*.{ts,js}": "yarn lint"
   },
   "husky": {
     "hooks": {

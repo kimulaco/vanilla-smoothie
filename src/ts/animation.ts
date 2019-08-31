@@ -45,8 +45,8 @@ const runFrame = (
 }
 
 const animation = (
-  duration:number,
-  mainFunc: any,
+  duration: number,
+  mainFunc: MainFunc,
   option: Option = {}
 ): void => {
   const config: Config = Object.assign({
