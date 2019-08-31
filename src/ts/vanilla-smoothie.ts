@@ -13,6 +13,7 @@ interface VanillaSmoothieOption {
   adjust?: number
 }
 interface VanillaSmoothieCache {
+  hash: string
   easing: string
   duration: number
   startTime: number
@@ -25,8 +26,8 @@ interface VanillaSmoothieCache {
 declare const window: VanillaSmoothieWindow
 
 const htmlElm = document.documentElement
-// const history = window.history && window.history.pushState ?
-//   window.history : null
+const history = window.history && window.history.pushState ?
+  window.history : null
 const defaultOption: VanillaSmoothieOption = {
   element: htmlElm,
   easing: 'linear',
@@ -37,13 +38,22 @@ const defaultOption: VanillaSmoothieOption = {
 
 
 class VanillaSmoothie {
+  constructor() {
+    window.addEventListener('popstate', () => {
+      this.onPopstate(location.hash)
+    })
+  }
+
   private cache: VanillaSmoothieCache = {
+    hash: '',
     easing: 'easeInQuad',
     duration: 500,
     startTime: 0,
     startOffset: 0,
     endOffset: 0,
   }
+
+  onPopstate (hash: string) {}
 
   scrollTo (
     target: VanillaSmoothieTarget,
@@ -52,6 +62,7 @@ class VanillaSmoothie {
   ): void {
     option = Object.assign(defaultOption, option)
     this.cache = {
+      hash: typeof target === 'string' && target[0] === '#' ? target : '',
       easing: option.easing || 'easeInQuad',
       duration: option.duration || 500,
       startTime: Date.now(),
@@ -66,7 +77,12 @@ class VanillaSmoothie {
         option.element.scrollTop = this.getScrollOffset(elapsed)
       }
     }, {
-      successCallback: callback
+      successCallback: () => {
+        if (history && this.cache.hash) {
+          history.pushState(null, '', this.cache.hash)
+        }
+        callback()
+      }
     })
   }
 
