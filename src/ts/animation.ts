@@ -17,18 +17,22 @@ interface Timer {
   start: number
 }
 
-let timer: Timer = {
+const timer: Timer = {
   duration: 500,
   start: 0
 }
 
-const runFrame = (mainFunc: MainFunc, successCallback: any, failCallback: any): any => {
+const runFrame = (
+  mainFunc: MainFunc,
+  successCallback: SuccessFunc,
+  failCallback: FailFunc
+): void => {
   const elapsed: number = Date.now() - timer.start
 
   try {
     mainFunc(elapsed)
   } catch (error) {
-    failCallback(error)
+    failCallback()
   }
 
   if (elapsed <= timer.duration) {
@@ -40,7 +44,11 @@ const runFrame = (mainFunc: MainFunc, successCallback: any, failCallback: any): 
   }
 }
 
-const animation = (duration:number = 0, mainFunc: any, option: Option = {}) => {
+const animation = (
+  duration:number,
+  mainFunc: any,
+  option: Option = {}
+): void => {
   const config: Config = Object.assign({
     successCallback: () => {},
     failCallback: () => {}
@@ -53,7 +61,7 @@ const animation = (duration:number = 0, mainFunc: any, option: Option = {}) => {
     if (typeof config.successCallback === 'function') {
       config.successCallback()
     }
-  }, (error: any) => {
+  }, () => {
     if (typeof config.failCallback === 'function') {
       config.failCallback()
     }

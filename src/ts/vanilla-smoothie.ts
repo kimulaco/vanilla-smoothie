@@ -78,7 +78,7 @@ class VanillaSmoothie {
       endOffset: this.getTargetOffset(target)
     }
 
-    animation(option.duration, (elapsed: number) => {
+    animation(option.duration || 500, (elapsed: number) => {
       if (option.element === window) {
         window.scroll(0, this.getScrollOffset(elapsed))
       } else {
