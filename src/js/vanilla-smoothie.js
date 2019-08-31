@@ -49,7 +49,7 @@ const getTargetTop = (target) => {
  * @param {object}
  */
 class VanillaSmoothie {
-  constructor(option = {}) {
+  constructor (option = {}) {
     this.option = Object.assign({
       element: win,
       history: true,
@@ -85,7 +85,7 @@ class VanillaSmoothie {
    * @param {function} callback
    * @return {void}
    */
-  scrollTo(target, duration, callback) {
+  scrollTo (target, duration, callback) {
     this.clock = Date.now()
     this.start = this.option.element.scrollTop || window.pageYOffset
     this.end = getTargetTop(target)
@@ -102,7 +102,7 @@ class VanillaSmoothie {
    * @param {function} callback
    * @return {void}
    */
-  scrollTop(duration, callback) {
+  scrollTop (duration, callback) {
     this.scrollTo(0, duration, callback)
   }
 
@@ -113,11 +113,11 @@ class VanillaSmoothie {
    * @param {function} callback
    * @return {void}
    */
-  scrollBottom(duration, callback) {
+  scrollBottom (duration, callback) {
     this.scrollTo(getScrollPageBottom(), duration, callback)
   }
 
-  _privateScrollTo(target) {
+  _privateScrollTo (target) {
     this.popstateFlag = true
     this.scrollTo(target, this.option.duration, () => {
       this.popstateFlag = false
@@ -128,7 +128,7 @@ class VanillaSmoothie {
    * _frame
    * @return {void}
    */
-  _frame() {
+  _frame () {
     const elapsed = Date.now() - this.clock
 
     if (this.option.element === win) {
@@ -153,7 +153,7 @@ class VanillaSmoothie {
    * @param {number} elapsed
    * @return {number}
    */
-  _getTop(elapsed) {
+  _getTop (elapsed) {
     if (elapsed > this.duration) {
       return this.end
     }
