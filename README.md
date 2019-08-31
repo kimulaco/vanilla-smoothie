@@ -1,6 +1,8 @@
 # VanillaSmoothie.js
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![npm version](https://badge.fury.io/js/vanilla-smoothie.svg)](https://badge.fury.io/js/vanilla-smoothie)
+[![Build Status](https://travis-ci.org/kimulaco/vanilla-smoothie.svg?branch=master)](https://travis-ci.org/kimulaco/vanilla-smoothie)
 
 <!-- [GH_PAGES]
 [GitHub](https://github.com/kimulaco/vanilla-smoothie)
