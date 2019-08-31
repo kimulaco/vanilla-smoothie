@@ -6,15 +6,11 @@
 [GitHub](https://github.com/kimulaco/vanilla-smoothie)
 [GH_PAGES] -->
 
-<!-- [GH_PAGES]
-<ul>
-<li><a href="#overview">Overview</a></li>
-<li><a href="#use">Use</a></li>
-<li><a href="#support">Support</a></li>
-<li><a href="#development">Development</a></li>
-<li><a href="#license">License</a></li>
-</ul>
-[GH_PAGES] -->
+- [Overview](#overview)
+- [Use](#use)
+- [Support browsers](#support-browsers)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Overview
 
@@ -158,7 +154,7 @@ vanillaSmoothie.scrollBottom(1000, () => {
 <button type="button" class="js-button-bottom">Page Bottom</button>
 [GH_PAGES] -->
 
-## Support
+## Support browsers
 
 Latest version of browser below.
 
@@ -166,17 +162,23 @@ Latest version of browser below.
 - Firefox
 - Safari
 
-## Development
+## Contributing
+
+Please create an [Issue](https://github.com/kimulaco/vanilla-smoothie/issues) or [Pull requests](https://github.com/kimulaco/vanilla-smoothie/pulls) if you have any improvements!
+
+### Development
+
+You can use yarn or npm.
 
 ```shell
 # Install package
-npm install
+yarn install
 
 # JavaScript compile and launch local server to http://localhost:3000
-npm run dev
+yarn dev
 
 # Build JavaScript and Document
-npm run build
+yarn build
 ```
 
 Other commands look to `package.json`.
