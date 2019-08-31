@@ -2,6 +2,7 @@ import easing from './easing'
 import { animation } from './animation'
 
 type VanillaSmoothieTarget = string | number
+type VanillaSmoothieCallbak = () => void
 interface VanillaSmoothieWindow extends Window {
   vanillaSmoothie: any
 }
@@ -24,7 +25,6 @@ interface VanillaSmoothieCache {
 declare const window: VanillaSmoothieWindow
 
 const htmlElm = document.documentElement
-// const bodyElm = document.body
 // const history = window.history && window.history.pushState ?
 //   window.history : null
 const defaultOption: VanillaSmoothieOption = {
@@ -48,7 +48,7 @@ class VanillaSmoothie {
   scrollTo (
     target: VanillaSmoothieTarget,
     option: VanillaSmoothieOption,
-    callback: any = () => {}
+    callback: VanillaSmoothieCallbak
   ): void {
     option = Object.assign(defaultOption, option)
     this.cache = {
@@ -70,6 +70,20 @@ class VanillaSmoothie {
     })
   }
 
+  scrollTop (
+    option: VanillaSmoothieOption,
+    callback: VanillaSmoothieCallbak
+  ): void {
+    this.scrollTo(0, option, callback)
+  }
+
+  scrollBottom (
+    option: VanillaSmoothieOption,
+    callback: VanillaSmoothieCallbak
+  ): void {
+    this.scrollTo(this.getScrollBottomOffset(), option, callback)
+  }
+
   private getScrollOffset (elapsed: number): number {
     if (elapsed > this.cache.duration) {
       return this.cache.endOffset
@@ -88,6 +102,15 @@ class VanillaSmoothie {
     }
 
     return 0
+  }
+
+  private getScrollBottomOffset = (): number => {
+    return Math.max.apply(null, [
+      document.body.clientHeight,
+      document.body.scrollHeight,
+      htmlElm.scrollHeight,
+      htmlElm.clientHeight
+    ]) - window.innerHeight
   }
 }
 
