@@ -53,7 +53,15 @@ class VanillaSmoothie {
     endOffset: 0,
   }
 
-  onPopstate (hash: string) {}
+  /*
+    eslint-disable
+    @typescript-eslint/no-unused-vars,
+    @typescript-eslint/explicit-function-return-type
+  */
+  onPopstate (hash: string) {
+    // Do nothing default
+  }
+  /* eslint-enable */
 
   scrollTo (
     target: VanillaSmoothieTarget,

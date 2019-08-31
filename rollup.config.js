@@ -1,3 +1,4 @@
+import { eslint } from 'rollup-plugin-eslint'
 import typescript from 'rollup-plugin-typescript2'
 import {terser} from 'rollup-plugin-terser'
 import banner from 'rollup-plugin-banner'
@@ -26,6 +27,7 @@ export default {
     format: 'umd'
   },
   plugins: [
+    eslint(),
     typescript(),
     isMinify && terser(),
     banner(license)
