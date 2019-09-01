@@ -27,7 +27,7 @@ export default {
     format: 'umd'
   },
   plugins: [
-    eslint(),
+    !isProd && eslint(),
     typescript(),
     isMinify && terser(),
     banner(license)
