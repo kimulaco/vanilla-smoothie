@@ -22,6 +22,7 @@ interface VanillaSmoothieCache {
 
 
 
+// eslint-disable-next-line init-declarations
 declare const window: VanillaSmoothieWindow
 
 const htmlElm = document.documentElement

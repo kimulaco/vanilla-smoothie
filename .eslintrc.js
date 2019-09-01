@@ -7,7 +7,11 @@ module.exports = {
     node: true
   },
   parserOptions: {
-    ecmaVersion: 2015
+    ecmaVersion: 2015,
+    sourceType: 'module'
+  },
+  rules: {
+    indent: [2, 2]
   },
   overrides: [
     {
@@ -22,7 +26,7 @@ module.exports = {
           '@typescript-eslint'
         ],
         rules: {
-          '@typescript-eslint/member-delimiter-style': 'off'
+          '@typescript-eslint/member-delimiter-style': 0
         }
     }
   ]
