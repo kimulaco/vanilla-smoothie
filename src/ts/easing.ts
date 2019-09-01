@@ -1,4 +1,4 @@
-const easing: any = {
+const easing: any = { // eslint-disable-line @typescript-eslint/no-explicit-any
   linear (t: number): number {
     return t
   },

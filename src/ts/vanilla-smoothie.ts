@@ -16,7 +16,6 @@ interface VanillaSmoothieCache {
   hash: string
   easing: string
   duration: number
-  startTime: number
   startOffset: number
   endOffset: number
 }
@@ -28,12 +27,6 @@ declare const window: VanillaSmoothieWindow
 const htmlElm = document.documentElement
 const history = window.history && window.history.pushState ?
   window.history : null
-const defaultOption: VanillaSmoothieOption = {
-  element: htmlElm,
-  easing: 'linear',
-  duration: 500,
-  adjust: 0
-}
 
 
 
@@ -48,7 +41,6 @@ class VanillaSmoothie {
     hash: '',
     easing: 'linear',
     duration: 500,
-    startTime: 0,
     startOffset: 0,
     endOffset: 0,
   }
@@ -65,31 +57,37 @@ class VanillaSmoothie {
 
   scrollTo (
     target: VanillaSmoothieTarget,
-    option: VanillaSmoothieOption,
+    option: VanillaSmoothieOption = {},
     callback: VanillaSmoothieCallbak
   ): void {
-    option = Object.assign(defaultOption, option)
+    const opt = Object.assign({
+      element: htmlElm,
+      easing: 'linear',
+      duration: 500,
+      adjust: 0
+    }, option)
     this.cache = {
       hash: typeof target === 'string' && target[0] === '#' ? target : '',
-      easing: option.easing || 'linear',
-      duration: option.duration || 500,
-      startTime: Date.now(),
-      startOffset: option.element.scrollTop || window.pageYOffset,
-      endOffset: this.getTargetOffset(target)
+      easing: opt.easing || 'linear',
+      duration: opt.duration || 500,
+      startOffset: opt.element.scrollTop || window.pageYOffset,
+      endOffset: this.getTargetOffset(target) + opt.adjust
     }
 
-    animation(option.duration || 500, (elapsed: number) => {
-      if (option.element === window) {
+    animation(opt.duration || 500, (elapsed: number) => {
+      if (opt.element === window) {
         window.scroll(0, this.getScrollOffset(elapsed))
       } else {
-        option.element.scrollTop = this.getScrollOffset(elapsed)
+        opt.element.scrollTop = this.getScrollOffset(elapsed)
       }
     }, {
       successCallback: () => {
         if (history && this.cache.hash) {
           history.pushState(null, '', this.cache.hash)
         }
-        callback()
+        if (typeof callback === 'function') {
+          callback()
+        }
       }
     })
   }
@@ -124,7 +122,6 @@ class VanillaSmoothie {
       if (!targetElement) return 0
       return targetElement.getBoundingClientRect().top + window.pageYOffset
     }
-
     return 0
   }
 
