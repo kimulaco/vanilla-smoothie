@@ -49,7 +49,7 @@ vanillaSmoothie.scrollTo('#anchor-01', {
 You can also get the this library with CDN or Zip download. Ideal for small samples.
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/vanilla-smoothie@1.2.4/dist/vanilla-smoothie.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanilla-smoothie@2.0.0/dist/vanilla-smoothie.min.js"></script>
 <script>
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener('click', (event) => {
