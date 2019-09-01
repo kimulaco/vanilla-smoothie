@@ -76,7 +76,6 @@ class VanillaSmoothie {
 
     animation(opt.duration || 500, (elapsed: number) => {
       if (opt.element === window) {
-        console.log(`window.scroll(0, ${this.getScrollOffset(elapsed)})`)
         window.scroll(0, this.getScrollOffset(elapsed))
       } else {
         opt.element.scrollTop = this.getScrollOffset(elapsed)
