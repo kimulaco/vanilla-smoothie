@@ -7,7 +7,7 @@ interface VanillaSmoothieWindow extends Window {
   vanillaSmoothie: any
 }
 interface VanillaSmoothieOption {
-  element?: any
+  element?: HTMLElement
   easing?: string;
   duration?: number
   adjust?: number
@@ -119,7 +119,7 @@ class VanillaSmoothie {
     if (typeof target === 'number') {
       return target
     } else if (typeof target === 'string') {
-      const targetElement: any = document.querySelector(target)
+      const targetElement: HTMLElement | null = document.querySelector(target)
       if (!targetElement) return 0
       return targetElement.getBoundingClientRect().top + window.pageYOffset
     }
