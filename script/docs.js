@@ -15,7 +15,7 @@ class Docs {
     }, config || {})
   }
 
-  generate() {
+  generate () {
     const tmpl = fs.readFileSync(this.config.tmpl).toString()
     let md = fs.readFileSync(this.config.md).toString()
 
@@ -32,7 +32,7 @@ class Docs {
     console.log('Generated pages.')
   }
 
-  watch(func) {
+  watch (func) {
     console.log('Start watch.')
     fs.watch(this.config.md, (eventType, filename) => {
       console.log('Changed file.')
@@ -47,7 +47,7 @@ const doc = new Docs({
   output: path.join(process.cwd(), 'docs/index.html'),
   replace: [
     {
-      reg: /\[Document\]\(https:\/\/kimulaco\.github\.io\/vanilla\-smoothie\/\)/g,
+      reg: /\[Document\]\(https:\/\/kimulaco\.github\.io\/vanilla-smoothie\/\)/g,
       template: ''
     },
     {

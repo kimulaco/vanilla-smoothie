@@ -1,9 +1,10 @@
-/** 
- * VanillaSmoothie.js v1.2.4
+/**
+ * VanillaSmoothie.js v2.0.0
  * https://kimulaco.github.io/vanilla-smoothie/
  * Copyright (c) 2019 kimulaco
  * This software is released under the MIT License.
  */
+
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
@@ -11,220 +12,187 @@
 }(this, function () { 'use strict';
 
   var easing = {
-    linear(t) {
-      return t
-    },
-    easeInQuad(t) {
-      return t * t
-    },
-    easeOutQuad(t) {
-      return t * (2 - t)
-    },
-    easeInOutQuad(t) {
-      return t < 0.5 ?
-        2 * t * t :
-        -1 + (4 - 2 * t) * t
-    },
-    easeInCubic(t) {
-      return t * t * t
-    },
-    easeOutCubic(t) {
-      return --t * t * t + 1
-    },
-    easeInOutCubic(t) {
-      return t < 0.5 ?
-        4 * t * t * t :
-        (t - 1) * (2 * t - 2) * (2 * t - 2) + 1
-    },
-    easeInQuart(t) {
-      return t * t * t * t
-    },
-    easeOutQuart(t) {
-      return 1 - --t * t * t * t
-    },
-    easeInOutQuart(t) {
-      return t < 0.5 ?
-        8 * t * t * t * t :
-        1 - 8 * --t * t * t * t
-    },
-    easeInQuint(t) {
-      return t * t * t * t * t
-    },
-    easeOutQuint(t) {
-      return 1 + --t * t * t * t * t
-    },
-    easeInOutQuint(t) {
-      return t < 0.5 ?
-        16 * t * t * t * t * t :
-        1 + 16 * --t * t * t * t * t
-    }
+      linear: function (t) {
+          return t;
+      },
+      easeInQuad: function (t) {
+          return t * t;
+      },
+      easeOutQuad: function (t) {
+          return t * (2 - t);
+      },
+      easeInOutQuad: function (t) {
+          return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+      },
+      easeInCubic: function (t) {
+          return t * t * t;
+      },
+      easeOutCubic: function (t) {
+          return --t * t * t + 1;
+      },
+      easeInOutCubic: function (t) {
+          return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+      },
+      easeInQuart: function (t) {
+          return t * t * t * t;
+      },
+      easeOutQuart: function (t) {
+          return 1 - --t * t * t * t;
+      },
+      easeInOutQuart: function (t) {
+          return t < 0.5 ? 8 * t * t * t * t : 1 - 8 * --t * t * t * t;
+      },
+      easeInQuint: function (t) {
+          return t * t * t * t * t;
+      },
+      easeOutQuint: function (t) {
+          return 1 + --t * t * t * t * t;
+      },
+      easeInOutQuint: function (t) {
+          return t < 0.5 ? 16 * t * t * t * t * t : 1 + 16 * --t * t * t * t * t;
+      }
   };
 
-  const win = window;
-  const doc = win.document;
-  const body = doc.body;
-  const docElement = doc.documentElement;
-  const history = win.history && win.history.pushState ? win.history : null;
-  let hash = '';
-
-  /**
-   * getScrollPageBottom
-   * @return {number}
-   */
-  const getScrollPageBottom = () => {
-    return Math.max.apply(null, [
-      body.clientHeight,
-      body.scrollHeight,
-      docElement.scrollHeight,
-      docElement.clientHeight
-    ]) - win.innerHeight
+  var timer = {
+      duration: 500,
+      start: 0
   };
-
-  /**
-   * getTargetTop
-   * @param {number|string} target
-   * @return {number|boolean}
-   */
-  const getTargetTop = (target) => {
-    let targetElement = {};
-
-    if (typeof target === 'number') {
-      return target
-    } else if (typeof target === 'string') {
-      if (target[0] === '#') hash = target;
-
-      targetElement = doc.querySelector(target);
-
-      if (!targetElement) return false
-
-      return targetElement.getBoundingClientRect().top + win.pageYOffset
-    }
-
-    return false
+  var runFrame = function (mainFunc, successCallback, failCallback) {
+      var elapsed = Date.now() - timer.start;
+      try {
+          mainFunc(elapsed);
+      }
+      catch (error) {
+          failCallback();
+      }
+      if (elapsed <= timer.duration) {
+          requestAnimationFrame(function () {
+              runFrame(mainFunc, successCallback, failCallback);
+          });
+      }
+      else {
+          successCallback();
+      }
   };
-
-  /**
-   * VanillaSmoothie
-   * @constructor
-   * @param {object}
-   */
-  class VanillaSmoothie {
-    constructor(option = {}) {
-      this.option = Object.assign({
-        element: win,
-        history: true,
-        hash: true,
-        duration: 500,
-        easing: 'linear'
+  var animation = function (duration, mainFunc, option) {
+      if (option === void 0) { option = {}; }
+      var config = Object.assign({
+          successCallback: function () { },
+          failCallback: function () { }
       }, option);
-      this.start = this.option.element.scrollTop || win.pageYOffset;
-      this.duration = this.option.duration;
-      this.end = 0;
-      this.clock = null;
-      this.callback = null;
-      this.popstateFlag = false;
-      this._scrollFrame = this._frame.bind(this);
-
-      if (this.option.history) {
-        win.addEventListener('popstate', () => {
-          if (location.hash) {
-            this._privateScrollTo(location.hash);
-          } else {
-            this._privateScrollTo(0);
+      timer.start = Date.now();
+      timer.duration = duration;
+      runFrame(mainFunc, function () {
+          if (typeof config.successCallback === 'function') {
+              config.successCallback();
           }
-        });
-      }
-
-      if (this.option.hash) this._privateScrollTo(location.hash);
-    }
-
-    /**
-     * scrollTo
-     * @param {string|number} target
-     * @param {number} duration
-     * @param {function} callback
-     * @return {void}
-     */
-    scrollTo(target, duration, callback) {
-      this.clock = Date.now();
-      this.start = this.option.element.scrollTop || window.pageYOffset;
-      this.end = getTargetTop(target);
-      this.callback = callback;
-      this.duration = duration || this.option.duration;
-
-      this._scrollFrame();
-    }
-
-    /**
-     * scrollTop
-     * @param {number} duration
-     * @param {object} root
-     * @param {function} callback
-     * @return {void}
-     */
-    scrollTop(duration, callback) {
-      this.scrollTo(0, duration, callback);
-    }
-
-    /**
-     * scrollBottom
-     * @param {number} duration
-     * @param {object} root
-     * @param {function} callback
-     * @return {void}
-     */
-    scrollBottom(duration, callback) {
-      this.scrollTo(getScrollPageBottom(), duration, callback);
-    }
-
-    _privateScrollTo(target) {
-      this.popstateFlag = true;
-      this.scrollTo(target, this.option.duration, () => {
-        this.popstateFlag = false;
+      }, function () {
+          if (typeof config.failCallback === 'function') {
+              config.failCallback();
+          }
       });
-    }
+  };
 
-    /**
-     * _frame
-     * @return {void}
-     */
-    _frame() {
-      const elapsed = Date.now() - this.clock;
-
-      if (this.option.element === win) {
-        win.scroll(0, this._getTop(elapsed));
-      } else {
-        this.option.element.scrollTop = this._getTop(elapsed);
+  var htmlElm = document.documentElement;
+  var history = window.history && window.history.pushState ?
+      window.history : null;
+  var VanillaSmoothie = /** @class */ (function () {
+      function VanillaSmoothie() {
+          var _this = this;
+          this.cache = {
+              hash: '',
+              easing: 'linear',
+              duration: 500,
+              startOffset: 0,
+              endOffset: 0,
+          };
+          this.getTargetOffset = function (target) {
+              if (typeof target === 'number') {
+                  return target;
+              }
+              else if (typeof target === 'string') {
+                  var targetElement = document.querySelector(target);
+                  if (!targetElement)
+                      return 0;
+                  return targetElement.getBoundingClientRect().top + window.pageYOffset;
+              }
+              return 0;
+          };
+          this.getScrollBottomOffset = function () {
+              return Math.max.apply(null, [
+                  document.body.clientHeight,
+                  document.body.scrollHeight,
+                  htmlElm.scrollHeight,
+                  htmlElm.clientHeight
+              ]) - window.innerHeight;
+          };
+          window.addEventListener('popstate', function () {
+              _this.onPopstate(location.hash);
+          });
       }
-
-      if (elapsed <= this.duration) {
-        requestAnimationFrame(this._scrollFrame);
-      } else {
-        if (hash && !this.popstateFlag) history.pushState(null, null, hash);
-
-        hash = '';
-
-        if (typeof this.callback === 'function') this.callback();
-      }
-    }
-
-    /**
-     * _getTop
-     * @param {number} elapsed
-     * @return {number}
-     */
-    _getTop(elapsed) {
-      if (elapsed > this.duration) {
-        return this.end
-      }
-
-      return this.start + (this.end - this.start) *
-        easing[this.option.easing](elapsed / this.duration)
-    }
+      /*
+        eslint-disable
+        @typescript-eslint/no-unused-vars,
+        @typescript-eslint/explicit-function-return-type
+      */
+      VanillaSmoothie.prototype.onPopstate = function (hash) {
+          // Do nothing default
+      };
+      /* eslint-enable */
+      VanillaSmoothie.prototype.scrollTo = function (target, option, callback) {
+          var _this = this;
+          if (option === void 0) { option = {}; }
+          var opt = Object.assign({
+              element: window,
+              easing: 'linear',
+              duration: 500,
+              adjust: 0
+          }, option);
+          this.cache = {
+              hash: typeof target === 'string' && target[0] === '#' ? target : '',
+              easing: opt.easing || 'linear',
+              duration: opt.duration || 500,
+              startOffset: opt.element.scrollTop || window.pageYOffset,
+              endOffset: this.getTargetOffset(target) + opt.adjust
+          };
+          animation(opt.duration || 500, function (elapsed) {
+              if (opt.element === window) {
+                  window.scroll(0, _this.getScrollOffset(elapsed));
+              }
+              else {
+                  opt.element.scrollTop = _this.getScrollOffset(elapsed);
+              }
+          }, {
+              successCallback: function () {
+                  if (history && _this.cache.hash) {
+                      history.pushState(null, '', _this.cache.hash);
+                  }
+                  if (typeof callback === 'function') {
+                      callback();
+                  }
+              }
+          });
+      };
+      VanillaSmoothie.prototype.scrollTop = function (option, callback) {
+          this.scrollTo(0, option, callback);
+      };
+      VanillaSmoothie.prototype.scrollBottom = function (option, callback) {
+          this.scrollTo(this.getScrollBottomOffset(), option, callback);
+      };
+      VanillaSmoothie.prototype.getScrollOffset = function (elapsed) {
+          if (elapsed > this.cache.duration) {
+              return this.cache.endOffset;
+          }
+          return this.cache.startOffset + (this.cache.endOffset - this.cache.startOffset) *
+              easing[this.cache.easing](elapsed / this.cache.duration);
+      };
+      return VanillaSmoothie;
+  }());
+  var vanillaSmoothie = new VanillaSmoothie();
+  if (typeof window !== 'undefined') {
+      window.vanillaSmoothie = vanillaSmoothie;
   }
 
-  if (typeof window !== 'undefined') win.VanillaSmoothie = VanillaSmoothie;
-
-  return VanillaSmoothie;
+  return vanillaSmoothie;
 
 }));

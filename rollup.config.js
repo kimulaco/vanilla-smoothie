@@ -1,30 +1,35 @@
-import banner from 'rollup-plugin-banner'
+import { eslint } from 'rollup-plugin-eslint'
+import typescript from 'rollup-plugin-typescript2'
 import {terser} from 'rollup-plugin-terser'
+import banner from 'rollup-plugin-banner'
 import license from './src/js/license'
 
 const packageName = 'vanilla-smoothie'
 const isProd = process.env.NODE_ENV === 'production'
-const isMinify = process.env.MODE === 'minify'
-const prodOutput = [
-  {
-    name: packageName,
-    file: isMinify ? `dist/${packageName}.min.js` : `dist/${packageName}.js`,
-    format: 'umd'
+const isMinify = process.env.MINIFY === 'true'
+let outputFile = ''
+
+if (isProd) {
+  if (isMinify) {
+    outputFile = `dist/${packageName}.min.js`
+  } else {
+    outputFile = `dist/${packageName}.js`
   }
-]
-const devOutput = [
-  {
-    name: packageName,
-    file: `docs/js/${packageName}.js`,
-    format: 'umd'
-  }
-]
+} else {
+  outputFile = `docs/js/${packageName}.js`
+}
 
 export default {
-  input: `./src/js/${packageName}.js`,
-  output: isProd ? prodOutput : devOutput,
+  input: `./src/ts/${packageName}.ts`,
+  output: {
+    name: packageName,
+    file: outputFile,
+    format: 'umd'
+  },
   plugins: [
-    isProd && isMinify && terser(),
+    !isProd && eslint(),
+    typescript(),
+    isMinify && terser(),
     banner(license)
   ]
 }
