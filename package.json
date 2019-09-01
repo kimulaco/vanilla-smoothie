@@ -14,11 +14,11 @@
   "umd:main": "dist/vanilla-smoothie.min.js",
   "scripts": {
     "build": "npm-run-all -s lint build:*",
-    "build:main": "NODE_ENV=production rollup -c",
-    "build:minify": "NODE_ENV=production MINIFY=true rollup -c",
+    "build:main": "cross-env NODE_ENV=production rollup -c",
+    "build:minify": "cross-env NODE_ENV=production MINIFY=true rollup -c",
     "build:docs": "node script/docs.js",
     "dev": "npm-run-all -p dev:*",
-    "dev:build": "MINIFY=true rollup -c -w",
+    "dev:build": "cross-env MINIFY=true rollup -c -w",
     "dev:docs": "node script/docs.js -w",
     "dev:server": "serve docs -p 3000",
     "lint": "eslint src/ts/*ts **/*.js"
@@ -34,6 +34,7 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
+    "cross-env": "^5.2.1",
     "eslint": "^6.3.0",
     "husky": "^3.0.4",
     "lint-staged": "^9.2.5",
