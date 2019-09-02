@@ -96,7 +96,7 @@
   var htmlElm = document.documentElement;
   var history = window.history && window.history.pushState ?
       window.history : null;
-  var VanillaSmoothie = /** @class */ (function () {
+  var VanillaSmoothie = (function () {
       function VanillaSmoothie() {
           var _this = this;
           this.cache = {
@@ -130,15 +130,8 @@
               _this.onPopstate(location.hash);
           });
       }
-      /*
-        eslint-disable
-        @typescript-eslint/no-unused-vars,
-        @typescript-eslint/explicit-function-return-type
-      */
       VanillaSmoothie.prototype.onPopstate = function (hash) {
-          // Do nothing default
       };
-      /* eslint-enable */
       VanillaSmoothie.prototype.scrollTo = function (target, option, callback) {
           var _this = this;
           if (option === void 0) { option = {}; }

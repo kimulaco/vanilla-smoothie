@@ -1,3 +1,4 @@
 docs/js/vanilla-smoothie.js
 docs/js/prism.js
 dist/**/*.js
+*.d.ts

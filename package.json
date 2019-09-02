@@ -12,6 +12,7 @@
   "homepage": "https://kimulaco.github.io/vanilla-smoothie/",
   "main": "dist/vanilla-smoothie.js",
   "umd:main": "dist/vanilla-smoothie.min.js",
+  "types": "dist/vanilla-smoothie.d.ts",
   "scripts": {
     "build": "npm-run-all -s lint build:*",
     "build:main": "cross-env NODE_ENV=production rollup -c",
