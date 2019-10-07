@@ -10,9 +10,9 @@ declare class VanillaSmoothie {
     constructor();
     private cache;
     onPopstate(hash: string): void;
-    scrollTo(target: VanillaSmoothieTarget, option: VanillaSmoothieOption | undefined, callback: VanillaSmoothieCallbak): void;
-    scrollTop(option: VanillaSmoothieOption, callback: VanillaSmoothieCallbak): void;
-    scrollBottom(option: VanillaSmoothieOption, callback: VanillaSmoothieCallbak): void;
+    scrollTo(target: VanillaSmoothieTarget, option: VanillaSmoothieOption | undefined, callback: VanillaSmoothieCallbak): Promise<void>;
+    scrollTop(option: VanillaSmoothieOption, callback: VanillaSmoothieCallbak): Promise<void>;
+    scrollBottom(option: VanillaSmoothieOption, callback: VanillaSmoothieCallbak): Promise<void>;
     private getScrollOffset;
     private getTargetOffset;
     private getScrollBottomOffset;

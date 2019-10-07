@@ -148,29 +148,35 @@
               startOffset: opt.element.scrollTop || window.pageYOffset,
               endOffset: this.getTargetOffset(target) + opt.adjust
           };
-          animation(opt.duration || 500, function (elapsed) {
-              if (opt.element === window) {
-                  window.scroll(0, _this.getScrollOffset(elapsed));
-              }
-              else {
-                  opt.element.scrollTop = _this.getScrollOffset(elapsed);
-              }
-          }, {
-              successCallback: function () {
-                  if (history && _this.cache.hash) {
-                      history.pushState(null, '', _this.cache.hash);
+          return new Promise(function (resolve, reject) {
+              animation(opt.duration || 500, function (elapsed) {
+                  if (opt.element === window) {
+                      window.scroll(0, _this.getScrollOffset(elapsed));
                   }
-                  if (typeof callback === 'function') {
-                      callback();
+                  else {
+                      opt.element.scrollTop = _this.getScrollOffset(elapsed);
                   }
-              }
+              }, {
+                  successCallback: function () {
+                      if (history && _this.cache.hash) {
+                          history.pushState(null, '', _this.cache.hash);
+                      }
+                      if (typeof callback === 'function') {
+                          callback();
+                      }
+                      resolve();
+                  },
+                  failCallback: function () {
+                      reject();
+                  }
+              });
           });
       };
       VanillaSmoothie.prototype.scrollTop = function (option, callback) {
-          this.scrollTo(0, option, callback);
+          return this.scrollTo(0, option, callback);
       };
       VanillaSmoothie.prototype.scrollBottom = function (option, callback) {
-          this.scrollTo(this.getScrollBottomOffset(), option, callback);
+          return this.scrollTo(this.getScrollBottomOffset(), option, callback);
       };
       VanillaSmoothie.prototype.getScrollOffset = function (elapsed) {
           if (elapsed > this.cache.duration) {
