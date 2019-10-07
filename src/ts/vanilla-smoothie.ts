@@ -60,7 +60,7 @@ class VanillaSmoothie {
     target: VanillaSmoothieTarget,
     option: VanillaSmoothieOption = {},
     callback: VanillaSmoothieCallbak
-  ): void {
+  ): Promise<void> {
     const opt = Object.assign({
       element: window,
       easing: 'linear',
@@ -75,36 +75,42 @@ class VanillaSmoothie {
       endOffset: this.getTargetOffset(target) + opt.adjust
     }
 
-    animation(opt.duration || 500, (elapsed: number) => {
-      if (opt.element === window) {
-        window.scroll(0, this.getScrollOffset(elapsed))
-      } else {
-        opt.element.scrollTop = this.getScrollOffset(elapsed)
-      }
-    }, {
-      successCallback: () => {
-        if (history && this.cache.hash) {
-          history.pushState(null, '', this.cache.hash)
+    return new Promise((resolve, reject) => {
+      animation(opt.duration || 500, (elapsed: number) => {
+        if (opt.element === window) {
+          window.scroll(0, this.getScrollOffset(elapsed))
+        } else {
+          opt.element.scrollTop = this.getScrollOffset(elapsed)
         }
-        if (typeof callback === 'function') {
-          callback()
+      }, {
+        successCallback: () => {
+          if (history && this.cache.hash) {
+            history.pushState(null, '', this.cache.hash)
+          }
+          if (typeof callback === 'function') {
+            callback()
+          }
+          resolve()
+        },
+        failCallback: () => {
+          reject()
         }
-      }
+      })
     })
   }
 
   scrollTop (
     option: VanillaSmoothieOption,
     callback: VanillaSmoothieCallbak
-  ): void {
-    this.scrollTo(0, option, callback)
+  ): Promise<void> {
+    return this.scrollTo(0, option, callback)
   }
 
   scrollBottom (
     option: VanillaSmoothieOption,
     callback: VanillaSmoothieCallbak
-  ): void {
-    this.scrollTo(this.getScrollBottomOffset(), option, callback)
+  ): Promise<void> {
+    return this.scrollTo(this.getScrollBottomOffset(), option, callback)
   }
 
   private getScrollOffset (elapsed: number): number {

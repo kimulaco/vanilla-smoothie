@@ -15,38 +15,38 @@
     })
   }
 
-  vanillaSmoothie.onPopstate = (hash) => {
-    vanillaSmoothie.scrollTo(hash, {
+  vanillaSmoothie.onPopstate = async (hash) => {
+    await vanillaSmoothie.scrollTo(hash, {
       duration: 500
-    }, function () {
-      console.log('scrollTo callback')
     })
+    console.log('scrollTo callback')
   }
 
-  setClickEvent('a[href^="#"]', function (event) {
+  setClickEvent('a[href^="#"]', async (event) => {
     event.preventDefault()
-    vanillaSmoothie.scrollTo(event.target.getAttribute('href'), {
-      duration: 500
-    }, function () {
+    try {
+      await vanillaSmoothie.scrollTo(event.target.getAttribute('href'), {
+        duration: 500
+      })
       console.log('scrollTo callback')
-    })
+    } catch (error) {
+      console.error(error)
+    }
   })
 
-  setClickEvent('.js-button-top', function (event) {
+  setClickEvent('.js-button-top', async (event) => {
     event.preventDefault()
-    vanillaSmoothie.scrollTop({
+    await vanillaSmoothie.scrollTop({
       duration: 500
-    }, function () {
-      console.log('scrollTop callback')
     })
+    console.log('scrollTop callback')
   })
 
-  setClickEvent('.js-button-bottom', function (event) {
+  setClickEvent('.js-button-bottom', async (event) => {
     event.preventDefault()
-    vanillaSmoothie.scrollBottom({
+    await vanillaSmoothie.scrollBottom({
       duration: 500
-    }, function () {
-      console.log('scrollBottom callback')
     })
+    console.log('scrollBottom callback')
   })
 }())
