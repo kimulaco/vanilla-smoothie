@@ -3,9 +3,7 @@ import { animation } from './animation'
 
 type VanillaSmoothieTarget = string | number
 type VanillaSmoothieCallbak = () => void
-interface VanillaSmoothieWindow extends Window {
-  vanillaSmoothie: any
-}
+
 interface VanillaSmoothieOption {
   element?: HTMLElement
   easing?: string;
@@ -18,6 +16,25 @@ interface VanillaSmoothieCache {
   duration: number
   startOffset: number
   endOffset: number
+}
+interface VanillaSmoothieInstance {
+  onPopstate: (hash: string) => void
+  scrollTo: (
+    target: VanillaSmoothieTarget,
+    option: VanillaSmoothieOption,
+    callback: VanillaSmoothieCallbak
+  ) => Promise<void>
+  scrollTop: (
+    option: VanillaSmoothieOption,
+    callback: VanillaSmoothieCallbak
+  ) => Promise<void>
+  scrollBottom: (
+    option: VanillaSmoothieOption,
+    callback: VanillaSmoothieCallbak
+  ) => Promise<void>
+}
+interface VanillaSmoothieWindow extends Window {
+  vanillaSmoothie: VanillaSmoothieInstance
 }
 
 
@@ -51,7 +68,7 @@ class VanillaSmoothie {
     @typescript-eslint/no-unused-vars,
     @typescript-eslint/explicit-function-return-type
   */
-  onPopstate (hash: string) {
+  onPopstate (hash: string): void {
     // Do nothing default
   }
   /* eslint-enable */
@@ -60,7 +77,7 @@ class VanillaSmoothie {
     target: VanillaSmoothieTarget,
     option: VanillaSmoothieOption = {},
     callback: VanillaSmoothieCallbak
-  ): void {
+  ): Promise<void> {
     const opt = Object.assign({
       element: window,
       easing: 'linear',
@@ -75,36 +92,42 @@ class VanillaSmoothie {
       endOffset: this.getTargetOffset(target) + opt.adjust
     }
 
-    animation(opt.duration || 500, (elapsed: number) => {
-      if (opt.element === window) {
-        window.scroll(0, this.getScrollOffset(elapsed))
-      } else {
-        opt.element.scrollTop = this.getScrollOffset(elapsed)
-      }
-    }, {
-      successCallback: () => {
-        if (history && this.cache.hash) {
-          history.pushState(null, '', this.cache.hash)
+    return new Promise((resolve, reject): void => {
+      animation(opt.duration || 500, (elapsed: number) => {
+        if (opt.element === window) {
+          window.scroll(0, this.getScrollOffset(elapsed))
+        } else {
+          opt.element.scrollTop = this.getScrollOffset(elapsed)
         }
-        if (typeof callback === 'function') {
-          callback()
+      }, {
+        successCallback: () => {
+          if (history && this.cache.hash) {
+            history.pushState(null, '', this.cache.hash)
+          }
+          if (typeof callback === 'function') {
+            callback()
+          }
+          resolve()
+        },
+        failCallback: () => {
+          reject()
         }
-      }
+      })
     })
   }
 
   scrollTop (
     option: VanillaSmoothieOption,
     callback: VanillaSmoothieCallbak
-  ): void {
-    this.scrollTo(0, option, callback)
+  ): Promise<void> {
+    return this.scrollTo(0, option, callback)
   }
 
   scrollBottom (
     option: VanillaSmoothieOption,
     callback: VanillaSmoothieCallbak
-  ): void {
-    this.scrollTo(this.getScrollBottomOffset(), option, callback)
+  ): Promise<void> {
+    return this.scrollTo(this.getScrollBottomOffset(), option, callback)
   }
 
   private getScrollOffset (elapsed: number): number {
@@ -138,7 +161,7 @@ class VanillaSmoothie {
 
 
 
-const vanillaSmoothie = new VanillaSmoothie()
+const vanillaSmoothie: VanillaSmoothieInstance = new VanillaSmoothie()
 
 export default vanillaSmoothie
 

@@ -6,6 +6,8 @@
     ],
     "target": "es5",
     "module": "ES2015",
+    "declaration": true,
+    "removeComments": true,
     "noEmit": true
   }
 }

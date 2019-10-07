@@ -1,5 +1,5 @@
 /**
- * VanillaSmoothie.js v2.0.0
+ * vanilla-smoothie.js v2.0.0
  * https://kimulaco.github.io/vanilla-smoothie/
  * Copyright (c) 2019 kimulaco
  * This software is released under the MIT License.
@@ -96,7 +96,7 @@
   var htmlElm = document.documentElement;
   var history = window.history && window.history.pushState ?
       window.history : null;
-  var VanillaSmoothie = /** @class */ (function () {
+  var VanillaSmoothie = (function () {
       function VanillaSmoothie() {
           var _this = this;
           this.cache = {
@@ -130,15 +130,8 @@
               _this.onPopstate(location.hash);
           });
       }
-      /*
-        eslint-disable
-        @typescript-eslint/no-unused-vars,
-        @typescript-eslint/explicit-function-return-type
-      */
       VanillaSmoothie.prototype.onPopstate = function (hash) {
-          // Do nothing default
       };
-      /* eslint-enable */
       VanillaSmoothie.prototype.scrollTo = function (target, option, callback) {
           var _this = this;
           if (option === void 0) { option = {}; }
@@ -155,29 +148,35 @@
               startOffset: opt.element.scrollTop || window.pageYOffset,
               endOffset: this.getTargetOffset(target) + opt.adjust
           };
-          animation(opt.duration || 500, function (elapsed) {
-              if (opt.element === window) {
-                  window.scroll(0, _this.getScrollOffset(elapsed));
-              }
-              else {
-                  opt.element.scrollTop = _this.getScrollOffset(elapsed);
-              }
-          }, {
-              successCallback: function () {
-                  if (history && _this.cache.hash) {
-                      history.pushState(null, '', _this.cache.hash);
+          return new Promise(function (resolve, reject) {
+              animation(opt.duration || 500, function (elapsed) {
+                  if (opt.element === window) {
+                      window.scroll(0, _this.getScrollOffset(elapsed));
                   }
-                  if (typeof callback === 'function') {
-                      callback();
+                  else {
+                      opt.element.scrollTop = _this.getScrollOffset(elapsed);
                   }
-              }
+              }, {
+                  successCallback: function () {
+                      if (history && _this.cache.hash) {
+                          history.pushState(null, '', _this.cache.hash);
+                      }
+                      if (typeof callback === 'function') {
+                          callback();
+                      }
+                      resolve();
+                  },
+                  failCallback: function () {
+                      reject();
+                  }
+              });
           });
       };
       VanillaSmoothie.prototype.scrollTop = function (option, callback) {
-          this.scrollTo(0, option, callback);
+          return this.scrollTo(0, option, callback);
       };
       VanillaSmoothie.prototype.scrollBottom = function (option, callback) {
-          this.scrollTo(this.getScrollBottomOffset(), option, callback);
+          return this.scrollTo(this.getScrollBottomOffset(), option, callback);
       };
       VanillaSmoothie.prototype.getScrollOffset = function (elapsed) {
           if (elapsed > this.cache.duration) {
