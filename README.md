@@ -93,7 +93,7 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 
 Scroll to a specified destination.
 
-You can specify selector or offset top for the `target`.
+For `target`, selector or offset is entered.
 
 Refer to (Option)[#option] for option parameter.
 
@@ -108,7 +108,7 @@ vanillaSmoothie.scrollTo(300)
 vanillaSmoothie.scrollTo('#id-name', {
   duration: 1000
 }, () => {
-  console.log('Callback!!')
+  console.log('Callback')
 })
 ```
 
@@ -120,7 +120,7 @@ Refer to (Option)[#option] for option parameter.
 
 ```js
 vanillaSmoothie.scrollTop(1000, () => {
-  console.log('Callback!!')
+  console.log('Callback')
 })
 ```
 
@@ -136,7 +136,7 @@ Refer to (Option)[#option] for option parameter.
 
 ```js
 vanillaSmoothie.scrollBottom(1000, () => {
-  console.log('Callback!!')
+  console.log('Callback')
 })
 ```
 
@@ -181,17 +181,22 @@ Please create an [Issue](https://github.com/kimulaco/vanilla-smoothie/issues) or
 
 ### Development
 
-You can use yarn or npm.
+Use yarn to download packages and run scripts.
+
+Before creating a pull request, execute `yarn lint` and make sure there are no syntax errors.
 
 ```shell
-# Install package
+# Install packages
 yarn
 
-# JavaScript compile and launch local server to http://localhost:3000
+# TypeScript compile and launch local server to http://localhost:3000
 yarn dev
 
-# Build JavaScript and Document
+# Build TypeScript and Document
 yarn build
+
+# Check TypeScript syntax
+yarn lint
 ```
 
 Other commands look to `package.json`.
