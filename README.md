@@ -9,6 +9,7 @@
 [GH_PAGES] -->
 
 - [Overview](#overview)
+- [Installation](#installation)
 - [Use](#use)
 - [Browsers support](#browsers-support)
 - [Contributing](#contributing)
@@ -18,39 +19,65 @@
 
 A minimal smooth scroll library.
 
-This library has no dependencies on other libraries. So you can easily use it without being influenced by the presence of the framework.
+This library has no dependencies on other libraries and frameworks. So you can easily implement the smooth scroll in any project.
 
 [Document](https://kimulaco.github.io/vanilla-smoothie/)
 
-## Use
+## Installation
 
 ### Node.js
 
-You can install use npm or yarn.
+You can install using npm or yarn and this method is recommended.
 
 ```shell
-yarn add vanilla-smoothie
+npm install --save vanilla-smoothie
 ```
 
+### CDN
+
+You can also use CDN. Suitable for creating small websites and samples.
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/vanilla-smoothie@2.1.0/dist/vanilla-smoothie.min.js"></script>
+```
+
+## Use
+
 You can achieve smooth scroll with a simple and intuitive way of writing.
+
+In addition, you can write any way you like, such as Callback or Promise.
 
 ```js
 const vanillaSmoothie = require('vanilla-smoothie')
 
+// Use callback
 vanillaSmoothie.scrollTo('#anchor-01', {
   duration: 800
 }, () => {
-  console.log('Callback!!')
+  console.log('Scrolled!!')
 })
+
+// Use Promise
+vanillaSmoothie.scrollTo('#anchor-02', {
+  duration: 800
+}).then(() => {
+  console.log('Scrolled!!')
+})
+
+// Use async/await
+(async () => {
+  await vanillaSmoothie.scrollTo('#anchor-03', {
+    duration: 800
+  })
+  console.log('Scrolled!!')
+})()
 ```
 
-### Browser
+### Example
 
-You can also get the this library with CDN or Zip download. Ideal for small samples.
+Sample code to easily implement the anchor link.
 
-```html
-<script src="https://cdn.jsdelivr.net/npm/vanilla-smoothie@2.0.0/dist/vanilla-smoothie.min.js"></script>
-<script>
+```js
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener('click', (event) => {
     vanillaSmoothie.scrollTo(event.target.getAttribute('href'), {
@@ -58,7 +85,6 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     })
   })
 })
-</script>
 ```
 
 ## Methods
