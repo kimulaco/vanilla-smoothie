@@ -16,43 +16,65 @@
 <a href="https://travis-ci.org/kimulaco/vanilla-smoothie"><img src="https://travis-ci.org/kimulaco/vanilla-smoothie.svg?branch=master" alt="Build Status"></a></p>
 <p><a href="https://github.com/kimulaco/vanilla-smoothie">GitHub</a></p>
 <ul>
-<li><a href="#overview">Overview</a></li>
+<li><a href="#feature">Feature</a></li>
+<li><a href="#installation">Installation</a></li>
 <li><a href="#use">Use</a></li>
 <li><a href="#browsers-support">Browsers support</a></li>
 <li><a href="#contributing">Contributing</a></li>
 <li><a href="#license">License</a></li>
 </ul>
-<h2 id="overview">Overview</h2>
-<p>A minimal smooth scroll library.</p>
-<p>This library has no dependencies on other libraries. So you can easily use it without being influenced by the presence of the framework.</p>
-<h2 id="use">Use</h2>
+<h3 id="feature">Feature</h3>
+<ul>
+<li><strong>Simple</strong> - It an intuitive and simple API, you can write as you like.</li>
+<li><strong>Minimal</strong> - It doesn&#39;t depend on other packages, so it has only the minimum necessary functions.</li>
+<li><strong>Universal</strong> - It can be used in various environments such as TypeScript and Front-end frameworks, Vanilla.js.</li>
+</ul>
+<h2 id="installation">Installation</h2>
 <h3 id="nodejs">Node.js</h3>
-<p>You can install use npm or yarn.</p>
-<pre><code class="language-shell">yarn add vanilla-smoothie</code></pre>
+<p>You can install using npm or yarn and this method is recommended.</p>
+<pre><code class="language-shell">npm install --save vanilla-smoothie</code></pre>
+<h3 id="cdn">CDN</h3>
+<p>You can also use CDN. Suitable for creating small websites and samples.</p>
+<pre><code class="language-html">&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vanilla-smoothie@2.1.0/dist/vanilla-smoothie.min.js&quot;&gt;&lt;/script&gt;</code></pre>
+<h2 id="use">Use</h2>
 <p>You can achieve smooth scroll with a simple and intuitive way of writing.</p>
+<p>In addition, you can write any way you like, such as Callback or Promise.</p>
 <pre><code class="language-js">const vanillaSmoothie = require(&#39;vanilla-smoothie&#39;)
 
+// Use callback
 vanillaSmoothie.scrollTo(&#39;#anchor-01&#39;, {
   duration: 800
 }, () =&gt; {
-  console.log(&#39;Callback!!&#39;)
-})</code></pre>
-<h3 id="browser">Browser</h3>
-<p>You can also get the this library with CDN or Zip download. Ideal for small samples.</p>
-<pre><code class="language-html">&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vanilla-smoothie@2.0.0/dist/vanilla-smoothie.min.js&quot;&gt;&lt;/script&gt;
-&lt;script&gt;
-document.querySelectorAll(&#39;a[href^=&quot;#&quot;]&#39;).forEach((anchor) =&gt; {
+  console.log(&#39;Scrolled!!&#39;)
+})
+
+// Use Promise
+vanillaSmoothie.scrollTo(&#39;#anchor-02&#39;, {
+  duration: 800
+}).then(() =&gt; {
+  console.log(&#39;Scrolled!!&#39;)
+})
+
+// Use async/await
+(async () =&gt; {
+  await vanillaSmoothie.scrollTo(&#39;#anchor-03&#39;, {
+    duration: 800
+  })
+  console.log(&#39;Scrolled!!&#39;)
+})()</code></pre>
+<h3 id="example">Example</h3>
+<p>Sample code to easily implement the anchor link.</p>
+<pre><code class="language-js">document.querySelectorAll(&#39;a[href^=&quot;#&quot;]&#39;).forEach((anchor) =&gt; {
   anchor.addEventListener(&#39;click&#39;, (event) =&gt; {
     vanillaSmoothie.scrollTo(event.target.getAttribute(&#39;href&#39;), {
       duration: 500
     })
   })
-})
-&lt;/script&gt;</code></pre>
+})</code></pre>
 <h2 id="methods">Methods</h2>
 <h3 id="scrolltotarget-option-callback">scrollTo(target[, option, callback])</h3>
 <p>Scroll to a specified destination.</p>
-<p>You can specify selector or offset top for the <code>target</code>.</p>
+<p>For <code>target</code>, selector or offset is entered.</p>
 <p>Refer to (Option)[#option] for option parameter.</p>
 <pre><code class="language-js">// Selector
 vanillaSmoothie.scrollTo(&#39;#id-name&#39;)
@@ -64,22 +86,22 @@ vanillaSmoothie.scrollTo(300)
 vanillaSmoothie.scrollTo(&#39;#id-name&#39;, {
   duration: 1000
 }, () =&gt; {
-  console.log(&#39;Callback!!&#39;)
+  console.log(&#39;Callback&#39;)
 })</code></pre>
 <h3 id="scrolltopoption-callback">scrollTop([option, callback])</h3>
 <p>Scroll to the top of the page.</p>
 <p>Refer to (Option)[#option] for option parameter.</p>
 <pre><code class="language-js">vanillaSmoothie.scrollTop(1000, () =&gt; {
-  console.log(&#39;Callback!!&#39;)
+  console.log(&#39;Callback&#39;)
 })</code></pre>
-<p><button type="button" class="js-button-top">Page Top</button></p>
+<p><button type="button" class="js-button-top">Scroll to top</button></p>
 <h3 id="scrollbottomduration-callback">scrollBottom([duration, callback])</h3>
 <p>Scroll to the bottom of the page.</p>
 <p>Refer to (Option)[#option] for option parameter.</p>
 <pre><code class="language-js">vanillaSmoothie.scrollBottom(1000, () =&gt; {
-  console.log(&#39;Callback!!&#39;)
+  console.log(&#39;Callback&#39;)
 })</code></pre>
-<p><button type="button" class="js-button-bottom">Page Bottom</button></p>
+<p><button type="button" class="js-button-bottom">Scroll to bottom</button></p>
 <h2 id="option">Option</h2>
 <table>
 <thead>
@@ -155,15 +177,19 @@ vanillaSmoothie.scrollTo(&#39;#id-name&#39;, {
 <h2 id="contributing">Contributing</h2>
 <p>Please create an <a href="https://github.com/kimulaco/vanilla-smoothie/issues">Issue</a> or <a href="https://github.com/kimulaco/vanilla-smoothie/pulls">Pull requests</a> if you have any improvements!</p>
 <h3 id="development">Development</h3>
-<p>You can use yarn or npm.</p>
-<pre><code class="language-shell"># Install package
+<p>Use yarn to download packages and run scripts.</p>
+<p>Before creating a pull request, execute <code>yarn lint</code> and make sure there are no syntax errors.</p>
+<pre><code class="language-shell"># Install packages
 yarn
 
-# JavaScript compile and launch local server to http://localhost:3000
+# TypeScript compile and launch local server to http://localhost:3000
 yarn dev
 
-# Build JavaScript and Document
-yarn build</code></pre>
+# Build TypeScript and Document
+yarn build
+
+# Check TypeScript syntax
+yarn lint</code></pre>
 <p>Other commands look to <code>package.json</code>.</p>
 <h2 id="license">License</h2>
 <p><a href="LICENSE">MIT License</a>.</p>

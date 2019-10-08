@@ -8,20 +8,18 @@
 [GitHub](https://github.com/kimulaco/vanilla-smoothie)
 [GH_PAGES] -->
 
-- [Overview](#overview)
+- [Feature](#feature)
 - [Installation](#installation)
 - [Use](#use)
 - [Browsers support](#browsers-support)
 - [Contributing](#contributing)
 - [License](#license)
 
-## Overview
+## Feature
 
-A minimal smooth scroll library.
-
-This library has no dependencies on other libraries and frameworks. So you can easily implement the smooth scroll in any project.
-
-[Document](https://kimulaco.github.io/vanilla-smoothie/)
+- **Simple** - It an intuitive and simple API, you can write as you like.
+- **Minimal** - It doesn't depend on other packages, so it has only the minimum necessary functions.
+- **Universal** - It can be used in various environments such as TypeScript and Front-end frameworks, Vanilla.js.
 
 ## Installation
 
@@ -38,7 +36,7 @@ npm install --save vanilla-smoothie
 You can also use CDN. Suitable for creating small websites and samples.
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/vanilla-smoothie@2.1.0/dist/vanilla-smoothie.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanilla-smoothie@{{PACKAGE_VERSION}}/dist/vanilla-smoothie.min.js"></script>
 ```
 
 ## Use
@@ -125,7 +123,7 @@ vanillaSmoothie.scrollTop(1000, () => {
 ```
 
 <!-- [GH_PAGES]
-<button type="button" class="js-button-top">Page Top</button>
+<button type="button" class="js-button-top">Scroll to top</button>
 [GH_PAGES] -->
 
 ### scrollBottom([duration, callback])
@@ -141,7 +139,7 @@ vanillaSmoothie.scrollBottom(1000, () => {
 ```
 
 <!-- [GH_PAGES]
-<button type="button" class="js-button-bottom">Page Bottom</button>
+<button type="button" class="js-button-bottom">Scroll to bottom</button>
 [GH_PAGES] -->
 
 ## Option

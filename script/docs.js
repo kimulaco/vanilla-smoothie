@@ -2,6 +2,7 @@
 const fs = require('fs')
 const path = require('path')
 const marked = require('marked')
+const pkg = require('../package')
 const isWatch = ['-w', '--watch'].includes(process.argv[2])
 
 class Docs {
@@ -47,8 +48,8 @@ const doc = new Docs({
   output: path.join(process.cwd(), 'docs/index.html'),
   replace: [
     {
-      reg: /\[Document\]\(https:\/\/kimulaco\.github\.io\/vanilla-smoothie\/\)/g,
-      template: ''
+      reg: '{{PACKAGE_VERSION}}',
+      template: pkg.version
     },
     {
       reg: /<!-- \[GH_PAGES\]([\s\S]*?)\[GH_PAGES\] -->/gm,
