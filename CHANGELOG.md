@@ -1,5 +1,10 @@
 # Change Log
 
+## [v2.1.0] 2019-10-08
+
+- Added Types file.
+- Supported Promise.
+
 ## [v2.0.0] 2019-09-02
 
 [https://github.com/kimulaco/vanilla-smoothie/releases/tag/v2.0.0](https://github.com/kimulaco/vanilla-smoothie/releases/tag/v2.0.0)
