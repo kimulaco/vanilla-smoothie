@@ -91,7 +91,7 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 
 Scroll to a specified destination.
 
-For `target`, selector or offset is entered.
+For `target`, selector or offset is entered. When the selector is specified for the `target`, the target element is focused after scroll.
 
 Refer to [Option](#option) for option parameter.
 
