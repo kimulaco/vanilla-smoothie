@@ -1,5 +1,10 @@
 # Change Log
 
+## [v2.2.0] 2019-10-10
+
+- Update documents.
+- Added focus control function.
+
 ## [v2.1.0] 2019-10-08
 
 - Added Types file.
