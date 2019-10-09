@@ -134,7 +134,7 @@ class VanillaSmoothie {
     const defaultTabindex: string | null = targetElement.getAttribute('tabindex')
     const defaultOutline: string | null = targetElement.style.outline
 
-    const onBlurTargetHandler = () => {
+    const onBlurTargetHandler = (): void => {
       if (defaultTabindex) {
         targetElement.setAttribute('tabindex', defaultTabindex)
       } else {
