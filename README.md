@@ -93,7 +93,7 @@ Scroll to a specified destination.
 
 For `target`, selector or offset is entered.
 
-Refer to (Option)[#option] for option parameter.
+Refer to [Option](#option) for option parameter.
 
 ```js
 // Selector
@@ -114,7 +114,7 @@ vanillaSmoothie.scrollTo('#id-name', {
 
 Scroll to the top of the page.
 
-Refer to (Option)[#option] for option parameter.
+Refer to [Option](#option) for option parameter.
 
 ```js
 vanillaSmoothie.scrollTop(1000, () => {
@@ -130,7 +130,7 @@ vanillaSmoothie.scrollTop(1000, () => {
 
 Scroll to the bottom of the page.
 
-Refer to (Option)[#option] for option parameter.
+Refer to [Option](#option) for option parameter.
 
 ```js
 vanillaSmoothie.scrollBottom(1000, () => {
