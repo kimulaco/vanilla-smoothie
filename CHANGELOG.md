@@ -1,5 +1,9 @@
 # Change Log
 
+## [v2.2.1] 2019-10-10
+
+- Fix script URL in document.
+
 ## [v2.2.0] 2019-10-10
 
 - Update documents.
