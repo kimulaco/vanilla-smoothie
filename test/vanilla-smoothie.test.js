@@ -1,4 +1,6 @@
 /* global browser */
+const pkg = require('../package')
+
 let page
 
 beforeAll(async () => {
@@ -6,6 +8,6 @@ beforeAll(async () => {
   await page.goto('http://localhost:3000')
 })
 
-test('should display `google` text on page', async () => {
-  await expect(page).toMatch('vanilla-smoothie.js')
+test('Valid CDN version', async () => {
+  await expect(page).toMatch(`https://cdn.jsdelivr.net/npm/vanilla-smoothie@${pkg.version}/dist/vanilla-smoothie.min.js`)
 })
