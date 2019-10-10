@@ -58,10 +58,14 @@ const doc = new Docs({
   ]
 })
 
-if (isWatch) {
-  doc.watch(() => {
-    doc.generate()
-  })
-} else {
+const main = async () => {
   doc.generate()
+
+  if (isWatch) {
+    doc.watch(() => {
+      doc.generate()
+    })
+  }
 }
+
+main()
