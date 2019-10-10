@@ -4,6 +4,8 @@
 
 - Update documents.
 - Added focus control function.
+- Added type error handle.
+- Update TypeScript and more packages.
 
 ## [v2.1.0] 2019-10-08
 
