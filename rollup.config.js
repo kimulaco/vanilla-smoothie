@@ -2,6 +2,7 @@ import { eslint } from 'rollup-plugin-eslint'
 import typescript from 'rollup-plugin-typescript2'
 import {terser} from 'rollup-plugin-terser'
 import banner from 'rollup-plugin-banner'
+import filesize from 'rollup-plugin-filesize'
 import license from './src/js/license'
 
 const packageName = 'vanilla-smoothie'
@@ -16,7 +17,7 @@ if (isProd) {
     outputFile = `dist/${packageName}.js`
   }
 } else {
-  outputFile = `docs/js/${packageName}.js`
+  outputFile = `docs/js/${packageName}.min.js`
 }
 
 export default {
@@ -30,6 +31,7 @@ export default {
     !isProd && eslint(),
     typescript(),
     isMinify && terser(),
-    banner(license)
+    banner(license),
+    filesize()
   ]
 }

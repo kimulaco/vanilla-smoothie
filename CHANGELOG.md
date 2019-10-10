@@ -1,5 +1,17 @@
 # Change Log
 
+## [v2.2.0] 2019-10-10
+
+- Update documents.
+- Added focus control function.
+- Added type error handle.
+- Update TypeScript and more packages.
+
+## [v2.1.0] 2019-10-08
+
+- Added Types file.
+- Supported Promise.
+
 ## [v2.0.0] 2019-09-02
 
 [https://github.com/kimulaco/vanilla-smoothie/releases/tag/v2.0.0](https://github.com/kimulaco/vanilla-smoothie/releases/tag/v2.0.0)

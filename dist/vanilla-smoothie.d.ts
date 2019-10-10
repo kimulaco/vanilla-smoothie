@@ -6,16 +6,11 @@ interface VanillaSmoothieOption {
     duration?: number;
     adjust?: number;
 }
-declare class VanillaSmoothie {
-    constructor();
-    private cache;
-    onPopstate(hash: string): void;
-    scrollTo(target: VanillaSmoothieTarget, option: VanillaSmoothieOption | undefined, callback: VanillaSmoothieCallbak): Promise<void>;
-    scrollTop(option: VanillaSmoothieOption, callback: VanillaSmoothieCallbak): Promise<void>;
-    scrollBottom(option: VanillaSmoothieOption, callback: VanillaSmoothieCallbak): Promise<void>;
-    private getScrollOffset;
-    private getTargetOffset;
-    private getScrollBottomOffset;
+interface VanillaSmoothieInstance {
+    onPopstate: (hash: string) => void;
+    scrollTo: (target: VanillaSmoothieTarget, option: VanillaSmoothieOption, callback: VanillaSmoothieCallbak) => Promise<void>;
+    scrollTop: (option: VanillaSmoothieOption, callback: VanillaSmoothieCallbak) => Promise<void>;
+    scrollBottom: (option: VanillaSmoothieOption, callback: VanillaSmoothieCallbak) => Promise<void>;
 }
-declare const vanillaSmoothie: VanillaSmoothie;
+declare const vanillaSmoothie: VanillaSmoothieInstance;
 export default vanillaSmoothie;

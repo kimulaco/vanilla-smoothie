@@ -8,49 +8,74 @@
 [GitHub](https://github.com/kimulaco/vanilla-smoothie)
 [GH_PAGES] -->
 
-- [Overview](#overview)
+- [Feature](#feature)
+- [Installation](#installation)
 - [Use](#use)
 - [Browsers support](#browsers-support)
 - [Contributing](#contributing)
 - [License](#license)
 
-## Overview
+## Feature
 
-A minimal smooth scroll library.
+- **Simple** - It an intuitive and simple API, you can write as you like.
+- **Minimal** - It doesn't depend on other packages, so it has only the minimum necessary functions.
+- **Universal** - It can be used in various environments such as TypeScript and Front-end frameworks, Vanilla.js.
 
-This library has no dependencies on other libraries. So you can easily use it without being influenced by the presence of the framework.
-
-[Document](https://kimulaco.github.io/vanilla-smoothie/)
-
-## Use
+## Installation
 
 ### Node.js
 
-You can install use npm or yarn.
+You can install using npm or yarn and this method is recommended.
 
 ```shell
-yarn add vanilla-smoothie
+npm install --save vanilla-smoothie
 ```
 
+### CDN
+
+You can also use CDN. Suitable for creating small websites and samples.
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/vanilla-smoothie@{{PACKAGE_VERSION}}/dist/vanilla-smoothie.min.js"></script>
+```
+
+## Use
+
 You can achieve smooth scroll with a simple and intuitive way of writing.
+
+In addition, you can write any way you like, such as Callback or Promise.
 
 ```js
 const vanillaSmoothie = require('vanilla-smoothie')
 
+// Use callback
 vanillaSmoothie.scrollTo('#anchor-01', {
   duration: 800
 }, () => {
-  console.log('Callback!!')
+  console.log('Scrolled!!')
 })
+
+// Use Promise
+vanillaSmoothie.scrollTo('#anchor-02', {
+  duration: 800
+}).then(() => {
+  console.log('Scrolled!!')
+})
+
+// Use async/await
+(async () => {
+  await vanillaSmoothie.scrollTo('#anchor-03', {
+    duration: 800
+  })
+  console.log('Scrolled!!')
+})()
 ```
 
-### Browser
+### Example
 
-You can also get the this library with CDN or Zip download. Ideal for small samples.
+Sample code to easily implement the anchor link.
 
-```html
-<script src="https://cdn.jsdelivr.net/npm/vanilla-smoothie@2.0.0/dist/vanilla-smoothie.min.js"></script>
-<script>
+```js
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener('click', (event) => {
     vanillaSmoothie.scrollTo(event.target.getAttribute('href'), {
@@ -58,7 +83,6 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     })
   })
 })
-</script>
 ```
 
 ## Methods
@@ -67,9 +91,9 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 
 Scroll to a specified destination.
 
-You can specify selector or offset top for the `target`.
+For `target`, selector or offset is entered. When the selector is specified for the `target`, the target element is focused after scroll.
 
-Refer to (Option)[#option] for option parameter.
+Refer to [Option](#option) for option parameter.
 
 ```js
 // Selector
@@ -82,7 +106,7 @@ vanillaSmoothie.scrollTo(300)
 vanillaSmoothie.scrollTo('#id-name', {
   duration: 1000
 }, () => {
-  console.log('Callback!!')
+  console.log('Callback')
 })
 ```
 
@@ -90,32 +114,32 @@ vanillaSmoothie.scrollTo('#id-name', {
 
 Scroll to the top of the page.
 
-Refer to (Option)[#option] for option parameter.
+Refer to [Option](#option) for option parameter.
 
 ```js
 vanillaSmoothie.scrollTop(1000, () => {
-  console.log('Callback!!')
+  console.log('Callback')
 })
 ```
 
 <!-- [GH_PAGES]
-<button type="button" class="js-button-top">Page Top</button>
+<button type="button" class="js-button-top">Scroll to top</button>
 [GH_PAGES] -->
 
 ### scrollBottom([duration, callback])
 
 Scroll to the bottom of the page.
 
-Refer to (Option)[#option] for option parameter.
+Refer to [Option](#option) for option parameter.
 
 ```js
 vanillaSmoothie.scrollBottom(1000, () => {
-  console.log('Callback!!')
+  console.log('Callback')
 })
 ```
 
 <!-- [GH_PAGES]
-<button type="button" class="js-button-bottom">Page Bottom</button>
+<button type="button" class="js-button-bottom">Scroll to bottom</button>
 [GH_PAGES] -->
 
 ## Option
@@ -155,17 +179,22 @@ Please create an [Issue](https://github.com/kimulaco/vanilla-smoothie/issues) or
 
 ### Development
 
-You can use yarn or npm.
+Use yarn to download packages and run scripts.
+
+Before creating a pull request, execute `yarn lint` and make sure there are no syntax errors.
 
 ```shell
-# Install package
+# Install packages
 yarn
 
-# JavaScript compile and launch local server to http://localhost:3000
+# TypeScript compile and launch local server to http://localhost:3000
 yarn dev
 
-# Build JavaScript and Document
+# Build TypeScript and Document
 yarn build
+
+# Check TypeScript syntax
+yarn lint
 ```
 
 Other commands look to `package.json`.

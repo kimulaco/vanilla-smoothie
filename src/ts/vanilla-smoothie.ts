@@ -84,6 +84,11 @@ class VanillaSmoothie {
       duration: 500,
       adjust: 0
     }, option)
+
+    if (!this.validateArgvType(target, opt, callback)) {
+      return Promise.reject()
+    }
+
     this.cache = {
       hash: typeof target === 'string' && target[0] === '#' ? target : '',
       easing: opt.easing || 'linear',
@@ -101,12 +106,12 @@ class VanillaSmoothie {
         }
       }, {
         successCallback: () => {
-          if (history && this.cache.hash) {
-            history.pushState(null, '', this.cache.hash)
-          }
-          if (typeof callback === 'function') {
-            callback()
-          }
+          const targetElement = this.getTargetElement(target)
+
+          if (history && this.cache.hash) history.pushState(null, '', this.cache.hash)
+          if (targetElement) this.adjustFocus(targetElement)
+          if (typeof callback === 'function') callback()
+
           resolve()
         },
         failCallback: () => {
@@ -130,6 +135,64 @@ class VanillaSmoothie {
     return this.scrollTo(this.getScrollBottomOffset(), option, callback)
   }
 
+  private validateArgvType (
+    target: VanillaSmoothieTarget,
+    option: VanillaSmoothieOption,
+    callback: VanillaSmoothieCallbak
+  ): boolean {
+    let isValid = true
+
+    if (!/^(string|number)$/.test(typeof target)) {
+      console.error('target must be of type string or number.')
+      isValid = false
+    }
+
+    if (!/^(string)$/.test(typeof option.easing)) {
+      console.error('easing option must be of type string.')
+      isValid = false
+    }
+
+    if (!/^(number)$/.test(typeof option.duration)) {
+      console.error('duration option must be of type number.')
+      isValid = false
+    }
+
+    if (!/^(number)$/.test(typeof option.adjust)) {
+      console.error('adjust option must be of type number.')
+      isValid = false
+    }
+
+    if (!/^(undefined|function)$/.test(typeof callback)) {
+      console.error('callback option must be of type function.')
+      isValid = false
+    }
+
+    return isValid
+  }
+
+  private adjustFocus (targetElement: HTMLElement): void {
+    const defaultTabindex: string | null = targetElement.getAttribute('tabindex')
+    const defaultOutline: string | null = targetElement.style.outline
+
+    const onBlurTargetHandler = (): void => {
+      if (defaultTabindex) {
+        targetElement.setAttribute('tabindex', defaultTabindex)
+      } else {
+        targetElement.removeAttribute('tabindex')
+      }
+
+      if (!defaultOutline) targetElement.style.outline = ''
+
+      targetElement.removeEventListener('blur', onBlurTargetHandler)
+    }
+
+    if (!defaultTabindex) targetElement.setAttribute('tabindex', '-1')
+    if (!defaultOutline) targetElement.style.outline = 'none'
+
+    targetElement.focus()
+    targetElement.addEventListener('blur', onBlurTargetHandler)
+  }
+
   private getScrollOffset (elapsed: number): number {
     if (elapsed > this.cache.duration) {
       return this.cache.endOffset
@@ -138,11 +201,18 @@ class VanillaSmoothie {
       easing[this.cache.easing](elapsed / this.cache.duration)
   }
 
+  private getTargetElement = (target: VanillaSmoothieTarget): HTMLElement | null => {
+    if (typeof target === 'string') {
+      return document.querySelector(target)
+    }
+    return null
+  }
+
   private getTargetOffset = (target: VanillaSmoothieTarget): number => {
     if (typeof target === 'number') {
       return target
     } else if (typeof target === 'string') {
-      const targetElement: HTMLElement | null = document.querySelector(target)
+      const targetElement: HTMLElement | null = this.getTargetElement(target)
       if (!targetElement) return 0
       return targetElement.getBoundingClientRect().top + window.pageYOffset
     }
