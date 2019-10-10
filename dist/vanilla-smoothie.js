@@ -1,5 +1,5 @@
 /**
- * vanilla-smoothie.js v2.0.0
+ * vanilla-smoothie.js v2.1.0
  * https://kimulaco.github.io/vanilla-smoothie/
  * Copyright (c) 2019 kimulaco
  * This software is released under the MIT License.
@@ -106,12 +106,18 @@
               startOffset: 0,
               endOffset: 0,
           };
+          this.getTargetElement = function (target) {
+              if (typeof target === 'string') {
+                  return document.querySelector(target);
+              }
+              return null;
+          };
           this.getTargetOffset = function (target) {
               if (typeof target === 'number') {
                   return target;
               }
               else if (typeof target === 'string') {
-                  var targetElement = document.querySelector(target);
+                  var targetElement = _this.getTargetElement(target);
                   if (!targetElement)
                       return 0;
                   return targetElement.getBoundingClientRect().top + window.pageYOffset;
@@ -141,6 +147,9 @@
               duration: 500,
               adjust: 0
           }, option);
+          if (!this.validateArgvType(target, opt, callback)) {
+              return Promise.reject();
+          }
           this.cache = {
               hash: typeof target === 'string' && target[0] === '#' ? target : '',
               easing: opt.easing || 'linear',
@@ -158,12 +167,13 @@
                   }
               }, {
                   successCallback: function () {
-                      if (history && _this.cache.hash) {
+                      var targetElement = _this.getTargetElement(target);
+                      if (history && _this.cache.hash)
                           history.pushState(null, '', _this.cache.hash);
-                      }
-                      if (typeof callback === 'function') {
+                      if (targetElement)
+                          _this.adjustFocus(targetElement);
+                      if (typeof callback === 'function')
                           callback();
-                      }
                       resolve();
                   },
                   failCallback: function () {
@@ -177,6 +187,51 @@
       };
       VanillaSmoothie.prototype.scrollBottom = function (option, callback) {
           return this.scrollTo(this.getScrollBottomOffset(), option, callback);
+      };
+      VanillaSmoothie.prototype.validateArgvType = function (target, option, callback) {
+          var isValid = true;
+          if (!/^(string|number)$/.test(typeof target)) {
+              console.error('target must be of type string or number.');
+              isValid = false;
+          }
+          if (!/^(string)$/.test(typeof option.easing)) {
+              console.error('easing option must be of type string.');
+              isValid = false;
+          }
+          if (!/^(number)$/.test(typeof option.duration)) {
+              console.error('duration option must be of type number.');
+              isValid = false;
+          }
+          if (!/^(number)$/.test(typeof option.adjust)) {
+              console.error('adjust option must be of type number.');
+              isValid = false;
+          }
+          if (!/^(undefined|function)$/.test(typeof callback)) {
+              console.error('callback option must be of type function.');
+              isValid = false;
+          }
+          return isValid;
+      };
+      VanillaSmoothie.prototype.adjustFocus = function (targetElement) {
+          var defaultTabindex = targetElement.getAttribute('tabindex');
+          var defaultOutline = targetElement.style.outline;
+          var onBlurTargetHandler = function () {
+              if (defaultTabindex) {
+                  targetElement.setAttribute('tabindex', defaultTabindex);
+              }
+              else {
+                  targetElement.removeAttribute('tabindex');
+              }
+              if (!defaultOutline)
+                  targetElement.style.outline = '';
+              targetElement.removeEventListener('blur', onBlurTargetHandler);
+          };
+          if (!defaultTabindex)
+              targetElement.setAttribute('tabindex', '-1');
+          if (!defaultOutline)
+              targetElement.style.outline = 'none';
+          targetElement.focus();
+          targetElement.addEventListener('blur', onBlurTargetHandler);
       };
       VanillaSmoothie.prototype.getScrollOffset = function (elapsed) {
           if (elapsed > this.cache.duration) {
