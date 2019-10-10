@@ -44,6 +44,30 @@ describe('Offset', () => {
     await expect(isCorrectScrollPosition).toBeTruthy()
   })
 
+  test('scrollTo(target: number, { adjust: 100 })', async () => {
+    const isCorrectScrollPosition = await page.evaluate(async () => {
+      const TARGET_OFFSET_TOP = 500;
+      const ADJUST_VALUE = 100;
+      await window.vanillaSmoothie.scrollTo(TARGET_OFFSET_TOP, {
+        adjust: ADJUST_VALUE
+      })
+      return window.pageYOffset === TARGET_OFFSET_TOP + ADJUST_VALUE
+    })
+    await expect(isCorrectScrollPosition).toBeTruthy()
+  })
+
+  test('scrollTo(target: number, { adjust: -100 })', async () => {
+    const isCorrectScrollPosition = await page.evaluate(async () => {
+      const TARGET_OFFSET_TOP = 500;
+      const ADJUST_VALUE = -100;
+      await window.vanillaSmoothie.scrollTo(TARGET_OFFSET_TOP, {
+        adjust: ADJUST_VALUE
+      })
+      return window.pageYOffset === TARGET_OFFSET_TOP + ADJUST_VALUE
+    })
+    await expect(isCorrectScrollPosition).toBeTruthy()
+  })
+
   test('scrollTop()', async () => {
     const isCorrectScrollPosition = await page.evaluate(async () => {
       window.scrollTo(0, 500)
