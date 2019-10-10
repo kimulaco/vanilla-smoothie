@@ -84,6 +84,11 @@ class VanillaSmoothie {
       duration: 500,
       adjust: 0
     }, option)
+
+    if (!this.validateArgvType(target, opt, callback)) {
+      return Promise.reject()
+    }
+
     this.cache = {
       hash: typeof target === 'string' && target[0] === '#' ? target : '',
       easing: opt.easing || 'linear',
@@ -128,6 +133,41 @@ class VanillaSmoothie {
     callback: VanillaSmoothieCallbak
   ): Promise<void> {
     return this.scrollTo(this.getScrollBottomOffset(), option, callback)
+  }
+
+  private validateArgvType (
+    target: VanillaSmoothieTarget,
+    option: VanillaSmoothieOption,
+    callback: VanillaSmoothieCallbak
+  ): boolean {
+    let isValid = true
+
+    if (!/^(string|number)$/.test(typeof target)) {
+      console.error('target must be of type string or number.')
+      isValid = false
+    }
+
+    if (!/^(string)$/.test(typeof option.easing)) {
+      console.error('easing option must be of type string.')
+      isValid = false
+    }
+
+    if (!/^(number)$/.test(typeof option.duration)) {
+      console.error('duration option must be of type number.')
+      isValid = false
+    }
+
+    if (!/^(number)$/.test(typeof option.adjust)) {
+      console.error('adjust option must be of type number.')
+      isValid = false
+    }
+
+    if (!/^(undefined|function)$/.test(typeof callback)) {
+      console.error('callback option must be of type function.')
+      isValid = false
+    }
+
+    return isValid
   }
 
   private adjustFocus (targetElement: HTMLElement): void {
