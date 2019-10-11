@@ -181,7 +181,7 @@ Please create an [Issue](https://github.com/kimulaco/vanilla-smoothie/issues) or
 
 Use yarn to download packages and run scripts.
 
-Before creating a pull request, execute `yarn lint` and make sure there are no syntax errors.
+Before creating a Pull requests, execute `yarn test` and check the operation of the library.
 
 ```shell
 # Install packages
@@ -195,6 +195,9 @@ yarn build
 
 # Check TypeScript syntax
 yarn lint
+
+# Run E2E test
+yarn test
 ```
 
 Other commands look to `package.json`.
