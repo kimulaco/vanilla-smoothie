@@ -48,10 +48,6 @@ const doc = new Docs({
   output: path.join(process.cwd(), 'docs/index.html'),
   replace: [
     {
-      reg: '{{PACKAGE_VERSION}}',
-      template: pkg.version
-    },
-    {
       reg: /<!-- \[GH_PAGES\]([\s\S]*?)\[GH_PAGES\] -->/gm,
       template: '$1'
     }

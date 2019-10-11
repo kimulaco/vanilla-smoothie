@@ -185,7 +185,7 @@ vanillaSmoothie.scrollTo(&#39;#id-name&#39;, {
 <p>Please create an <a href="https://github.com/kimulaco/vanilla-smoothie/issues">Issue</a> or <a href="https://github.com/kimulaco/vanilla-smoothie/pulls">Pull requests</a> if you have any improvements!</p>
 <h3 id="development">Development</h3>
 <p>Use yarn to download packages and run scripts.</p>
-<p>Before creating a pull request, execute <code>yarn lint</code> and make sure there are no syntax errors.</p>
+<p>Before creating a Pull requests, execute <code>yarn test</code> and check the operation of the library.</p>
 <pre><code class="language-shell"># Install packages
 yarn
 
@@ -196,7 +196,10 @@ yarn dev
 yarn build
 
 # Check TypeScript syntax
-yarn lint</code></pre>
+yarn lint
+
+# Run E2E test
+yarn test</code></pre>
 <p>Other commands look to <code>package.json</code>.</p>
 <h2 id="license">License</h2>
 <p><a href="LICENSE">MIT License</a>.</p>
