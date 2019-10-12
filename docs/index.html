@@ -42,7 +42,7 @@ gtag('config', 'UA-149590381-1');
 <pre><code class="language-shell">npm install --save vanilla-smoothie</code></pre>
 <h3 id="cdn">CDN</h3>
 <p>You can also use CDN. Suitable for creating small websites and samples.</p>
-<pre><code class="language-html">&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vanilla-smoothie@2.2.0/dist/vanilla-smoothie.min.js&quot;&gt;&lt;/script&gt;</code></pre>
+<pre><code class="language-html">&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vanilla-smoothie@2.2.2/dist/vanilla-smoothie.min.js&quot;&gt;&lt;/script&gt;</code></pre>
 <h2 id="use">Use</h2>
 <p>You can achieve smooth scroll with a simple and intuitive way of writing.</p>
 <p>In addition, you can write any way you like, such as Callback or Promise.</p>
@@ -185,7 +185,7 @@ vanillaSmoothie.scrollTo(&#39;#id-name&#39;, {
 <p>Please create an <a href="https://github.com/kimulaco/vanilla-smoothie/issues">Issue</a> or <a href="https://github.com/kimulaco/vanilla-smoothie/pulls">Pull requests</a> if you have any improvements!</p>
 <h3 id="development">Development</h3>
 <p>Use yarn to download packages and run scripts.</p>
-<p>Before creating a pull request, execute <code>yarn lint</code> and make sure there are no syntax errors.</p>
+<p>Before creating a Pull requests, execute <code>yarn test</code> and check the operation of the library.</p>
 <pre><code class="language-shell"># Install packages
 yarn
 
@@ -196,7 +196,10 @@ yarn dev
 yarn build
 
 # Check TypeScript syntax
-yarn lint</code></pre>
+yarn lint
+
+# Run E2E test
+yarn test</code></pre>
 <p>Other commands look to <code>package.json</code>.</p>
 <h2 id="license">License</h2>
 <p><a href="LICENSE">MIT License</a>.</p>

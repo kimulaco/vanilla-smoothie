@@ -36,7 +36,7 @@ npm install --save vanilla-smoothie
 You can also use CDN. Suitable for creating small websites and samples.
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/vanilla-smoothie@{{PACKAGE_VERSION}}/dist/vanilla-smoothie.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanilla-smoothie@2.2.2/dist/vanilla-smoothie.min.js"></script>
 ```
 
 ## Use
@@ -181,7 +181,7 @@ Please create an [Issue](https://github.com/kimulaco/vanilla-smoothie/issues) or
 
 Use yarn to download packages and run scripts.
 
-Before creating a pull request, execute `yarn lint` and make sure there are no syntax errors.
+Before creating a Pull requests, execute `yarn test` and check the operation of the library.
 
 ```shell
 # Install packages
@@ -195,6 +195,9 @@ yarn build
 
 # Check TypeScript syntax
 yarn lint
+
+# Run E2E test
+yarn test
 ```
 
 Other commands look to `package.json`.
