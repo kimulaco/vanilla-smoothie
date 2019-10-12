@@ -1,5 +1,9 @@
 # Change Log
 
+## [v2.2.2] 2019-10-12
+
+- Add test code.
+
 ## [v2.2.1] 2019-10-10
 
 - Fix script URL in document.
