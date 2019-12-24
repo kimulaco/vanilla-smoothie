@@ -9,7 +9,7 @@
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
   (global = global || self, global['vanilla-smoothie'] = factory());
-}(this, function () { 'use strict';
+}(this, (function () { 'use strict';
 
   var easing = {
       linear: function (t) {
@@ -130,9 +130,6 @@
                   htmlElm.clientHeight
               ]) - window.innerHeight;
           };
-          window.addEventListener('popstate', function () {
-              _this.onPopstate(location.hash);
-          });
       }
       VanillaSmoothie.prototype.onPopstate = function (hash) {
       };
@@ -174,6 +171,7 @@
                           _this.adjustFocus(targetElement);
                       if (typeof callback === 'function')
                           callback();
+                      window.addEventListener('popstate', _this.handlePopstate.bind(_this));
                       resolve();
                   },
                   failCallback: function () {
@@ -187,6 +185,9 @@
       };
       VanillaSmoothie.prototype.scrollBottom = function (option, callback) {
           return this.scrollTo(this.getScrollBottomOffset(), option, callback);
+      };
+      VanillaSmoothie.prototype.handlePopstate = function () {
+          this.onPopstate(location.hash);
       };
       VanillaSmoothie.prototype.validateArgvType = function (target, option, callback) {
           var isValid = true;
@@ -249,4 +250,4 @@
 
   return vanillaSmoothie;
 
-}));
+})));
