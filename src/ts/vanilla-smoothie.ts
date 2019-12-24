@@ -45,12 +45,6 @@ declare const window: VanillaSmoothieWindow
 
 
 class VanillaSmoothie {
-  constructor() {
-    window.addEventListener('popstate', () => {
-      this.onPopstate(location.hash)
-    })
-  }
-
   private cache: VanillaSmoothieCache = {
     hash: '',
     easing: 'linear',
@@ -110,6 +104,7 @@ class VanillaSmoothie {
           if (targetElement) this.adjustFocus(targetElement)
           if (typeof callback === 'function') callback()
 
+          window.addEventListener('popstate', this.handlePopstate.bind(this))
           resolve()
         },
         failCallback: () => {
@@ -131,6 +126,10 @@ class VanillaSmoothie {
     callback: VanillaSmoothieCallbak
   ): Promise<void> {
     return this.scrollTo(this.getScrollBottomOffset(), option, callback)
+  }
+
+  private handlePopstate(): void {
+    this.onPopstate(location.hash)
   }
 
   private validateArgvType (

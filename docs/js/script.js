@@ -19,7 +19,7 @@
     await vanillaSmoothie.scrollTo(hash, {
       duration: 500
     })
-    console.log('scrollTo callback')
+    console.log('scrollTo callback by popstate')
   }
 
   setClickEvent('a[href^="#"]', async (event) => {
