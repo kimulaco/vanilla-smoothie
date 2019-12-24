@@ -42,10 +42,6 @@ interface VanillaSmoothieWindow extends Window {
 // eslint-disable-next-line init-declarations
 declare const window: VanillaSmoothieWindow
 
-const htmlElm = document.documentElement
-const history = window.history && window.history.pushState ?
-  window.history : null
-
 
 
 class VanillaSmoothie {
@@ -78,6 +74,8 @@ class VanillaSmoothie {
     option: VanillaSmoothieOption = {},
     callback: VanillaSmoothieCallbak
   ): Promise<void> {
+    const history = window.history && window.history.pushState ?
+      window.history : null
     const opt = Object.assign({
       element: window,
       easing: 'linear',
@@ -220,6 +218,7 @@ class VanillaSmoothie {
   }
 
   private getScrollBottomOffset = (): number => {
+    const htmlElm = document.documentElement
     return Math.max.apply(null, [
       document.body.clientHeight,
       document.body.scrollHeight,
