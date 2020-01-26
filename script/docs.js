@@ -2,7 +2,6 @@
 const fs = require('fs')
 const path = require('path')
 const marked = require('marked')
-const pkg = require('../package')
 const isWatch = ['-w', '--watch'].includes(process.argv[2])
 
 class Docs {

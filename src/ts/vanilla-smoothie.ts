@@ -42,19 +42,9 @@ interface VanillaSmoothieWindow extends Window {
 // eslint-disable-next-line init-declarations
 declare const window: VanillaSmoothieWindow
 
-const htmlElm = document.documentElement
-const history = window.history && window.history.pushState ?
-  window.history : null
-
 
 
 class VanillaSmoothie {
-  constructor() {
-    window.addEventListener('popstate', () => {
-      this.onPopstate(location.hash)
-    })
-  }
-
   private cache: VanillaSmoothieCache = {
     hash: '',
     easing: 'linear',
@@ -78,6 +68,8 @@ class VanillaSmoothie {
     option: VanillaSmoothieOption = {},
     callback: VanillaSmoothieCallbak
   ): Promise<void> {
+    const history = window.history && window.history.pushState ?
+      window.history : null
     const opt = Object.assign({
       element: window,
       easing: 'linear',
@@ -112,6 +104,7 @@ class VanillaSmoothie {
           if (targetElement) this.adjustFocus(targetElement)
           if (typeof callback === 'function') callback()
 
+          window.addEventListener('popstate', this.handlePopstate.bind(this))
           resolve()
         },
         failCallback: () => {
@@ -133,6 +126,10 @@ class VanillaSmoothie {
     callback: VanillaSmoothieCallbak
   ): Promise<void> {
     return this.scrollTo(this.getScrollBottomOffset(), option, callback)
+  }
+
+  private handlePopstate(): void {
+    this.onPopstate(location.hash)
   }
 
   private validateArgvType (
@@ -220,6 +217,7 @@ class VanillaSmoothie {
   }
 
   private getScrollBottomOffset = (): number => {
+    const htmlElm = document.documentElement
     return Math.max.apply(null, [
       document.body.clientHeight,
       document.body.scrollHeight,

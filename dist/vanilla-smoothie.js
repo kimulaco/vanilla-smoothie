@@ -9,7 +9,7 @@
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
   (global = global || self, global['vanilla-smoothie'] = factory());
-}(this, function () { 'use strict';
+}(this, (function () { 'use strict';
 
   var easing = {
       linear: function (t) {
@@ -93,9 +93,6 @@
       });
   };
 
-  var htmlElm = document.documentElement;
-  var history = window.history && window.history.pushState ?
-      window.history : null;
   var VanillaSmoothie = (function () {
       function VanillaSmoothie() {
           var _this = this;
@@ -125,6 +122,7 @@
               return 0;
           };
           this.getScrollBottomOffset = function () {
+              var htmlElm = document.documentElement;
               return Math.max.apply(null, [
                   document.body.clientHeight,
                   document.body.scrollHeight,
@@ -132,15 +130,14 @@
                   htmlElm.clientHeight
               ]) - window.innerHeight;
           };
-          window.addEventListener('popstate', function () {
-              _this.onPopstate(location.hash);
-          });
       }
       VanillaSmoothie.prototype.onPopstate = function (hash) {
       };
       VanillaSmoothie.prototype.scrollTo = function (target, option, callback) {
           var _this = this;
           if (option === void 0) { option = {}; }
+          var history = window.history && window.history.pushState ?
+              window.history : null;
           var opt = Object.assign({
               element: window,
               easing: 'linear',
@@ -174,6 +171,7 @@
                           _this.adjustFocus(targetElement);
                       if (typeof callback === 'function')
                           callback();
+                      window.addEventListener('popstate', _this.handlePopstate.bind(_this));
                       resolve();
                   },
                   failCallback: function () {
@@ -187,6 +185,9 @@
       };
       VanillaSmoothie.prototype.scrollBottom = function (option, callback) {
           return this.scrollTo(this.getScrollBottomOffset(), option, callback);
+      };
+      VanillaSmoothie.prototype.handlePopstate = function () {
+          this.onPopstate(location.hash);
       };
       VanillaSmoothie.prototype.validateArgvType = function (target, option, callback) {
           var isValid = true;
@@ -249,4 +250,4 @@
 
   return vanillaSmoothie;
 
-}));
+})));

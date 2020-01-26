@@ -27,8 +27,9 @@ module.exports = {
           '@typescript-eslint'
         ],
         rules: {
-          "no-undef": 0,
-          '@typescript-eslint/member-delimiter-style': 0
+          'no-undef': 0,
+          '@typescript-eslint/member-delimiter-style': 0,
+          '@typescript-eslint/no-empty-function': 0
         }
     }
   ]
