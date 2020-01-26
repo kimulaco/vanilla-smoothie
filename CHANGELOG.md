@@ -1,5 +1,11 @@
 # Change Log
 
+## [v2.2.3] 2020-01-26
+
+- Fixed to support SSR.
+- Updated development packages.
+- Removed IE from support browser notation.
+
 ## [v2.2.2] 2019-10-12
 
 - Add test code.
