@@ -117,8 +117,8 @@ for (const browserType of BROWSER_TYPES) {
       })
     })
 
-    afterAll(() => {
-      browser.close()
+    afterAll(async () => {
+      await browser.close()
     })
   })
 }
@@ -149,7 +149,7 @@ describe('Document page test', () => {
     expect(isLoadedLibrary).toBeTruthy()
   })
 
-  afterAll(() => {
-    browser.close()
+  afterAll(async () => {
+    await browser.close()
   })
 })
