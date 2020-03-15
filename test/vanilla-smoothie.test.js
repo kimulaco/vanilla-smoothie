@@ -1,19 +1,22 @@
-/* global browser */
+const playwright = require('playwright');
 const pkg = require('../package')
-
+let browser
 let page
 
 beforeAll(async () => {
-  page = await browser.newPage()
+  browser = await playwright['chromium'].launch()
+  const context = await browser.newContext()
+  page = await context.newPage()
   await page.goto('http://localhost:3000')
 })
 
 describe('Document', () => {
   test('Valid CDN version', async () => {
+    const pageContent = await page.content()
     const cdnUrl = 'https://cdn.jsdelivr.net/npm/vanilla-smoothie@'
       + pkg.version
       + '/dist/vanilla-smoothie.min.js'
-    await expect(page).toMatch(cdnUrl)
+    await expect(pageContent).toMatch(cdnUrl)
   })
 
   test('Load vanilla-smoothie.min.js', async () => {
@@ -125,4 +128,8 @@ describe('Usability', () => {
     })
     expect(isCorrectScrolledFocusId).toBeTruthy()
   })
+})
+
+afterAll(() => {
+  browser.close()
 })

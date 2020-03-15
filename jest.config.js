@@ -1,4 +1,4 @@
 module.exports = {
-  preset: 'jest-puppeteer',
+  preset: 'jest-playwright-preset',
   testRegex: './*\\.test\\.js$'
 }
