@@ -1,6 +1,9 @@
 const playwright = require('playwright')
 const pkg = require('../package')
 const BROWSER_TYPES = ['chromium', 'firefox', 'webkit']
+const CHROMIUM_CONFIG = {
+  args: ['--no-sandbox']
+}
 
 for (const browserType of BROWSER_TYPES) {
   describe(`Library test by ${browserType}`, () => {
@@ -8,7 +11,11 @@ for (const browserType of BROWSER_TYPES) {
     let page
 
     beforeAll(async () => {
-      browser = await playwright[browserType].launch()
+      let browserOption = {}
+      if (browserType === 'chromium') {
+        browserOption = CHROMIUM_CONFIG
+      }
+      browser = await playwright[browserType].launch(browserOption)
       const context = await browser.newContext()
       page = await context.newPage()
       await page.goto('http://localhost:3000')
@@ -128,7 +135,7 @@ describe('Document page test', () => {
   let page
 
   beforeAll(async () => {
-    browser = await playwright.chromium.launch()
+    browser = await playwright.chromium.launch(CHROMIUM_CONFIG)
     const context = await browser.newContext()
     page = await context.newPage()
     await page.goto('http://localhost:3000')
