@@ -23,7 +23,7 @@
     "dev:docs": "node script/docs.js -w",
     "dev:server": "serve docs -p 3000",
     "lint": "eslint -c .eslintrc.js src/ts/*ts docs/js/script.js",
-    "test": "jest --verbose --runInBand"
+    "test": "jest --verbose"
   },
   "lint-staged": {
     "*.{ts,js}": "yarn lint"
