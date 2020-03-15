@@ -1,5 +1,15 @@
 # Change Log
 
+## [v2.2.4] 2020-03-15
+
+- Update devDependencies
+    - Update TypeScript to v3.8.3
+    - Update Rollup to v2.0.6
+- Migrate from Puppeteer to playwright
+    - Test by Chromium, Firefox, Webkit
+- Migrate from TravisCI to GitHub Actions
+    - Run cross-browser test with playwright on GitHub Actions
+
 ## [v2.2.3] 2020-01-26
 
 - Fixed to support SSR.
