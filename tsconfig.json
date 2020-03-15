@@ -1,11 +1,9 @@
 {
   "compilerOptions": {
     "strict": true,
-    "lib": [
-      "dom"
-    ],
+    "lib": ["es6", "dom"],
     "target": "es5",
-    "module": "ES2015",
+    "module": "es2015",
     "declaration": true,
     "removeComments": true,
     "noEmit": true

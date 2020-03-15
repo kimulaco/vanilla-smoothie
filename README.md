@@ -1,8 +1,8 @@
 # vanilla-smoothie.js
 
-[![License MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![npm version](https://badge.fury.io/js/vanilla-smoothie.svg)](https://badge.fury.io/js/vanilla-smoothie)
-[![Build Status](https://travis-ci.org/kimulaco/vanilla-smoothie.svg?branch=master)](https://travis-ci.org/kimulaco/vanilla-smoothie)
+[![Build Status](https://github.com/kimulaco/vanilla-smoothie/workflows/Main/badge.svg)](https://github.com/kimulaco/vanilla-smoothie/actions)
+[![License MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 <!-- [GH_PAGES]
 [GitHub](https://github.com/kimulaco/vanilla-smoothie)
@@ -36,7 +36,7 @@ npm install --save vanilla-smoothie
 You can also use CDN. Suitable for creating small websites and samples.
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/vanilla-smoothie@2.2.2/dist/vanilla-smoothie.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanilla-smoothie@2.2.4/dist/vanilla-smoothie.min.js"></script>
 ```
 
 ## Use
