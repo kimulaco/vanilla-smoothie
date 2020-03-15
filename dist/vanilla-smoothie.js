@@ -1,7 +1,7 @@
 /**
- * vanilla-smoothie.js v2.2.2
+ * vanilla-smoothie.js v2.2.3
  * https://kimulaco.github.io/vanilla-smoothie/
- * Copyright (c) 2019 kimulaco
+ * Copyright (c) 2020 kimulaco
  * This software is released under the MIT License.
  */
 
