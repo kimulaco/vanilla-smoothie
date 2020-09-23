@@ -1,5 +1,13 @@
 # Change Log
 
+## [v2.2.5] 2020-09-23
+
+- fix: change callback arg to optional #42
+- update dependency
+    - Bump yargs-parser from 18.1.0 to 18.1.3 #44
+    - Bump lodash from 4.17.15 to 4.17.19 #43
+    - Bump acorn from 6.3.0 to 6.4.1 #41
+
 ## [v2.2.4] 2020-03-15
 
 - Update devDependencies
