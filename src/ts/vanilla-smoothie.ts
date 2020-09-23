@@ -2,7 +2,7 @@ import easing from './easing'
 import { animation } from './animation'
 
 type VanillaSmoothieTarget = string | number
-type VanillaSmoothieCallbak = () => void
+type VanillaSmoothieCallbak = () => void | undefined
 
 interface VanillaSmoothieOption {
   element?: HTMLElement
@@ -66,7 +66,7 @@ class VanillaSmoothie {
   scrollTo (
     target: VanillaSmoothieTarget,
     option: VanillaSmoothieOption = {},
-    callback: VanillaSmoothieCallbak
+    callback?: VanillaSmoothieCallbak | undefined
   ): Promise<void> {
     const history = window.history && window.history.pushState ?
       window.history : null
@@ -116,14 +116,14 @@ class VanillaSmoothie {
 
   scrollTop (
     option: VanillaSmoothieOption,
-    callback: VanillaSmoothieCallbak
+    callback?: VanillaSmoothieCallbak
   ): Promise<void> {
     return this.scrollTo(0, option, callback)
   }
 
   scrollBottom (
     option: VanillaSmoothieOption,
-    callback: VanillaSmoothieCallbak
+    callback?: VanillaSmoothieCallbak
   ): Promise<void> {
     return this.scrollTo(this.getScrollBottomOffset(), option, callback)
   }
@@ -135,7 +135,7 @@ class VanillaSmoothie {
   private validateArgvType (
     target: VanillaSmoothieTarget,
     option: VanillaSmoothieOption,
-    callback: VanillaSmoothieCallbak
+    callback?: VanillaSmoothieCallbak
   ): boolean {
     let isValid = true
 

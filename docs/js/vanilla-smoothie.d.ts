@@ -1,5 +1,5 @@
 declare type VanillaSmoothieTarget = string | number;
-declare type VanillaSmoothieCallbak = () => void;
+declare type VanillaSmoothieCallbak = () => void | undefined;
 interface VanillaSmoothieOption {
     element?: HTMLElement;
     easing?: string;
