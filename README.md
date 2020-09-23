@@ -36,7 +36,7 @@ npm install --save vanilla-smoothie
 You can also use CDN. Suitable for creating small websites and samples.
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/vanilla-smoothie@2.2.5-beta.0/dist/vanilla-smoothie.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanilla-smoothie@2.2.5/dist/vanilla-smoothie.min.js"></script>
 ```
 
 ## Use
